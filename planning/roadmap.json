@@ -1,0 +1,579 @@
+{
+  "schema_version": 1,
+  "project": "BroWSER",
+  "status": "planning",
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Planning baseline",
+      "status": "complete",
+      "depends_on": [],
+      "owner_role": "Project maintainer",
+      "deliverables": [
+        "README.md",
+        "docs/STRATEGY.md",
+        "docs/ARCHITECTURE.md",
+        "docs/ROADMAP.md",
+        "docs/SECURITY_MODEL.md",
+        "docs/VALIDATION.md",
+        "docs/RESOURCING.md",
+        "planning/roadmap.json",
+        "tools/check_plan.py",
+        "tests/test_check_plan.py"
+      ],
+      "acceptance": [
+        "Engineering strategy, architecture, release gates and staffing assumptions are internally consistent.",
+        "Repository validation and its negative contract tests pass.",
+        "Public repository contains the reviewed planning baseline, without engine completion claims."
+      ],
+      "evidence": [
+        "docs/BASELINE_VERIFICATION.md"
+      ]
+    },
+    {
+      "id": "M1",
+      "title": "Deterministic offline renderer",
+      "status": "planned",
+      "depends_on": [
+        "M0"
+      ],
+      "owner_role": "Engine lead",
+      "deliverables": [
+        "evidence/M1/capability-matrix.md",
+        "evidence/M1/review.md"
+      ],
+      "acceptance": [
+        "Freeze the complete M1 scope and upstream fixture IDs before implementation review.",
+        "All frozen M1 assertions and reftests pass through the custom parser-to-pixel pipeline.",
+        "Each fixture repeats 100 times with identical pixels on the pinned environment and reproduces on a second equivalent worker.",
+        "Seven consecutive days of parser and layout fuzzing have no unresolved reproducible crash; size and time limits pass.",
+        "Network and script execution remain disabled."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M2",
+      "title": "Sandboxed network browser",
+      "status": "planned",
+      "depends_on": [
+        "M1"
+      ],
+      "owner_role": "Platform and security leads",
+      "deliverables": [
+        "evidence/M2/capability-matrix.md",
+        "evidence/M2/security-review.md"
+      ],
+      "acceptance": [
+        "Frozen navigation, Fetch, TLS, origin, cookie and cache tests pass.",
+        "Compromised-child and hostile IPC tests prove denied ambient file and socket access.",
+        "Codec isolation, cancellation, process teardown and unrelated-tab crash recovery pass.",
+        "Independent security review has no open critical or high findings before arbitrary network browsing.",
+        "Controlled internal test builds only; external network-capable distribution additionally requires the applicable B042 operational release gates."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M3",
+      "title": "JavaScript and dynamic web platform",
+      "status": "planned",
+      "depends_on": [
+        "M2"
+      ],
+      "owner_role": "Runtime and DOM leads",
+      "deliverables": [
+        "evidence/M3/capability-matrix.md",
+        "evidence/M3/runtime-review.md"
+      ],
+      "acceptance": [
+        "Approved VM embedding decision includes GC ownership and update rehearsal evidence.",
+        "Real Web IDL bindings, realms, event loop, microtasks, modules, mutation and document lifecycle pass declared tests.",
+        "Embedded Test262 results have no unexplained regression against the identical standalone VM build.",
+        "Script-enabled cross-origin and lifecycle adversarial tests pass.",
+        "Controlled internal test builds only; external network-capable distribution additionally requires the applicable B042 operational release gates."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M4",
+      "title": "Developer alpha",
+      "status": "planned",
+      "depends_on": [
+        "M3"
+      ],
+      "owner_role": "Release lead",
+      "deliverables": [
+        "evidence/M4/capability-matrix.md",
+        "evidence/M4/release-review.md"
+      ],
+      "acceptance": [
+        "Published flex/grid, forms/editing, international text, accessibility, inspector and WebDriver alpha matrix passes.",
+        "At least 90 percent of the frozen 100-task corpus succeeds.",
+        "Thirty-day supervised use has no unresolved critical or high security defect or profile corruption.",
+        "Signed install, update, rollback and vulnerability intake drills pass."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "M5",
+      "title": "Competitive readiness",
+      "status": "planned",
+      "depends_on": [
+        "M4"
+      ],
+      "owner_role": "Project and security leads",
+      "deliverables": [
+        "evidence/M5/release-review.md",
+        "evidence/M5/comparison.md"
+      ],
+      "acceptance": [
+        "At least 99 percent of the frozen advertised-feature WPT cohort passes and whole-suite outcome counts are published.",
+        "At least 98 percent of the frozen 500-task corpus succeeds.",
+        "Independent isolation, VM and update review passes with no open critical or high security finding; 90-day operations drill passes.",
+        "Declared accessibility and controlled latency, memory and product-advantage thresholds in docs/ROADMAP.md pass.",
+        "Each supported platform has staffed ownership, patch capacity and reproducible release evidence."
+      ],
+      "evidence": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "B001",
+      "title": "Publish the verified engineering baseline",
+      "milestone": "M0",
+      "priority": "P0",
+      "status": "complete",
+      "depends_on": [],
+      "owner_role": "Project maintainer",
+      "acceptance": [
+        "Publish coherent planning documents and explicit implementation status.",
+        "Pass repository checks and record exact commands, environment and results."
+      ],
+      "evidence": [
+        "docs/BASELINE_VERIFICATION.md"
+      ]
+    },
+    {
+      "id": "B010",
+      "title": "Freeze the M1 capability and fixture contract",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B001"
+      ],
+      "owner_role": "Engine and test leads",
+      "acceptance": [
+        "List exact HTML/CSS/text/paint features, spec sections, upstream revisions and expected outcomes.",
+        "Include malformed and boundary cases, input/memory/time limits, pinned fonts and image assets with licenses."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B011",
+      "title": "Bootstrap reproducible Rust builds and a real executable slice",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B010"
+      ],
+      "owner_role": "Build and engine leads",
+      "acceptance": [
+        "Pin the toolchain and dependency locks; build from clean Linux workers and a macOS developer host.",
+        "CLI reads a constrained input and writes a validated document artifact through real parsing code; no empty subsystem crates."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B012",
+      "title": "Implement the HTML tokenizer cohort",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B011"
+      ],
+      "owner_role": "HTML/DOM engineer",
+      "acceptance": [
+        "Match the frozen token fixtures including character references, raw-text states and malformed input.",
+        "Bound input growth and document tokenizer errors; run fuzz target with reproducible failures retained."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B013",
+      "title": "Implement DOM ownership and HTML tree construction",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B012"
+      ],
+      "owner_role": "HTML/DOM engineer",
+      "acceptance": [
+        "Pass document and fragment tree fixtures including malformed nesting and node/attribute handling.",
+        "Test identity, ownership, mutation invariants, deep inputs and deterministic teardown."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B014",
+      "title": "Implement CSS syntax, selectors and cascade",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B011"
+      ],
+      "owner_role": "Style engineer",
+      "acceptance": [
+        "Pass cohort tokenization, declaration recovery, type/class/ID/combinator selectors, origins, specificity and source order.",
+        "Computed values, inheritance and box-model inputs have assertion tests rather than screenshot-only tests."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B015",
+      "title": "Integrate deterministic international text metrics",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B011"
+      ],
+      "owner_role": "Text engineer",
+      "acceptance": [
+        "Shape Latin, Arabic and Devanagari fixtures using licensed pinned fonts and explicit Unicode data.",
+        "Pass direction, cluster, wrapping and malformed-font limits; document native ownership and dependency updates."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B016",
+      "title": "Implement block and inline formatting",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B013",
+        "B014",
+        "B015"
+      ],
+      "owner_role": "Layout engineer",
+      "acceptance": [
+        "Pass frozen geometry tests for sizing, margins, padding, borders, whitespace and line wrapping.",
+        "Cover nested/empty/oversized documents and deterministic bounded failure without hidden truncation."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B017",
+      "title": "Implement display lists, PNG resources and CPU paint",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B016"
+      ],
+      "owner_role": "Rendering engineer",
+      "acceptance": [
+        "Generate stable display lists and pixels for clipping, text, backgrounds, borders, colors and controlled PNG fixtures.",
+        "Validate image decoded-size limits; fail resource manifest escapes and unsupported fixture requirements explicitly."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B018",
+      "title": "Deliver the offline fixture runner and inspectable output",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B017"
+      ],
+      "owner_role": "Test and engine leads",
+      "acceptance": [
+        "CLI renders declared inputs to images, layout diagnostics and structured outcomes with reliable exit status.",
+        "Runner provides no ambient network or browsing-profile access and preserves stdout/stderr and diff artifacts."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B019",
+      "title": "Close the M1 renderer gate with independent replay",
+      "milestone": "M1",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B018"
+      ],
+      "owner_role": "Test lead and reviewer",
+      "acceptance": [
+        "All M1 assertions pass; each fixture is identical across 100 repetitions and a second equivalent worker.",
+        "Seven-day parser/layout fuzz window and resource-limit tests pass; capability matrix includes every unsupported feature."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B020",
+      "title": "Implement broker-owned context identity and capability IPC",
+      "milestone": "M2",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B019"
+      ],
+      "owner_role": "Platform engineer",
+      "acceptance": [
+        "Version and bound messages; bind context/origin/partition authority to broker-owned records.",
+        "Reject wrong owner, stale generation, invalid size/offset and mutable shared-memory races; isolate child failure."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B021",
+      "title": "Enforce the Linux content and codec sandbox",
+      "milestone": "M2",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B020"
+      ],
+      "owner_role": "Security engineer",
+      "acceptance": [
+        "Compose privilege dropping, handle closure, namespaces and syscall/filesystem policy for the chosen Linux baseline.",
+        "Hostile children cannot open ambient files/sockets/devices or access another context; startup fails if isolation setup fails."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B022",
+      "title": "Implement URL, Fetch, TLS and partitioned network policy",
+      "milestone": "M2",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B020"
+      ],
+      "owner_role": "Network engineer",
+      "acceptance": [
+        "Pass pinned URL fixtures plus controlled certificates, redirects, MIME, credentials, CORS, cookies and cache tests.",
+        "Broker-authorized requests preserve origin and partition across redirects; enforce cancellation and resource limits."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B023",
+      "title": "Deliver navigation, trusted origin UI and storage lifecycle",
+      "milestone": "M2",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B021",
+        "B022"
+      ],
+      "owner_role": "Browser and storage engineers",
+      "acceptance": [
+        "Pass navigation commits, history, stale response, crash recovery and bounded download tests.",
+        "Enforce file/internal/opaque origin policy, private-session teardown and quota/partition persistence tests."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B024",
+      "title": "Close the network security gate",
+      "milestone": "M2",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B023"
+      ],
+      "owner_role": "Independent security reviewer",
+      "acceptance": [
+        "Replay every M2 invariant, including compromised-renderer IPC, cross-context access and isolated decoder attacks.",
+        "Fix all critical/high findings and record independent retest before arbitrary public content is enabled."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B030",
+      "title": "Select and prove a maintainable JavaScript VM embedding",
+      "milestone": "M3",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B011"
+      ],
+      "owner_role": "Runtime engineer",
+      "acceptance": [
+        "Evaluate SpiderMonkey build/update feasibility and compare alternatives if evidence fails.",
+        "Prototype GC-safe wrappers, realm separation, exception propagation, interruption, jobs and modules; record license/build/footprint results."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B031",
+      "title": "Implement traced Web IDL and DOM bindings",
+      "milestone": "M3",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B024",
+        "B030"
+      ],
+      "owner_role": "Runtime and DOM engineers",
+      "acceptance": [
+        "Pass native rooting, cross-language cycle, finalization, reentrancy, conversion and realm identity tests.",
+        "No binding outlives its document authority; navigation teardown and GC stress preserve isolation."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B032",
+      "title": "Integrate the HTML event loop and dynamic rendering",
+      "milestone": "M3",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B031"
+      ],
+      "owner_role": "Runtime engineer",
+      "acceptance": [
+        "Pass tasks, microtask checkpoints, timers, promises, events, module loading and script loading order fixtures.",
+        "DOM mutation invalidates affected style/layout and paints correct pixels; runaway work can be interrupted."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B033",
+      "title": "Close the dynamic platform compatibility gate",
+      "milestone": "M3",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B032"
+      ],
+      "owner_role": "Test and security leads",
+      "acceptance": [
+        "Run real Test262 standalone and embedded adapters with upstream flags, negative tests, async and module semantics.",
+        "Publish both denominators with no unexplained embedding regression; script-enabled origin and lifecycle security tests pass."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B040",
+      "title": "Expand layout, forms, editing and international interaction",
+      "milestone": "M4",
+      "priority": "P1",
+      "status": "planned",
+      "depends_on": [
+        "B033"
+      ],
+      "owner_role": "Layout and interaction engineers",
+      "acceptance": [
+        "Pass full declared alpha flex/grid and positioning cohorts with geometry and reference tests.",
+        "Pass selection, focus, keyboard, forms, IME, bidirectional text and complex-script editing task fixtures."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B041",
+      "title": "Deliver accessibility, inspector and WebDriver integration",
+      "milestone": "M4",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B040"
+      ],
+      "owner_role": "Accessibility and tooling owners",
+      "acceptance": [
+        "Expose tested semantic tree, focus and actions to the supported OS accessibility bridge.",
+        "Human screen-reader and keyboard tasks pass; inspector reports real DOM/styles/layout and WebDriver runs WPT through a real adapter."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B042",
+      "title": "Establish signed release, update and incident operations",
+      "milestone": "M4",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B024"
+      ],
+      "owner_role": "Release and security leads",
+      "acceptance": [
+        "Test authenticated updates, rollback authorization, tampered metadata rejection, interruption and recovery.",
+        "Rehearse private intake, dependency patching, signing-key separation and profile migration with staffed backup owners."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B043",
+      "title": "Close the developer alpha gate",
+      "milestone": "M4",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B041",
+        "B042"
+      ],
+      "owner_role": "Release reviewer",
+      "acceptance": [
+        "Pass at least 90 percent of frozen 100-site tasks, with every failure and unsupported capability visible.",
+        "Complete thirty-day supervised trial without unresolved critical/high security findings or profile corruption."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B050",
+      "title": "Broaden standards, site compatibility and platform coverage",
+      "milestone": "M5",
+      "priority": "P1",
+      "status": "planned",
+      "depends_on": [
+        "B043"
+      ],
+      "owner_role": "Compatibility lead",
+      "acceptance": [
+        "Freeze release scope covering all tests for advertised features and publish full WPT manifest outcome counts.",
+        "Reach at least 99 percent scoped WPT and 98 percent of frozen 500-site tasks; ports satisfy their own isolation and accessibility gates."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B051",
+      "title": "Demonstrate competitive performance with reproducible controls",
+      "milestone": "M5",
+      "priority": "P1",
+      "status": "planned",
+      "depends_on": [
+        "B043"
+      ],
+      "owner_role": "Performance engineer",
+      "acceptance": [
+        "Use matched stable Chromium/Firefox versions and full process-tree memory with correctness/security enabled.",
+        "Pass predeclared latency, memory and product-advantage thresholds with raw samples and uncertainty from two workers."
+      ],
+      "evidence": []
+    },
+    {
+      "id": "B052",
+      "title": "Complete independent release security and continuity review",
+      "milestone": "M5",
+      "priority": "P0",
+      "status": "planned",
+      "depends_on": [
+        "B050",
+        "B051",
+        "B042"
+      ],
+      "owner_role": "Independent release reviewers",
+      "acceptance": [
+        "Retest sandbox, VM, origin, update and accessibility gates with no critical/high finding open.",
+        "Complete the 90-day patch/incident drill and verify two maintainers for each critical subsystem before release approval."
+      ],
+      "evidence": []
+    }
+  ]
+}
