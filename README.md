@@ -8,6 +8,10 @@ engineering plan and working plan-validation tools. It contains no browser engin
 implementation and makes no compatibility, performance, or security claims for an
 engine. Every engine milestone remains planned.
 
+**M0 is complete.** The [acceptance record](docs/BASELINE_VERIFICATION.md) maps
+each baseline requirement to its evidence. The next work item is B010: freeze the
+M1 offline renderer's capability and fixture contract before implementing the engine.
+
 The ambition is to compete with Chromium/Blink and Firefox/Gecko on compatibility,
 security, responsiveness, resource use, and developer trust. Achieving that requires
 sustained, specialist engineering over multiple years. The first delivery target is
@@ -26,6 +30,7 @@ much narrower: a reproducible, offline HTML/CSS renderer on Linux.
 | [Dependency decisions](docs/decisions/0001-engine-boundary.md) | What to build and what to integrate |
 | [Work items](docs/BACKLOG.md) | Prioritized implementation contracts |
 | [Machine-readable plan](planning/roadmap.json) | Dependencies, acceptance criteria, and evidence state |
+| [M0 acceptance record](docs/BASELINE_VERIFICATION.md) | Baseline checklist, local checks, and published CI evidence |
 | [Standards sources](docs/SOURCES.md) | Authoritative references and evidence policy |
 
 ## Validate the repository

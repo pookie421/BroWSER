@@ -30,7 +30,8 @@ excuse for avoidable process privilege or unsafe defaults.
    partition, navigation generation, process assignment, user activation, and
    granted capabilities. A child cannot redefine these in a request payload.
 3. A sandbox is installed and verified before any untrusted page bytes reach a
-   process. If setup fails, remote content does not load. A development bypass
+   process, including arbitrary local documents. If setup fails, those inputs do
+   not load. A development bypass
    cannot be enabled accidentally in a release package.
 4. No IPC message, shared-memory range, renderer frame, accessibility update, or
    permission result is accepted without bounds, identity, and lifetime checks.
@@ -45,6 +46,11 @@ excuse for avoidable process privilege or unsafe defaults.
    reports an unsupported protected API as available.
 8. Release packages verify update authenticity and reject unauthorized rollback;
    emergency recovery has a separate authenticated procedure.
+
+The initial single-process development renderer is restricted to controlled
+synthetic fixtures in an isolated test environment, without network or profile
+access. It is not a mode for opening arbitrary local or remote documents. This
+development restriction does not waive the containment gate for untrusted input.
 
 ## Threat register and evidence
 

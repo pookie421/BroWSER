@@ -66,8 +66,9 @@ flowchart LR
     R2 -->|validated display submissions| G
 ```
 
-These are target roles. The offline renderer may initially use one process with
-no network or profile access. Enabling remote content requires the separated,
+These are target roles. The offline renderer may initially use one process for
+controlled synthetic fixtures in an isolated test environment, with no network
+or profile access. Arbitrary local documents and remote content require the separated,
 tested roles that its attack surface needs; a single-process development mode
 cannot be promoted to a release mode.
 
