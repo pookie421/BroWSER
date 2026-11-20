@@ -8,6 +8,22 @@ Every future engine result must identify the BroWSER commit and build flags; too
 
 Store public sanitized evidence in an immutable release artifact or equivalent content-addressed store and link it from the reviewed milestone record. Retain passing release evidence for the supported lifetime plus one year. Retain minimized regressions in version control. A changed binary, corpus, reference, font, or harness creates a new run; it cannot overwrite the old result.
 
+Run `python3 tools/run_m1_bootstrap.py --build --repeat 100` for development
+bootstrap evidence. The runner pins the cohort identity, builds with the locked
+offline Cargo inputs, records the executable Cargo produced, and verifies build,
+source and cohort hashes across the replay. It publishes the result and command
+log together in a fresh `artifacts/m1/bootstrap-*` directory, with per-attempt
+timing, outcome and diagnostics and any outputs retained from failing cases.
+The `--binary` option provides an exploratory replay of an existing executable.
+Development evidence covers the bootstrap, with the full-M1 and WPT denominators
+reported separately. The repository Markdown check validates file targets and
+excludes unpublished local handoff files.
+
+The CLI stages output bytes and publishes each file without overwriting
+existing paths. A paired render can briefly expose its first file during
+publication. On failure the CLI rolls back files it published and reports
+any cleanup error with the affected path.
+
 ## Testing layers
 
 | Layer | Required behavior and evidence | Cadence after implementation |

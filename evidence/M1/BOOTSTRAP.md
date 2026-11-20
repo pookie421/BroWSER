@@ -2,6 +2,9 @@
 
 Observed 20 November 2026 on macOS arm64 with pinned Rust 1.100.0. This is the first
 complete controlled-fixture parser/style/layout/paint path. M1 remains in progress.
+The checks and command below describe the original M1-v1 run. The current
+development replay uses the revised contract and fresh builds.
+[Current replay instructions](../../docs/VALIDATION.md#evidence-identity)
 
 ## Implemented and exercised
 
@@ -47,7 +50,7 @@ python3 tools/run_m1_bootstrap.py --repeat 100
 - [Command diagnostics](2026-11-20-macos/bootstrap-report.commands.json): every invoked
   fixture command, exit code, stdout and stderr; temporary output directory names
   are normalized to a documented placeholder.
-- [Frozen cohort](../../planning/m1-cohort.json): 28 case contracts, 34 hashed assets,
+- [M1-v1 cohort](https://github.com/pookie421/BroWSER/blob/c97fa6a747638177fc2a618ada27eb62eb27d6ef/planning/m1-cohort.json): 28 case contracts, 34 hashed assets,
   source revisions and independent expected geometry/glyph/pixel values.
 
 The local manifest records base commit `691b825` with `worktree_dirty: true` because

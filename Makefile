@@ -15,5 +15,4 @@ engine-check:
 	$(CARGO) fmt --all -- --check
 	$(CARGO) test --locked --offline --all-targets
 	$(CARGO) clippy --locked --offline --all-targets -- -D warnings
-	$(CARGO) build --locked --offline
-	$(PYTHON) tools/run_m1_bootstrap.py --binary target/debug/browser-engine --repeat 100
+	$(PYTHON) tools/run_m1_bootstrap.py --build --cargo "$(CARGO)" --repeat 100

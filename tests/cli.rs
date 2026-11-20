@@ -70,13 +70,23 @@ fn inspect_and_render_produce_real_artifacts() {
         String::from_utf8_lossy(&render.stderr)
     );
     let ppm = fs::read(fixture.0.join("image.ppm")).unwrap();
-    assert!(ppm.starts_with(b"P6\n8 8\n255\n"));
-    assert_eq!(ppm.len(), b"P6\n8 8\n255\n".len() + 8 * 8 * 3);
-    assert!(ppm.windows(3).any(|pixel| pixel == [255, 0, 0]));
-    assert!(
-        !fs::read_to_string(fixture.0.join("layout.json"))
-            .unwrap()
-            .is_empty()
+    let pixels = ppm.strip_prefix(b"P6\n8 8\n255\n").unwrap();
+    assert_eq!(pixels.len(), 8 * 8 * 3);
+    let pixel = |x: usize, y: usize| {
+        let start = (y * 8 + x) * 3;
+        &pixels[start..start + 3]
+    };
+    assert_eq!(pixel(3, 2), [255, 0, 0]);
+    assert_eq!(pixel(4, 2), [255, 255, 255]);
+    assert_eq!(
+        fs::read_to_string(fixture.0.join("layout.json")).unwrap(),
+        concat!(
+            r#"{"viewport":{"width":8,"height":8},"boxes":[{"node":1,"tag":"div","#,
+            r#""border_box":{"x":0,"y":0,"width":4,"height":3},"#,
+            r#""content_box":{"x":0,"y":0,"width":4,"height":3},"#,
+            r##""clip":{"x":0,"y":0,"width":8,"height":8},"background":"#ff0000"}]}"##,
+            "\n\n",
+        ),
     );
 }
 
@@ -93,7 +103,6 @@ fn rejects_bad_arguments_and_invalid_utf8_without_artifacts() {
             "--output",
             "dom.json",
         ],
-        vec!["render", "--width", "0"],
         vec![
             "inspect",
             "--fixture",
@@ -106,6 +115,49 @@ fn rejects_bad_arguments_and_invalid_utf8_without_artifacts() {
         assert!(!fixture.run(&args).status.success());
     }
     assert!(!fixture.0.join("dom.json").exists());
+}
+
+#[test]
+fn inspection_modes_are_explicit_and_exclusive() {
+    let fixture = Fixture::new(b"<p>one<p>two");
+    let mut args = vec![
+        "inspect",
+        "--fixture-root",
+        ".",
+        "--fixture",
+        "input.html",
+        "--output",
+        "dom.json",
+    ];
+    let dom = fixture.0.join("dom.json");
+    assert!(!fixture.run(&args).status.success());
+    assert!(!dom.exists());
+
+    args.extend(["--parse-mode", "document", "--fragment-context", "div"]);
+    let conflict = fixture.run(&args);
+    assert_eq!(
+        String::from_utf8(conflict.stderr).unwrap(),
+        "browser-engine: choose one of --parse-mode and --fragment-context\n"
+    );
+    assert!(!dom.exists());
+
+    args.truncate(args.len() - 2);
+    let result = fixture.run(&args);
+    assert!(result.status.success(), "{:?}", result.stderr);
+    let document = fs::read_to_string(&dom).unwrap();
+    for name in ["html", "head", "body"] {
+        assert!(document.contains(&format!("\"name\":\"{name}\"")));
+    }
+    assert_eq!(document.matches("\"name\":\"p\"").count(), 2);
+    fs::remove_file(&dom).unwrap();
+
+    args.truncate(args.len() - 2);
+    args.extend(["--fragment-context", "div"]);
+    let result = fixture.run(&args);
+    assert!(result.status.success(), "{:?}", result.stderr);
+    let fragment = fs::read_to_string(&dom).unwrap();
+    assert!(!fragment.contains("\"name\":\"html\""));
+    assert_eq!(fragment.matches("\"name\":\"p\"").count(), 2);
 }
 
 #[test]
@@ -164,7 +216,7 @@ fn fixture_root_prevents_escaping_to_other_inputs() {
 }
 
 #[test]
-fn input_and_viewport_limits_fail_without_output() {
+fn oversized_input_fails_without_output() {
     let fixture = Fixture::new(&vec![b' '; 1_048_577]);
     let args = [
         "inspect",
@@ -178,20 +230,62 @@ fn input_and_viewport_limits_fail_without_output() {
     let result = fixture.run(&args);
     assert!(!result.status.success());
     assert!(String::from_utf8_lossy(&result.stderr).contains("input limit"));
-    fs::write(fixture.0.join("input.html"), b"<div></div>").unwrap();
-    let result = fixture.run(&[
-        "render",
-        "--fixture-root",
-        ".",
-        "--fixture",
-        "input.html",
-        "--output",
-        "image.ppm",
-        "--width",
-        "2049",
-    ]);
-    assert!(!result.status.success());
-    assert!(!fixture.0.join("image.ppm").exists());
+    assert!(!fixture.0.join("dom.json").exists());
+}
+
+#[test]
+fn viewport_bounds_apply_to_both_dimensions() {
+    let fixture = Fixture::new(b"<div></div>");
+    let image = fixture.0.join("image.ppm");
+    let layout = fixture.0.join("layout.json");
+    for varied in ["--width", "--height"] {
+        for (value, accepted) in [
+            ("0", false),
+            ("1", true),
+            ("2047", true),
+            ("2048", true),
+            ("2049", false),
+        ] {
+            let (width, height) = if varied == "--width" {
+                (value, "1")
+            } else {
+                ("1", value)
+            };
+            let result = fixture.run(&[
+                "render",
+                "--fixture-root",
+                ".",
+                "--fixture",
+                "input.html",
+                "--output",
+                "image.ppm",
+                "--layout",
+                "layout.json",
+                "--width",
+                width,
+                "--height",
+                height,
+            ]);
+            assert_eq!(result.status.success(), accepted, "{varied} {value}");
+            if accepted {
+                assert!(
+                    fs::read(&image)
+                        .unwrap()
+                        .starts_with(format!("P6\n{width} {height}\n255\n").as_bytes())
+                );
+                assert!(layout.is_file());
+                fs::remove_file(&image).unwrap();
+                fs::remove_file(&layout).unwrap();
+            } else {
+                assert_eq!(
+                    String::from_utf8(result.stderr).unwrap(),
+                    format!("browser-engine: {varied} must be an integer in 1..=2048\n")
+                );
+                assert!(!image.exists());
+                assert!(!layout.exists());
+            }
+        }
+    }
 }
 
 #[test]
@@ -208,4 +302,45 @@ fn unsupported_text_is_an_error_without_blank_image_success() {
     ]);
     assert!(!result.status.success());
     assert!(!fixture.0.join("image.ppm").exists());
+}
+
+#[test]
+fn unsupported_paint_property_cannot_publish_an_incorrect_image() {
+    let fixture =
+        Fixture::new(b"<div style='width:2px;height:2px;background:red;opacity:0'></div>");
+    let args = [
+        "render",
+        "--fixture-root",
+        ".",
+        "--fixture",
+        "input.html",
+        "--output",
+        "image.ppm",
+        "--layout",
+        "layout.json",
+        "--width",
+        "4",
+        "--height",
+        "4",
+    ];
+    let result = fixture.run(&args);
+    assert_eq!(result.status.code(), Some(1));
+    assert_eq!(
+        String::from_utf8(result.stderr).unwrap(),
+        "browser-engine: unsupported bootstrap CSS property: opacity\n"
+    );
+    assert!(!fixture.0.join("image.ppm").exists());
+    assert!(!fixture.0.join("layout.json").exists());
+
+    fs::write(
+        fixture.0.join("input.html"),
+        b"<div style='width:2px;height:2px;background:red'></div>",
+    )
+    .unwrap();
+    assert!(fixture.run(&args).status.success());
+    let image = fs::read(fixture.0.join("image.ppm")).unwrap();
+    assert_eq!(
+        &image.strip_prefix(b"P6\n4 4\n255\n").unwrap()[..3],
+        [255, 0, 0]
+    );
 }

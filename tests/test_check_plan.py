@@ -233,6 +233,16 @@ class PlanContractTests(unittest.TestCase):
         self.assertTrue(any("broken local link" in error for error in errors))
         self.assertTrue(any("escapes repository" in error for error in errors))
 
+    def test_local_handoff_is_excluded_from_repository_link_validation(self):
+        before = check_plan.check_links(self.root)
+        (self.root / "AGENTS.md").write_text("[Broken](missing.md)", encoding="utf-8")
+        handoff = self.root / "local-agent"
+        handoff.mkdir()
+        (handoff / "STATE.md").write_text("[Broken](missing.md)", encoding="utf-8")
+        self.assertEqual(before, check_plan.check_links(self.root))
+        (self.root / "README.md").write_text("[Local](local-agent/STATE.md)", encoding="utf-8")
+        self.assertIn("unpublished handoff", check_plan.check_links(self.root)[0])
+
     def test_examples_and_issue_templates_are_not_link_targets(self):
         (self.root / ".github" / "ISSUE_TEMPLATE").mkdir(parents=True)
         (self.root / ".github" / "ISSUE_TEMPLATE" / "bug.md").write_text("[Example](absent.md)", encoding="utf-8")

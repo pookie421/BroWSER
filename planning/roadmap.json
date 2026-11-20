@@ -211,7 +211,8 @@
       ],
       "evidence": [
         "evidence/M1/capability-matrix.md",
-        "evidence/M1/BOOTSTRAP.md"
+        "evidence/M1/BOOTSTRAP.md",
+        "docs/CODE_AUDIT.md"
       ]
     },
     {
@@ -246,7 +247,8 @@
       ],
       "evidence": [
         "evidence/M1/capability-matrix.md",
-        "evidence/M1/BOOTSTRAP.md"
+        "evidence/M1/BOOTSTRAP.md",
+        "docs/CODE_AUDIT.md"
       ]
     },
     {

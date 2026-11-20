@@ -1,7 +1,13 @@
 {
   "schema_version": 1,
-  "id": "M1-v1",
+  "id": "M1-v2",
   "frozen_on": "2026-11-16",
+  "revised_on": "2026-11-20",
+  "revision": {
+    "supersedes": "M1-v1",
+    "superseded_sha256": "bfd5baf5bc4d451da74887b58e0f6c639496ab48210153ad24ef48d1cca9e02c",
+    "changes": "C001 corrects the specificity winner and adds a positive adjacent-selector assertion. B004 and B005 require exact rejection diagnostics and paired controls."
+  },
   "scope_status": "frozen_contract_not_implementation_evidence",
   "limits": {
     "input_bytes": 1048576,
@@ -127,6 +133,12 @@
       "license": "MIT"
     },
     {
+      "path": "fixtures/m1/bootstrap/external-resource-control.html",
+      "bytes": 67,
+      "sha256": "457a98773b3580c9a9f5e61089d6d4e387ccefb46b6000b4a696c1a980a855ab",
+      "license": "MIT"
+    },
+    {
       "path": "fixtures/m1/bootstrap/external-resource.html",
       "bytes": 131,
       "sha256": "8b096ccf00c072962486ca1fbfedbff701a3a91e2b03f975946b4859e7c2defd",
@@ -142,6 +154,12 @@
       "path": "fixtures/m1/bootstrap/root-box.html",
       "bytes": 173,
       "sha256": "824804bdae25606b49b7b6566fcf11eb3c9a27b670242d234b897ca3f653e290",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/visible-text-control.html",
+      "bytes": 101,
+      "sha256": "78ec3c0839c2cdf26a52644d2e5aadf851cc861da3f8317ad9187a376f242a5e",
       "license": "MIT"
     },
     {
@@ -250,6 +268,12 @@
       "path": "fixtures/m1/full/rawtext.html",
       "bytes": 77,
       "sha256": "3a787e14d720763847c9885068c2d7f663239d00ccf58b85739cf70726e1afde",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/selectors-v2.html",
+      "bytes": 402,
+      "sha256": "671a14021db4d2e89998291e9f9112f10fe46f6045002beb9b1c278c9b993755",
       "license": "MIT"
     },
     {
@@ -448,14 +472,19 @@
       "kind": "reject",
       "input": "fixtures/m1/bootstrap/visible-text.html",
       "expected": {
-        "exit": "nonzero",
-        "diagnostic_contains": "unsupported",
-        "reason": "Bootstrap cannot paint visible text and must fail rather than omit it."
+        "exit": 1,
+        "reason": "Bootstrap cannot paint visible text and must fail rather than omit it.",
+        "stderr": "browser-engine: unsupported visible text: shaping and inline layout are outside the bootstrap renderer"
       },
       "spec": [
         "https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#inline-formatting"
       ],
-      "execution": "not_run"
+      "execution": "not_run",
+      "control": "fixtures/m1/bootstrap/visible-text-control.html",
+      "viewport": {
+        "width": 32,
+        "height": 24
+      }
     },
     {
       "id": "M1-B005",
@@ -463,13 +492,19 @@
       "kind": "reject",
       "input": "fixtures/m1/bootstrap/external-resource.html",
       "expected": {
-        "exit": "nonzero",
-        "reason": "External stylesheets are outside the controlled bootstrap grammar; no network access occurs."
+        "exit": 1,
+        "reason": "External stylesheets are outside the controlled bootstrap grammar; no network access occurs.",
+        "stderr": "browser-engine: unsupported external stylesheet: bootstrap styles must be embedded"
       },
       "spec": [
         "docs/SECURITY_MODEL.md"
       ],
-      "execution": "not_run"
+      "execution": "not_run",
+      "control": "fixtures/m1/bootstrap/external-resource-control.html",
+      "viewport": {
+        "width": 32,
+        "height": 24
+      }
     },
     {
       "id": "M1-H001",
@@ -596,20 +631,23 @@
       "id": "M1-C001",
       "stage": "full_m1",
       "kind": "style",
-      "input": "fixtures/m1/full/selectors.html",
+      "input": "fixtures/m1/full/selectors-v2.html",
       "expected": {
         "elements": {
           "a": {
             "background-color": "#ff0000"
           },
           "b": {
-            "background-color": "#00ff00"
+            "background-color": "#ff0000"
           },
           "s": {
             "color": "#0000ff"
           },
           "p": {
             "color": "#008000"
+          },
+          "c": {
+            "background-color": "#00ff00"
           }
         }
       },

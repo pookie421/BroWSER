@@ -1,8 +1,8 @@
 # M1 scope and fixture contract
 
-Contract **M1-v1**, frozen 16 November 2026. Machine-readable source:
-[planning/m1-cohort.json](../planning/m1-cohort.json). This freezes the required
-behavior and test inputs; it does not assert implementation completion or test passes.
+Contract **M1-v2** revises the 16 November 2026 freeze on 20 November 2026.
+The machine-readable manifest freezes the required behavior and test inputs.
+[Current cohort](../planning/m1-cohort.json) · [M1-v1 snapshot](https://github.com/pookie421/BroWSER/blob/c97fa6a747638177fc2a618ada27eb62eb27d6ef/planning/m1-cohort.json)
 
 M1 remains the deterministic offline renderer described in [ROADMAP.md](ROADMAP.md).
 The first executable bootstrap is a deliberately smaller development slice. Its
@@ -35,6 +35,8 @@ The first runner operates only on controlled fixtures in
 padding, border and margin coordinates; B003 verifies a concrete cascade result.
 B004 requires explicit rejection of visible text before text rendering exists.
 B005 requires rejection of an external stylesheet request without fetching it.
+Both require exit 1 with the fixture's exact diagnostic, no output files, and
+successful rendering of a paired control that removes the unsupported feature.
 
 The manifest represents pixels as `[x, y, red, green, blue]`, zero-based from the
 viewport's top-left corner. Rectangles use `[x, y, width, height]` in integer CSS
@@ -48,6 +50,14 @@ Each actual runner invocation writes a separate evidence report with the commit,
 toolchain, environment and per-case outcomes. Do not edit the contract to erase
 failures or count deferred cases as passes.
 
+The CLI's default parser uses balanced explicit tags. The inspect-only document
+mode supports implied `html`, `head` and `body` and bounded paragraph recovery.
+The inspect-only div fragment mode returns the parsed children under the JSON root.
+Both modes use the same input, token and tree limits as strict parsing.
+They accept the subset of head metadata and ordinary block and phrasing elements
+documented by the parser. Other tree-construction modes produce a diagnostic.
+[Tree-construction implementation](../src/html/tree.rs)
+
 ## Resource contract
 
 | Resource | Maximum accepted value | Required boundary behavior |
@@ -55,6 +65,7 @@ failures or count deferred cases as passes.
 | HTML UTF-8 input | 1,048,576 bytes | Reject maximum + 1 before unbounded allocation; malformed/unsupported content has its own failure |
 | Document nodes | 10,000 | Count document/doctype/element/text nodes, including generated nodes; never truncate silently |
 | Element depth | 128 | Count elements from html through the current node inclusive; exclude the document node |
+| Bootstrap attribute tokens | 128 per start tag | Count all tokens including duplicates. Retain the first value for each name. Reject the 129th token. |
 | Viewport width or height | 2,048 CSS pixels | Reject zero and maximum + 1 before allocating a surface |
 | CSS source total | 262,144 bytes | Bound style parsing independently of HTML length |
 | Decoded resource bytes | 16,777,216 bytes per resource | Validate before allocating decoded image/font work buffers |
@@ -68,6 +79,33 @@ node, depth, decoded-size and viewport bounds belong at engine entry/allocation
 boundaries. The bootstrap reports its implemented checks separately. Its lack of
 network calls does not constitute an OS sandbox or authorization to open arbitrary
 untrusted local documents.
+
+The input limit counts the original bytes, including a leading UTF-8 signature.
+The parser strips one leading signature, preserves U+FEFF elsewhere, and
+normalizes CRLF and lone CR to LF. Diagnostics report zero-based UTF-8 byte
+positions in that normalized stream, including for invalid character references.
+
+The development renderer charges up to 5,120,000 selector checks across all
+applicable rules. Each compound costs at least one check per element, with
+additional charges for tag, ID and class probes when a compound has several.
+The separate sibling-selector check retains the 5,120,000 element–compound
+limit for `+` and `~`. Rules with no usable declarations incur no match work.
+Cascade processing has a separate 5,120,000 matched-declaration limit.
+Paint preflights up to 33,554,432 clipped pixel writes across canvas,
+backgrounds and borders before allocating one RGB PPM buffer.
+
+Embedded stylesheets are parsed independently in document order. The bootstrap
+uses a screen context with bare `all`, `screen`, `print` and `speech` media
+types and comma-separated lists. It ignores non-CSS and nonmatching sheets
+and diagnoses media query syntax outside the supported subset. Unknown
+declarations and invalid values in the supported subset follow CSS recovery.
+Recognized unsupported layout or paint behavior returns a diagnostic.
+
+An ordinary `hidden` attribute removes its element from paint and flow unless
+an explicit author `display` declaration overrides it. A root background
+paints the canvas. With a transparent root, the document body's background
+paints the canvas. Solid borders with omitted width use 3px in this renderer.
+The initial border color follows the element's foreground.
 
 ## Assets and independent oracles
 
@@ -107,6 +145,19 @@ source. The complete required feature boundary includes the stated unit/property
 coverage as well as the 28 enumerated integration cases: passing only those small
 integration examples cannot close B012–B019. No fixture or future outcome can be
 removed from the denominator after measurement without a visible scope revision.
+
+### M1-C001 specificity discrepancy
+
+M1-v1 specified a green background for `#b`. Both `main > div.item` and
+`div + div` match it, with respective specificities `(0, 1, 2)` and `(0, 0, 2)`.
+They have equal origin and importance, so the first rule wins and M1-v2
+expects red. The revised fixture adds an unclassed adjacent sibling, `#c`,
+whose green background independently exercises the adjacent selector.
+[Revised input](../fixtures/m1/full/selectors-v2.html) · [Selector specificity](https://www.w3.org/TR/2018/REC-selectors-3-20181106/#specificity) · [Cascade sorting order](https://www.w3.org/TR/2022/CR-css-cascade-5-20220113/#cascade-sort)
+
+M1-v2 keeps all 28 case IDs and records the superseded manifest digest.
+M1-v1 results remain historical. The revised C001, B004 and B005 assertions
+require new evidence under M1-v2. No official C001 run was recorded against M1-v1.
 
 Primary references checked 16 November 2026:
 

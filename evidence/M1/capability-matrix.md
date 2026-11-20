@@ -8,17 +8,21 @@ progress alongside M1. Wider task gates remain open until their full contracts p
 
 | Capability | Working bootstrap behavior | Remaining M1 obligation |
 | --- | --- | --- |
-| Input and DOM | Bounded UTF-8, explicit balanced tags, attributes/references, parent/child ownership, stable JSON | HTML insertion modes, document/fragment recovery, broader references and tested DOM mutation |
-| CSS | Bounded embedded/inline source; compound type/ID/class, child/descendant selectors, author cascade, importance and inline precedence | Complete frozen syntax recovery, sibling combinators, UA/user origins, inheritance and computed-value coverage |
-| Geometry | Integer block content boxes, edges, selected widths/heights, hidden content and overflow clipping | Inline formatting, whitespace/wrapping, margin collapse and full geometry cohort |
-| Paint | CPU RGB surface, solid backgrounds/borders, clipping, P6 PPM output | Display-list contract breadth, text rasterization, PNG decode and compositing |
+| Input and DOM | Bounded UTF-8 with normalized offsets, doctype nodes, strict parser, opt-in document and div-fragment inspection with bounded paragraph recovery | Broader HTML states and references, stable DOM mutation and teardown coverage |
+| CSS | Token-aware rule and declaration boundaries, tree-ordered screen stylesheets, bounded selectors, author cascade, foreground inheritance for paint and precise unsupported-feature diagnostics | Complete frozen syntax recovery, user origin and computed-style output |
+| Geometry | Integer block content boxes, edges, selected widths/heights, hidden elements and overflow clipping | Inline formatting, whitespace/wrapping, margin collapse and full geometry cohort |
+| Paint | One CPU RGB PPM buffer, bounded clipped fills, canvas propagation and solid border defaults | Display-list contract breadth, text rasterization, PNG decode and compositing |
 | Text/resources | Real pinned Noto assets, original notices and independent HarfBuzz references exist | No visible text or PNG resources are rendered yet; unsupported requests fail explicitly |
-| CLI | Real inspect/render commands, constrained fixture roots, bounded read, staged non-overwriting files, JSON diagnostics | Full M1 fixture adapter and isolated resource/RSS enforcement |
-| Tests | 38 library tests, six executable tests, one deterministic mutation smoke test; five frozen bootstrap cases | 23 full-M1 integration cases not run, broader unit/property obligations, second equivalent worker and seven-day coverage-guided fuzzing |
-| Scripting/security | Inert script fixture data; initial VM source/build-prerequisite research | No VM embedding, network service, OS sandbox or general browsing support |
+| CLI | Inspect/render commands, constrained fixture roots, bounded reads, staged output and rollback diagnostics | Full M1 fixture adapter and isolated RSS enforcement |
+| Tests | Build-bound bootstrap replay with fresh evidence bundles, exact rejection/control checks, typed DOM/layout validation, and a Unicode mutation smoke test | Official full-M1 execution, broader unit/property obligations, second equivalent worker and seven-day coverage-guided fuzzing |
+| Scripting/security | Inert script fixture data; initial VM source/build-prerequisite research; a separate [offline M2 broker experiment](../../docs/M2_SCOPE.md#offline-broker-experiment) | VM embedding, network service, OS sandbox and general browsing support remain future work |
 
-All three render fixtures passed their independent geometry/pixel assertions and
-100 repeated output-hash checks. Both negative fixtures returned explicit errors
-without artifacts. This is **5/5 bootstrap cases**, not a full-M1 or WPT score.
-WPT executed: **0**. See [the evidence index](BOOTSTRAP.md) and the
-[frozen scope](../../docs/M1_SCOPE.md).
+The M1-v2 audit follow-up passed 88 Rust and 49 Python tests locally on macOS
+arm64 with Rust 1.100.0. All five bootstrap cases passed, including 100
+identical repetitions for each of the three render cases and both exact
+rejection/control pairs. The pixel hashes match M1-v1. The layout hashes changed
+because inspection now counts the doctype as a document node.
+
+Direct checks matched H001–H006, L002, P001 and R001–R004. The official
+full-M1 roster still has 23 cases awaiting execution. WPT execution remains
+at zero. [Audit results](../../docs/CODE_AUDIT.md#remediation) · [Bootstrap evidence](BOOTSTRAP.md)

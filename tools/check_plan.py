@@ -21,6 +21,7 @@ MILESTONE_KEYS = COMMON_KEYS | {"deliverables"}
 TASK_KEYS = COMMON_KEYS | {"milestone", "priority"}
 STATUSES = {"planned", "in_progress", "complete"}
 IGNORED_DIRECTORIES = {".git", ".venv", "venv", "node_modules", "target", "dist", "build", "artifacts", "__pycache__"}
+LOCAL_HANDOFF = {"AGENTS.md", "local-agent"}
 LINK = re.compile(r"!?\[[^\]\n]*\]\((<[^>\n]+>|[^\s)]+)(?:\s+[\"'][^\n]*?[\"'])?\)")
 REFERENCE = re.compile(r"^\s{0,3}\[[^\]]+\]:\s*(<[^>\n]+>|\S+)", re.MULTILINE)
 
@@ -205,10 +206,12 @@ def validate_plan(plan: object, root: Path) -> list[str]:
 
 
 def markdown_files(root: Path):
-    """Yield authored Markdown, excluding generated and template directories."""
+    """Yield authored Markdown, excluding templates, generated files and local handoff."""
     for path in sorted(root.rglob("*.md")):
         relative = path.relative_to(root)
-        if any(part in IGNORED_DIRECTORIES for part in relative.parts) or "ISSUE_TEMPLATE" in relative.parts:
+        if relative.parts[0] in LOCAL_HANDOFF or any(
+            part in IGNORED_DIRECTORIES or part == "ISSUE_TEMPLATE" for part in relative.parts
+        ):
             continue
         yield path
 
@@ -246,6 +249,9 @@ def check_links(root: Path) -> list[str]:
                 relative_target = candidate.resolve().relative_to(root.resolve())
             except (ValueError, OSError, RuntimeError):
                 errors.append(f"{label}: local link escapes repository: {target}")
+                continue
+            if relative_target.parts and relative_target.parts[0] in LOCAL_HANDOFF:
+                errors.append(f"{label}: local link targets unpublished handoff: {target}")
                 continue
             if not candidate.exists():
                 errors.append(f"{label}: broken local link: {target} ({relative_target})")

@@ -27,7 +27,18 @@ M2 and M3 are controlled internal test builds. External distribution of any netw
 
 M1 cohort requirements are: UTF-8 input; HTML document and fragment parsing; malformed nesting and character references; DOM text/element/attribute handling; CSS tokenization; type/class/ID and combinator selectors; origin, specificity, and source-order cascade; box sizing and block/inline flow; margins/padding/borders; whitespace and line wrapping; shaped Latin, Arabic, and Devanagari text using pinned fonts; clipping, colors, PNG decoding, and deterministic raster output. The cohort includes positive, negative, boundary-size, and malformed cases for each item. Freeze exact test IDs, expected outputs, fonts, limits, and upstream revisions before M1 implementation is reviewed. The cohort is a product scope, not a substitute for publishing out-of-scope failures.
 
+M1-v2 corrects the specificity oracle and tightens negative bootstrap results
+without reducing frozen case coverage. The audit follow-up advances B012 and
+B014 and exercises document/fragment parsing, renderer work limits and bootstrap
+evidence. B013 still requires ownership and mutation coverage. B018 and B019
+still depend on the remaining full-cohort features and their independent replay.
+[Frozen scope](M1_SCOPE.md) · [Code audit](CODE_AUDIT.md)
+
 M2 adds URL parsing/canonicalization, HTTPS and HTTP policy, certificate verification, redirects, fetch cancellation, content limits, content-type handling, cookies, cache partitioning, navigation commits, same-origin enforcement, cross-origin requests, CSP enforcement for supported resource types, renderer process selection, and broker authorization. Every feature needs adversarial tests before exposure to remote content.
+
+The [M2 acceptance candidate](M2_SCOPE.md) maps those features to tests and sets
+out the parallel work that can start with synthetic data during M1. M1
+acceptance remains the prerequisite for B020 delivery.
 
 M3 adds script execution ordering, Web IDL conversion, realms, exception propagation, microtask checkpoints, DOM events, module resolution, GC stress, document teardown, stale callbacks, navigation races, and supported web APIs. VM conformance and browser embedding correctness are different evidence streams. A passing standalone VM cannot certify DOM security.
 

@@ -35,19 +35,19 @@ jobs:
       - name: Check Rust formatting
         run: cargo fmt --all -- --check
       - name: Build and test offline
-        run: |
-          cargo test --locked --offline --all-targets
-          cargo build --locked --offline
+        run: cargo test --locked --offline --all-targets
       - name: Check Rust diagnostics
         run: cargo clippy --locked --offline --all-targets -- -D warnings
+      - name: Exercise the offline broker prototype
+        run: cargo run --locked --offline --example m2_broker
       - name: Verify bootstrap artifacts and determinism
-        run: python3 tools/run_m1_bootstrap.py --repeat 100
+        run: python3 tools/run_m1_bootstrap.py --build --repeat 100
       - name: Retain bootstrap evidence
         if: always()
         # actions/upload-artifact v7.0.2; official tag verified 2026-11-20.
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: m1-bootstrap-${{ matrix.os }}-${{ github.sha }}
-          path: artifacts/m1/*.json
+          path: artifacts/m1/bootstrap-*/
           retention-days: 90
           if-no-files-found: warn
