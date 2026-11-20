@@ -1,8 +1,10 @@
 # M1 implementation status
 
 Updated 20 November 2026. **M1 is in progress.** B010's scope/fixture contract is
-complete. B011 has a working macOS bootstrap; its clean Linux CI build is pending
-publication verification. Wider task gates remain open until their full contracts pass.
+complete. B011's clean Linux and macOS builds and bootstrap checks passed in
+[CI for e1c0523](https://github.com/pookie421/BroWSER/actions/runs/44714692984), so
+bootstrap setup is complete. B012/B014 are in progress; B030 feasibility is in
+progress alongside M1. Wider task gates remain open until their full contracts pass.
 
 | Capability | Working bootstrap behavior | Remaining M1 obligation |
 | --- | --- | --- |

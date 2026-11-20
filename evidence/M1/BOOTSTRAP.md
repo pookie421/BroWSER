@@ -27,7 +27,7 @@ expectations were preserved; no failing case was removed or counted as passing.
 | Render determinism | Each render case passed 100 independent CLI invocations |
 | Full-M1 integration cases | 23 not run |
 | WPT | 0 executed |
-| Linux/macOS CI for this source | Pending publication verification |
+| Linux/macOS CI for source commit e1c0523 | Both engine jobs and repository validation passed |
 
 Commands exercised:
 
@@ -55,6 +55,13 @@ the implementation had not yet been committed. Its source hashes identify the
 actual tested files. It does not claim the old planning commit contained this code.
 The published CI workflow replays the exact committed source on Linux and macOS
 and retains development reports/diagnostics for 90 days as Actions artifacts.
+
+Observed published run:
+[Planning integrity, 44714692984](https://github.com/pookie421/BroWSER/actions/runs/44714692984).
+The `engine (ubuntu-24.04)`, `engine (macos-15)` and `validate` jobs completed
+successfully for source commit `e1c0523e6675ee38ddd42f79f9f3cf5ccab4433f`.
+B011 is complete; this cross-platform bootstrap result does not close the full-M1
+cohort, equivalent-worker or sustained-fuzzing requirements.
 
 ## Gates still open
 
