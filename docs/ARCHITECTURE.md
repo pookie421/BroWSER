@@ -1,10 +1,11 @@
 # BroWSER architecture
 
 Status: proposed implementation architecture. Reviewed against primary references on
-2026-11-16. Updated 2026-11-20: the repository also contains a limited M1 bootstrap
-with strict fixture parsing, DOM inspection, CSS block layout and CPU PPM painting.
-The [capability matrix](../evidence/M1/capability-matrix.md) identifies actual support;
-the broader architecture below remains a target rather than an implementation claim.
+2026-11-16. Updated 2026-11-20. The M1 fixture renderer implements owned DOM
+mutation, computed CSS styles, bounded block and standalone text layout, and
+CPU painting of solid fills, declared PNGs and pinned-font glyphs. The
+capability matrix tracks the working slice and the remaining milestones.
+[M1 capability matrix](../evidence/M1/capability-matrix.md)
 
 ## Objective and system boundary
 

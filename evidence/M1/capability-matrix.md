@@ -1,28 +1,39 @@
 # M1 implementation status
 
-Updated 20 November 2026. **M1 is in progress.** B010's scope/fixture contract is
+Updated 21 November 2026. **M1 is in progress.** B010's scope/fixture contract is
 complete. B011's clean Linux and macOS builds and bootstrap checks passed in
 [CI for e1c0523](https://github.com/pookie421/BroWSER/actions/runs/44714692984), so
-bootstrap setup is complete. B012/B014 are in progress; B030 feasibility is in
-progress alongside M1. Wider task gates remain open until their full contracts pass.
+bootstrap setup is complete. The frozen M1-v2 cases now run through the offline
+fixture adapter. [Current roadmap status](../../planning/roadmap.json)
 
-| Capability | Working bootstrap behavior | Remaining M1 obligation |
+| Capability | Working fixture behavior | Remaining obligation |
 | --- | --- | --- |
-| Input and DOM | Bounded UTF-8 with normalized offsets, doctype nodes, strict parser, opt-in document and div-fragment inspection with bounded paragraph recovery | Broader HTML states and references, stable DOM mutation and teardown coverage |
-| CSS | Token-aware rule and declaration boundaries, tree-ordered screen stylesheets, bounded selectors, author cascade, foreground inheritance for paint and precise unsupported-feature diagnostics | Complete frozen syntax recovery, user origin and computed-style output |
-| Geometry | Integer block content boxes, edges, selected widths/heights, hidden elements and overflow clipping | Inline formatting, whitespace/wrapping, margin collapse and full geometry cohort |
-| Paint | One CPU RGB PPM buffer, bounded clipped fills, canvas propagation and solid border defaults | Display-list contract breadth, text rasterization, PNG decode and compositing |
-| Text/resources | Real pinned Noto assets, original notices and independent HarfBuzz references exist | No visible text or PNG resources are rendered yet; unsupported requests fail explicitly |
-| CLI | Inspect/render commands, constrained fixture roots, bounded reads, staged output and rollback diagnostics | Full M1 fixture adapter and isolated RSS enforcement |
-| Tests | Build-bound bootstrap replay with fresh evidence bundles, exact rejection/control checks, typed DOM/layout validation, and a Unicode mutation smoke test | Official full-M1 execution, broader unit/property obligations, second equivalent worker and seven-day coverage-guided fuzzing |
+| Input and DOM | Bounded UTF-8, doctype nodes, document/div-fragment tree construction, stable document-local handles, checked attachment and detachment, text and attributes, bounded arena teardown | Broader HTML states, references and live DOM operations as the engine grows |
+| CSS | Author/user/UA cascade, token-aware grammar and recovery, computed-value inspection, inheritance and initial values | Broader selector/value and display coverage |
+| Geometry | Integer block boxes, adjoining vertical margin collapse, clipping, and whitespace collapse and wrapping for standalone pinned-font text | Mixed inline/element flows and broader block/inline conformance |
+| Paint | CPU RGB PPM, clipped solid fills, canvas backgrounds, PNG alpha compositing and grayscale glyph paint | Independent text raster review and later isolated codec execution |
+| Text/resources | Real OpenType shaping and coverage from the three pinned Noto faces, declared 8-bit static PNGs with bounded decoded size | Mixed-direction itemization, additional scripts, and broader resource formats |
+| CLI | Inspect, style, shape, decode-png and render commands, constrained fixture roots and atomic evidence bundles. Fixture runs use a fresh scratch environment and can record and enforce sampled per-child RSS. | Linux worker isolation and live Linux RSS backend verification |
+| Tests | Build-bound bootstrap and full-M1 replay, typed oracles, same-process text/image replay, verified replay comparison, and a bounded concurrent fuzz driver | Second equivalent worker and sustained coverage-guided fuzzing |
 | Scripting/security | Inert script fixture data; initial VM source/build-prerequisite research; a separate [offline M2 broker experiment](../../docs/M2_SCOPE.md#offline-broker-experiment) | VM embedding, network service, OS sandbox and general browsing support remain future work |
 
-The M1-v2 audit follow-up passed 88 Rust and 49 Python tests locally on macOS
-arm64 with Rust 1.100.0. All five bootstrap cases passed, including 100
-identical repetitions for each of the three render cases and both exact
-rejection/control pairs. The pixel hashes match M1-v1. The layout hashes changed
-because inspection now counts the doctype as a document node.
+The M1-v2 fixture roster stays frozen. The full-M1 replay checks exact shaped
+glyphs and retained screenshots for T004/T005. These two cases await independent
+raster review. WPT execution remains at zero.
+[Frozen scope](../../docs/M1_SCOPE.md) · [Replay policy](../../docs/VALIDATION.md#evidence-identity)
 
-Direct checks matched H001–H006, L002, P001 and R001–R004. The official
-full-M1 roster still has 23 cases awaiting execution. WPT execution remains
-at zero. [Audit results](../../docs/CODE_AUDIT.md#remediation) · [Bootstrap evidence](BOOTSTRAP.md)
+| Local verification on macOS arm64 with Rust 1.100.0 | Observed result |
+| --- | --- |
+| Rust and Python suites | 124 Rust tests and 75 Python tests passed. Formatting, Clippy and plan validation passed. |
+| Bootstrap | 5 of 5 passed, with 100 repetitions per render case. |
+| Full M1 | 21 passed and 2 await raster review. Two RSS-monitored replays on the same worker matched all 23 case outcomes and hashes across 100 repetitions per case and 8,200 fixture invocations. No assertion, resource, timeout, crash or harness failures were recorded. |
+| Independent margin comparison | All 769 labeled border rectangles from 45 generated in-flow block trees matched WebKit. |
+| Parser and renderer fuzz smoke | 5,000 AddressSanitizer-instrumented inputs per target completed under the campaign driver. A short timed run and supervised interruption also exercised telemetry and cleanup. |
+
+The monitored fixture runs had a maximum measured peak of 8,814,592 bytes.
+A separate synthetic over-limit child was terminated when a sample crossed
+the 512 MiB cap. The observed peak was 542,785,536 bytes. Independent
+HarfBuzz and FreeType references matched the frozen glyph geometry and both
+ink bounds. Arabic and Devanagari raster acceptance, the seven-day campaign,
+Linux isolation and a second equivalent worker remain open.
+[Fuzz and replay evidence requirements](../../docs/VALIDATION.md#determinism-bounds-and-adversarial-runs)

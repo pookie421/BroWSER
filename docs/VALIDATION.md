@@ -1,6 +1,8 @@
 # Validation and evidence policy
 
-Status updated 20 November 2026: the M1 bootstrap has local parser, renderer, CLI and fixture checks. Their scope and actual outcomes are recorded in [bootstrap evidence](../evidence/M1/BOOTSTRAP.md). No engine benchmark or WPT result is claimed. Repository integrity checks still verify the planning package separately from engine behavior and security.
+Updated 21 November 2026. The offline engine has local bootstrap and full-M1
+fixture reports, same-process replay tests and short coverage-guided runs.
+[M1 capability matrix](../evidence/M1/capability-matrix.md)
 
 ## Evidence identity
 
@@ -18,6 +20,37 @@ The `--binary` option provides an exploratory replay of an existing executable.
 Development evidence covers the bootstrap, with the full-M1 and WPT denominators
 reported separately. The repository Markdown check validates file targets and
 excludes unpublished local handoff files.
+
+Run `python3 tools/run_m1_bootstrap.py --stage full-m1 --repeat 100` for the
+23 full-M1 cases. It exercises the engine commands with typed assertions over
+DOM trees, computed styles, glyph runs, laid-out text, images, and generated
+limits. A text render can match its glyph reference and retain a screenshot
+while independent raster review is pending. Only reviewed passing cases count
+toward the M1 gate.
+
+Full-M1 runs default to a five-second fixture deadline and a 512 MiB RSS
+monitor. Each fixture process gets a fresh scratch home and cache and a
+fixed locale. The supervisor samples the child every 10 ms, terminates its
+process group on a detected overage, and checks the kernel's per-child peak
+when it reaps the process. A final peak above the cap is a resource failure
+even if the fixture returned zero. The command log records the measured
+values, limit trigger and any partial output. An unavailable requested
+backend fails before fixture execution. [Fixture supervisor](../tools/m1_limits.py)
+
+The supervisor's sampling can permit a brief overshoot before termination.
+It monitors the direct fixture child. OS filesystem and network isolation
+and any process-tree hard memory limit require separate worker controls.
+Bootstrap can opt into the same checks with `--rss-policy sampled`.
+
+Use `--worker-id` with a non-private operator-assigned label when recording
+an equivalent-worker replay. On each provisioned worker, retain the build-bound
+report, command log and case artifacts. Compare the two complete bundles with
+`python3 tools/compare_m1_workers.py FIRST/full-m1-report.json SECOND/full-m1-report.json`.
+The comparison validates artifacts, repetition logs, matching source and
+build settings, recorded platform metadata and exact fixture hashes. It
+preserves the declared worker labels and outstanding raster reviews. The
+reviewer verifies that the labels correspond to independently provisioned
+equivalent workers. [Worker comparison tool](../tools/compare_m1_workers.py)
 
 The CLI stages output bytes and publishes each file without overwriting
 existing paths. A paired render can briefly expose its first file during
@@ -64,6 +97,13 @@ For M1, repeat every frozen fixture 100 times on the same environment and compar
 Before the first implementation gate, choose and version explicit limits for input bytes, node count, nesting depth, decoded resource bytes, page memory, IPC size, and execution time. Tests cover just below, at, and above each limit; rejection must be deterministic, diagnostic, and bounded. Treat limits as product behavior and publish them. The security review chooses limits from measured behavior and threat model rather than an arbitrary number copied into an untested plan.
 
 Fuzz campaign records include harness, seed corpus, coverage instrumentation, CPU time, executions, discovered unique failures, minimized cases, fixes, and post-fix reruns. A seven-day observation window does not mean a program is safe; it supplies one bounded gate. Reset the window for affected targets after a substantial lifetime or parser change. Any unresolved reproducible memory safety defect, escape, cross-origin leak, or profile corruption blocks release.
+
+The parser and renderer have checksum-locked libFuzzer targets with
+AddressSanitizer. The campaign driver freezes the source and seed corpus,
+runs both targets concurrently, and retains telemetry, artifacts and any
+failure. It records the measured overlap and keeps the seven-day check open
+until both targets complete with at least 604,800 seconds of observed overlap.
+[Fuzz targets and reproduction commands](../fuzz/README.md)
 
 ## Performance method
 

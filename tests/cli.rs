@@ -344,3 +344,84 @@ fn unsupported_paint_property_cannot_publish_an_incorrect_image() {
         [255, 0, 0]
     );
 }
+
+#[test]
+fn png_render_uses_only_declared_fixture_resources() {
+    let fixture = Fixture::new(b"<div><img src='checker.png'></div>");
+    let source = include_bytes!("../fixtures/m1/assets/checker.png");
+    fs::write(fixture.0.join("checker.png"), source).unwrap();
+    let args = [
+        "render",
+        "--fixture-root",
+        ".",
+        "--fixture",
+        "input.html",
+        "--output",
+        "image.ppm",
+        "--layout",
+        "layout.json",
+        "--width",
+        "2",
+        "--height",
+        "2",
+    ];
+    let missing = fixture.run(&args);
+    assert_eq!(missing.status.code(), Some(1));
+    assert!(String::from_utf8_lossy(&missing.stderr).contains("requires a declared PNG resource"));
+    assert!(!fixture.0.join("image.ppm").exists());
+    assert!(!fixture.0.join("layout.json").exists());
+
+    let outside = Fixture::new(source);
+    let escaped = format!("checker.png={}", outside.0.join("input.html").display());
+    let escaped = fixture.run(&[args.as_slice(), &["--resource", &escaped]].concat());
+    assert_eq!(escaped.status.code(), Some(1));
+    assert!(String::from_utf8_lossy(&escaped.stderr).contains("inside --fixture-root"));
+    assert!(!fixture.0.join("image.ppm").exists());
+    assert!(!fixture.0.join("layout.json").exists());
+
+    let rendered =
+        fixture.run(&[args.as_slice(), &["--resource", "checker.png=checker.png"]].concat());
+    assert!(
+        rendered.status.success(),
+        "{}",
+        String::from_utf8_lossy(&rendered.stderr)
+    );
+    let ppm = fs::read(fixture.0.join("image.ppm")).unwrap();
+    assert_eq!(
+        ppm.strip_prefix(b"P6\n2 2\n255\n").unwrap(),
+        [255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255]
+    );
+    assert!(fixture.0.join("layout.json").is_file());
+}
+
+#[test]
+fn png_decode_reports_dimensions_and_rejects_truncation_without_output() {
+    let fixture = Fixture::new(include_bytes!("../fixtures/m1/assets/truncated.png"));
+    let args = [
+        "decode-png",
+        "--fixture-root",
+        ".",
+        "--fixture",
+        "input.html",
+        "--output",
+        "png.json",
+    ];
+    let rejected = fixture.run(&args);
+    assert_eq!(rejected.status.code(), Some(1));
+    assert!(
+        String::from_utf8_lossy(&rejected.stderr)
+            .starts_with("browser-engine: invalid PNG header:")
+    );
+    assert!(!fixture.0.join("png.json").exists());
+
+    fs::write(
+        fixture.0.join("input.html"),
+        include_bytes!("../fixtures/m1/assets/checker.png"),
+    )
+    .unwrap();
+    assert!(fixture.run(&args).status.success());
+    assert_eq!(
+        fs::read(fixture.0.join("png.json")).unwrap(),
+        b"{\"width\":2,\"height\":2}\n"
+    );
+}

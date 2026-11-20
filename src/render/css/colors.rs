@@ -2,7 +2,7 @@
 
 use crate::render::Color;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub(in crate::render) enum ColorValue {
     Current,
     Transparent,

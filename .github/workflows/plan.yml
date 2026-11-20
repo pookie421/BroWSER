@@ -32,6 +32,8 @@ jobs:
           persist-credentials: false
       - name: Install pinned Rust toolchain
         run: rustup toolchain install 1.100.0 --profile minimal --component rustfmt,clippy
+      - name: Fetch checksum-locked Rust dependencies
+        run: cargo fetch --locked
       - name: Check Rust formatting
         run: cargo fmt --all -- --check
       - name: Build and test offline

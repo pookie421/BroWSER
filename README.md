@@ -3,11 +3,11 @@
 An independent browser engine project with an auditable path from a deterministic
 offline renderer to a secure, interoperable desktop browser.
 
-**Status: M1 in progress, 20 November 2026.** A working Rust development bootstrap
-parses controlled HTML fixtures, computes a CSS block-box layout, and paints PPM
-images with inspectable DOM and geometry output. It is a limited offline slice;
-full HTML recovery, text painting, PNG resources, scripting, networking and a desktop
-browser are still future work. No general browsing safety or compatibility claim is made.
+**Status: M1 in progress, 21 November 2026.** The offline Rust engine inspects
+and mutates controlled DOM trees, computes CSS values, and paints block boxes,
+declared PNGs, and pinned-font text to PPM. The M1 text profile covers standalone
+blocks with homogeneous Latin, Arabic, or Devanagari text. Scripting, networking,
+and the desktop browser remain future work.
 
 **M0 is complete.** The [acceptance record](docs/BASELINE_VERIFICATION.md) maps
 each baseline requirement to its evidence. B010's M1 scope and fixtures are frozen.
@@ -60,32 +60,36 @@ The same checks run in [GitHub Actions](.github/workflows/plan.yml).
 ## Build and run the renderer
 
 Install Rust using its official installer. `rust-toolchain.toml` selects Rust 1.100.0.
-The bootstrap uses only the Rust standard library and builds offline after the
-toolchain is installed.
+Fetch the checksum-locked Cargo dependencies once. Builds and fixture replays
+then run offline.
 
 ```sh
+cargo fetch --locked
 cargo build --locked --offline
 mkdir -p artifacts/demo
 cargo run --locked --offline -- inspect --fixture fixtures/m1/bootstrap/root-box.html --output artifacts/demo/dom.json
 cargo run --locked --offline -- render --fixture fixtures/m1/bootstrap/nested-boxes.html --output artifacts/demo/image.ppm --layout artifacts/demo/layout.json --width 64 --height 48
+cargo run --locked --offline -- render --profile m1 --fixture fixtures/m1/full/arabic.html --output artifacts/demo/arabic.ppm --layout artifacts/demo/arabic.json --width 128 --height 64
+cargo run --locked --offline -- render --fixture fixtures/m1/full/png.html --resource checker.png=fixtures/m1/assets/checker.png --output artifacts/demo/checker.ppm --width 8 --height 8
 make engine-check
 ```
 
 For document and fragment inspection, pass `--parse-mode document` or
 `--fragment-context div`. The default still accepts the strict bootstrap grammar.
 Use fresh output filenames for each invocation.
-The CLI accepts only files inside the selected fixture root (`fixtures/m1` by
-default). This unsandboxed developer build is limited to controlled synthetic input;
-the path check is not an OS sandbox. Unsupported visible text, images and external
-stylesheets return diagnostics. A recognized CSS feature that needs unsupported
-layout or paint behavior also produces a diagnostic.
+The `style` command reports computed values, `shape` reports glyph positions and
+UTF-8 clusters, and `decode-png` checks dimensions and PNG integrity. Fixture and
+resource files must resolve inside the selected fixture root (`fixtures/m1` by
+default). Use controlled synthetic inputs for this unsandboxed developer build.
+[Supported grammar and CLI](docs/M1_SCOPE.md#current-engine-profiles)
 
 `make engine-check` runs Rust formatting, tests, Clippy, and the bootstrap replay
 from a fresh Cargo build. The replay verifies the reviewed cohort and its assets,
 checks independent pixels and geometry, exercises each rejected feature alongside
 its passing control, and repeats each render case 100 times. Each invocation
 publishes a new bundle under `artifacts/m1/` with the build record, diagnostics
-and available failure artifacts. The report tracks the 23 full-M1 cases as not run.
+and available failure artifacts. Run the 23-case development cohort separately
+with `python3 tools/run_m1_bootstrap.py --stage full-m1 --repeat 100`.
 
 ## Engineering commitments
 

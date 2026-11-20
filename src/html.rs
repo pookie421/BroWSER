@@ -22,7 +22,9 @@ use std::borrow::Cow;
 use std::collections::BTreeMap;
 use std::fmt::Write;
 
+mod dom;
 mod tree;
+pub use dom::{DomError, NodeId};
 use tree::{DocumentPhase, TreeMode};
 
 pub const MAX_INPUT_BYTES: usize = 1_048_576;
@@ -30,10 +32,12 @@ pub const MAX_NODES: usize = 10_000;
 pub const MAX_DEPTH: usize = 128;
 pub const MAX_ATTRIBUTES: usize = 128;
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Debug)]
 pub struct Document {
-    pub nodes: Vec<Node>,
-    pub root: usize,
+    pub(crate) nodes: Vec<Node>,
+    pub(crate) root: usize,
+    owner: u64,
+    data_bytes: usize,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -55,11 +59,26 @@ pub enum NodeKind {
 }
 
 impl Document {
-    /// A deterministic JSON representation with stable node IDs and attribute order.
+    /// Serialize the connected tree with stable node IDs and attribute order.
+    /// Detached nodes keep their IDs and appear again when reattached.
     pub fn canonical_json(&self) -> String {
         let mut out = format!("{{\"root\":{},\"nodes\":[", self.root);
-        for (id, node) in self.nodes.iter().enumerate() {
-            if id != 0 {
+        let mut connected = vec![false; self.nodes.len()];
+        let mut pending = vec![self.root];
+        while let Some(index) = pending.pop() {
+            connected[index] = true;
+            pending.extend(&self.nodes[index].children);
+        }
+        let mut first = true;
+        for (id, node) in self
+            .nodes
+            .iter()
+            .enumerate()
+            .filter(|(id, _)| connected[*id])
+        {
+            if first {
+                first = false;
+            } else {
                 out.push(',');
             }
             write!(out, "{{\"id\":{id},\"parent\":").expect("writing to a String");
@@ -199,14 +218,7 @@ impl<'a> Parser<'a> {
         Self {
             input,
             position: 0,
-            document: Document {
-                root: 0,
-                nodes: vec![Node {
-                    parent: None,
-                    children: Vec::new(),
-                    kind: NodeKind::Document,
-                }],
-            },
+            document: Document::new(),
             stack: vec![0],
             saw_doctype: false,
             saw_element: false,
@@ -230,6 +242,7 @@ impl<'a> Parser<'a> {
             }
         }
         self.finish_tree()?;
+        self.document.measure_data();
         Ok(self.document)
     }
 

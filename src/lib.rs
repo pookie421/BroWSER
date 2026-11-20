@@ -4,4 +4,6 @@
 //! implementation or a sandbox for arbitrary documents. See docs/M1_SCOPE.md.
 
 pub mod html;
+pub mod png_image;
 pub mod render;
+pub mod text;

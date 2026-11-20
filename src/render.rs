@@ -1,18 +1,22 @@
-//! Deterministic block-box renderer for controlled bootstrap fixtures.
+//! Deterministic renderer for controlled HTML/CSS fixtures.
 //!
 //! This is an explicitly bounded fixture grammar, not a claim of general CSS or
 //! HTML rendering support. It paints empty block boxes, solid borders, backgrounds
-//! and overflow clips. Visible text and replaced/inline content are rejected until
-//! text shaping and the corresponding formatting algorithms are implemented.
-//! Margins do not collapse in this bootstrap grammar.
+//! and overflow clips. The M1 profile additionally shapes and paints direct
+//! text in standalone block boxes and collapses adjoining in-flow margins.
 
 use crate::html::{Document, NodeKind, json_string};
+use crate::png_image::{PngImage, PngResources};
+use crate::text::{Direction, PinnedFont};
 use std::collections::{BTreeMap, BTreeSet};
+use std::fmt::Write;
 
 mod css;
+mod inline;
+mod margins;
 use css::Token;
-use css::colors::color_value;
-use css::values::{edge_length, parse_declarations, parse_length};
+use css::colors::{ColorValue, color_value};
+use css::values::{edge_length, font_size_px, line_height_px, parse_declarations, parse_length};
 
 const MAX_VIEWPORT: u32 = 2048;
 const MAX_NODES: usize = 10_000;
@@ -42,6 +46,10 @@ impl Color {
     }
 }
 
+fn color_json(color: Option<Color>) -> String {
+    json_string(&color.map_or_else(|| "transparent".to_owned(), Color::hex))
+}
+
 #[derive(Clone, Copy, Debug, Default)]
 struct Edges {
     top: i64,
@@ -50,40 +58,69 @@ struct Edges {
     left: i64,
 }
 
+impl Edges {
+    fn values(self) -> [i64; 4] {
+        [self.top, self.right, self.bottom, self.left]
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Display {
+    Inline,
+    Block,
+    None,
+}
+
+impl Display {
+    fn css(self) -> &'static str {
+        match self {
+            Self::Inline => "inline",
+            Self::Block => "block",
+            Self::None => "none",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug)]
+struct TextStyle {
+    font: PinnedFont,
+    font_px: u32,
+    line_px: Option<u32>,
+    direction: Direction,
+}
+
+impl TextStyle {
+    const INITIAL: Self = Self {
+        font: PinnedFont::Latin,
+        font_px: 16,
+        line_px: None,
+        direction: Direction::Ltr,
+    };
+}
+
 #[derive(Clone, Debug)]
 struct Style {
-    hidden: bool,
-    explicit_block: bool,
+    display: Display,
     width: Option<i64>,
     height: Option<i64>,
     margin: Edges,
     padding: Edges,
     border: Edges,
-    background: Option<Color>,
+    background: ColorValue,
     foreground: Option<Color>,
-    border_color: Option<Color>,
+    border_color: ColorValue,
     solid_border: bool,
     clip_children: bool,
+    text: TextStyle,
 }
 
 impl Style {
-    fn for_tag(tag: &str, hidden: bool) -> Self {
+    fn initial() -> Self {
         Self {
-            hidden: hidden
-                || matches!(tag, "head" | "style" | "script" | "title" | "meta" | "link"),
-            explicit_block: false,
+            display: Display::Inline,
             width: None,
             height: None,
-            margin: if tag == "body" {
-                Edges {
-                    top: 8,
-                    right: 8,
-                    bottom: 8,
-                    left: 8,
-                }
-            } else {
-                Edges::default()
-            },
+            margin: Edges::default(),
             padding: Edges::default(),
             border: Edges {
                 top: MEDIUM_BORDER_WIDTH,
@@ -91,12 +128,56 @@ impl Style {
                 bottom: MEDIUM_BORDER_WIDTH,
                 left: MEDIUM_BORDER_WIDTH,
             },
-            background: None,
-            foreground: None,
-            border_color: None,
+            background: ColorValue::Transparent,
+            foreground: Some(Color(0, 0, 0)),
+            border_color: ColorValue::Current,
             solid_border: false,
             clip_children: false,
+            text: TextStyle::INITIAL,
         }
+    }
+
+    fn for_tag(tag: &str, hidden: bool) -> Self {
+        let mut style = Self::initial();
+        // These are the controlled HTML subset's user-agent declarations.
+        style.display =
+            if hidden || matches!(tag, "head" | "style" | "script" | "title" | "meta" | "link") {
+                Display::None
+            } else if matches!(
+                tag,
+                "html"
+                    | "body"
+                    | "div"
+                    | "p"
+                    | "section"
+                    | "article"
+                    | "main"
+                    | "header"
+                    | "footer"
+                    | "nav"
+                    | "aside"
+            ) {
+                Display::Block
+            } else {
+                Display::Inline
+            };
+        if tag == "body" {
+            style.margin = Edges {
+                top: 8,
+                right: 8,
+                bottom: 8,
+                left: 8,
+            };
+        }
+        style
+    }
+
+    fn background_color(&self) -> Option<Color> {
+        self.background.resolve(self.foreground)
+    }
+
+    fn border_color(&self) -> Option<Color> {
+        self.border_color.resolve(self.foreground)
     }
 }
 
@@ -132,15 +213,30 @@ struct Declaration {
 }
 
 struct Rule {
+    origin: StylesheetOrigin,
     selectors: Vec<Selector>,
     declarations: Vec<Declaration>,
 }
 
 type Specificity = (u32, u32, u32);
 
+#[derive(Clone, Copy)]
+enum StylesheetOrigin {
+    User,
+    Author,
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+enum CascadeLevel {
+    UserNormal,
+    AuthorNormal,
+    AuthorImportant,
+    UserImportant,
+}
+
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 struct Rank {
-    important: bool,
+    cascade_level: CascadeLevel,
     inline: bool,
     specificity: Specificity,
     order: usize,
@@ -185,19 +281,56 @@ struct LayoutBox {
     content_box: Rect,
     clip: Rect,
     style: Style,
+    image: Option<String>,
+    inline: Option<(inline::InlineLayout, Rect)>,
 }
 
 /// Render the declared block-box fixture subset into binary P6 PPM and geometry.
-/// No networking, script execution, font lookup, or image decoding occurs here.
 pub fn render(doc: &Document, width: u32, height: u32) -> Result<RenderOutput, String> {
+    render_with_resources(doc, width, height, &PngResources::default())
+}
+
+/// Render with an explicit map of decoded PNGs. The renderer cannot resolve
+/// filesystem paths or network addresses.
+pub fn render_with_resources(
+    doc: &Document,
+    width: u32,
+    height: u32,
+    images: &PngResources,
+) -> Result<RenderOutput, String> {
+    render_fixture(doc, width, height, images, false)
+}
+
+/// Render a controlled document using the pinned-font text profile.
+pub fn render_m1(
+    doc: &Document,
+    width: u32,
+    height: u32,
+    images: &PngResources,
+) -> Result<RenderOutput, String> {
+    render_fixture(doc, width, height, images, true)
+}
+
+fn render_fixture(
+    doc: &Document,
+    width: u32,
+    height: u32,
+    images: &PngResources,
+    m1_profile: bool,
+) -> Result<RenderOutput, String> {
     if width == 0 || height == 0 || width > MAX_VIEWPORT || height > MAX_VIEWPORT {
         return Err(format!(
             "viewport dimensions must be between 1 and {MAX_VIEWPORT}"
         ));
     }
     let elements = validate_document(doc)?;
-    let rules = collect_rules(doc, &elements)?;
+    let rules = collect_rules(doc, &elements, "")?;
     let winners = cascade(doc, &elements, &rules)?;
+    let mut resources = LayoutResources {
+        winners: &winners,
+        images,
+        inline_budget: m1_profile.then(inline::InlineBudget::default),
+    };
     let mut boxes = Vec::new();
     let viewport = Rect {
         x: 0,
@@ -205,6 +338,7 @@ pub fn render(doc: &Document, width: u32, height: u32) -> Result<RenderOutput, S
         width: i64::from(width),
         height: i64::from(height),
     };
+    let initial = Style::initial();
     let mut y = 0;
     for child in &doc.nodes[doc.root].children {
         y += layout_node(
@@ -212,22 +346,103 @@ pub fn render(doc: &Document, width: u32, height: u32) -> Result<RenderOutput, S
             *child,
             (0, y),
             i64::from(width),
-            (viewport, Some(Color(0, 0, 0))),
-            &winners,
+            (viewport, &initial),
+            &mut resources,
             &mut boxes,
         )?;
+    }
+    if m1_profile {
+        margins::reflow(doc, &mut boxes, viewport);
     }
     let byte_count = (width as usize)
         .checked_mul(height as usize)
         .and_then(|count| count.checked_mul(3))
         .ok_or_else(|| "surface size overflow".to_owned())?;
-    let fills = paint_fills(doc, &boxes, viewport)?;
+    let mut glyphs = BTreeMap::new();
+    let mut raster_budget = inline::RasterBudget::default();
+    for item in &boxes {
+        if let Some((layout, clip)) = &item.inline
+            && item.style.foreground.is_some()
+        {
+            glyphs.insert(item.node, layout.rasterize(*clip, &mut raster_budget)?);
+        }
+    }
+    let fills = paint_fills(doc, &boxes, viewport, images, &glyphs)?;
     let mut ppm = format!("P6\n{width} {height}\n255\n").into_bytes();
     let header_len = ppm.len();
     ppm.resize(header_len + byte_count, 255);
     paint(&mut ppm[header_len..], width, &fills);
-    let layout_json = layout_json(width, height, &boxes);
+    let layout_json = layout_json(width, height, &boxes, m1_profile);
     Ok(RenderOutput { ppm, layout_json })
+}
+
+/// Serialize the fixture subset's computed properties in document order.
+///
+/// `node` is the DOM node index. `id` is the optional HTML ID attribute.
+/// Lengths are integer CSS pixels, with null representing auto width or height.
+/// The optional user-origin declarations share the normal stylesheet bounds.
+pub fn inspect_styles(doc: &Document, user_css: &str) -> Result<String, String> {
+    let elements = validate_document(doc)?;
+    let rules = collect_rules(doc, &elements, user_css)?;
+    let winners = cascade(doc, &elements, &rules)?;
+    let initial = Style::initial();
+    let mut computed = vec![None; doc.nodes.len()];
+    let mut out = String::from("{\"elements\":[");
+    for (index, element) in elements.iter().enumerate() {
+        let parent = element.parent.and_then(|parent| computed[parent].as_ref());
+        let style = computed_style(
+            doc,
+            element.node,
+            parent.unwrap_or(&initial),
+            &winners[element.node],
+        )?;
+        if index > 0 {
+            out.push(',');
+        }
+        write_style_json(&mut out, element, &style);
+        computed[element.node] = Some(style);
+    }
+    out.push_str("]}");
+    Ok(out)
+}
+
+fn write_style_json(out: &mut String, element: &ElementLinks<'_>, style: &Style) {
+    let id = element.id.map_or_else(|| "null".to_owned(), json_string);
+    let length = |value: Option<i64>| value.map_or_else(|| "null".to_owned(), |n| n.to_string());
+    write!(
+        out,
+        concat!(
+            "{{\"node\":{},\"tag\":{},\"id\":{},\"properties\":",
+            "{{\"color\":{},\"background-color\":{},\"width_px\":{},\"height_px\":{},",
+            "\"display\":\"{}\",\"overflow\":\"{}\",\"border-color\":{},\"border-style\":\"{}\",",
+            "\"margin_px\":{:?},\"padding_px\":{:?},\"border_width_px\":{:?},",
+            "\"font-family\":{},\"font_size_px\":{},\"line_height_px\":{},\"direction\":\"{}\",",
+            "\"white-space\":\"normal\"}}}}",
+        ),
+        element.node,
+        json_string(element.tag),
+        id,
+        color_json(style.foreground),
+        color_json(style.background_color()),
+        length(style.width),
+        length(style.height),
+        style.display.css(),
+        if style.clip_children {
+            "hidden"
+        } else {
+            "visible"
+        },
+        color_json(style.border_color()),
+        if style.solid_border { "solid" } else { "none" },
+        style.margin.values(),
+        style.padding.values(),
+        style.border.values(),
+        json_string(style.text.font.family()),
+        style.text.font_px,
+        length(style.text.line_px.map(i64::from)),
+        style.text.direction.as_str(),
+    )
+    .expect("writing to a String");
 }
 
 fn validate_document(doc: &Document) -> Result<Vec<ElementLinks<'_>>, String> {
@@ -288,17 +503,27 @@ fn validate_document(doc: &Document) -> Result<Vec<ElementLinks<'_>>, String> {
         }
         stack[first_child..].reverse();
     }
-    if seen.iter().any(|visited| !visited) {
-        return Err("document contains unreachable nodes".to_owned());
-    }
+    doc.validate_detached_nodes(&mut seen)?;
     Ok(elements)
 }
 
-fn collect_rules(doc: &Document, elements: &[ElementLinks<'_>]) -> Result<Vec<Rule>, String> {
+fn collect_rules(
+    doc: &Document,
+    elements: &[ElementLinks<'_>],
+    user_css: &str,
+) -> Result<Vec<Rule>, String> {
     let mut source_bytes = 0;
     let mut rules = Vec::new();
     let mut rule_count = 0;
     let mut order = 0;
+    add_css_source_bytes(&mut source_bytes, user_css.len())?;
+    collect_sheet(
+        user_css,
+        StylesheetOrigin::User,
+        &mut rules,
+        &mut rule_count,
+        &mut order,
+    )?;
     for element in elements {
         let node = &doc.nodes[element.node];
         let NodeKind::Element { name, attributes } = &node.kind else {
@@ -331,7 +556,13 @@ fn collect_rules(doc: &Document, elements: &[ElementLinks<'_>]) -> Result<Vec<Ru
                 }
             }
             if is_css_type(attributes.get("type")) && matches_screen(attributes.get("media"))? {
-                collect_sheet(&css, &mut rules, &mut rule_count, &mut order)?;
+                collect_sheet(
+                    &css,
+                    StylesheetOrigin::Author,
+                    &mut rules,
+                    &mut rule_count,
+                    &mut order,
+                )?;
             }
         }
     }
@@ -369,6 +600,7 @@ fn matches_screen(value: Option<&String>) -> Result<bool, String> {
 
 fn collect_sheet(
     css: &str,
+    origin: StylesheetOrigin,
     rules: &mut Vec<Rule>,
     rule_count: &mut usize,
     order: &mut usize,
@@ -401,6 +633,7 @@ fn collect_sheet(
         let declarations = parse_declarations(body, order)?;
         if !declarations.is_empty() {
             rules.push(Rule {
+                origin,
                 selectors,
                 declarations,
             });
@@ -623,7 +856,13 @@ fn cascade<'a>(
                     ));
                 }
                 for declaration in &rule.declarations {
-                    offer(&mut winners[element.node], declaration, specificity, false);
+                    offer(
+                        &mut winners[element.node],
+                        declaration,
+                        rule.origin,
+                        specificity,
+                        false,
+                    );
                 }
             }
         }
@@ -677,11 +916,17 @@ fn match_selector(
 fn offer<'a>(
     winners: &mut Winners<'a>,
     declaration: &'a Declaration,
+    origin: StylesheetOrigin,
     specificity: Specificity,
     inline: bool,
 ) {
     let rank = Rank {
-        important: declaration.important,
+        cascade_level: match (origin, declaration.important) {
+            (StylesheetOrigin::User, false) => CascadeLevel::UserNormal,
+            (StylesheetOrigin::Author, false) => CascadeLevel::AuthorNormal,
+            (StylesheetOrigin::Author, true) => CascadeLevel::AuthorImportant,
+            (StylesheetOrigin::User, true) => CascadeLevel::UserImportant,
+        },
         inline,
         specificity,
         order: declaration.order,
@@ -697,18 +942,35 @@ fn offer<'a>(
 fn computed_style(
     doc: &Document,
     node: usize,
-    inherited_color: Option<Color>,
+    parent: &Style,
     stylesheet_winners: &Winners<'_>,
 ) -> Result<Style, String> {
     let NodeKind::Element { name, attributes } = &doc.nodes[node].kind else {
         return Err("style requested for a non-element node".to_owned());
     };
     let mut style = Style::for_tag(name, attributes.contains_key("hidden"));
+    let initial = Style::initial();
+    style.foreground = parent.foreground;
+    style.text = parent.text;
     let mut winners = stylesheet_winners.clone();
     let inline = attributes.get("style").map(String::as_str).unwrap_or("");
     let inline_declarations = parse_declarations(inline, &mut 0)?;
     for declaration in &inline_declarations {
-        offer(&mut winners, declaration, (0, 0, 0), true);
+        offer(
+            &mut winners,
+            declaration,
+            StylesheetOrigin::Author,
+            (0, 0, 0),
+            true,
+        );
+    }
+    if name == "img" {
+        if !winners.contains_key("width") {
+            style.width = image_attribute_size(attributes, "width")?;
+        }
+        if !winners.contains_key("height") {
+            style.height = image_attribute_size(attributes, "height")?;
+        }
     }
     if !winners.contains_key("display")
         && attributes
@@ -717,45 +979,124 @@ fn computed_style(
     {
         return Err("hidden until-found is outside the bootstrap renderer".to_owned());
     }
-    let resolve_color = |value: &str, foreground| -> Result<Option<Color>, String> {
-        Ok(color_value(value)?.and_then(|color| color.resolve(foreground)))
-    };
-    style.foreground = match winners.get("color") {
-        Some((_, value)) => resolve_color(value, inherited_color)?,
-        None => inherited_color,
-    };
-    style.border_color = style.foreground;
+    if let Some(dir) = attributes.get("dir") {
+        if dir.eq_ignore_ascii_case("rtl") {
+            style.text.direction = Direction::Rtl;
+        } else if dir.eq_ignore_ascii_case("ltr") {
+            style.text.direction = Direction::Ltr;
+        } else if dir.eq_ignore_ascii_case("auto") && !winners.contains_key("direction") {
+            return Err(
+                "automatic HTML text direction is outside the controlled renderer".to_owned(),
+            );
+        }
+    }
     for (property, (_, value)) in winners {
+        let default_from = match value {
+            "inherit" => Some(parent),
+            "unset"
+                if matches!(
+                    property,
+                    "color"
+                        | "font-family"
+                        | "font-size"
+                        | "line-height"
+                        | "white-space"
+                        | "direction"
+                ) =>
+            {
+                Some(parent)
+            }
+            "initial" | "unset" => Some(&initial),
+            _ => None,
+        };
         match property {
             "display" => {
-                style.hidden = value == "none";
-                style.explicit_block = value == "block";
+                style.display = default_from.map_or_else(
+                    || {
+                        if value == "none" {
+                            Display::None
+                        } else {
+                            Display::Block
+                        }
+                    },
+                    |source| source.display,
+                );
             }
-            "width" => style.width = parse_length(value, false)?,
-            "height" => style.height = parse_length(value, false)?,
-            "color" => {} // Resolved before currentcolor in the other properties.
-            "background-color" => style.background = resolve_color(value, style.foreground)?,
-            "border-color" => style.border_color = resolve_color(value, style.foreground)?,
-            "border-style" => style.solid_border = value == "solid",
-            "overflow" => style.clip_children = value == "hidden",
+            "width" => {
+                style.width = if let Some(source) = default_from {
+                    source.width
+                } else {
+                    parse_length(value, false)?
+                };
+            }
+            "height" => {
+                style.height = if let Some(source) = default_from {
+                    source.height
+                } else {
+                    parse_length(value, false)?
+                };
+            }
+            "color" => {
+                style.foreground = if let Some(source) = default_from {
+                    source.foreground
+                } else {
+                    absolute_or_current_color(value)?.resolve(parent.foreground)
+                };
+            }
+            "background-color" => {
+                style.background = if let Some(source) = default_from {
+                    source.background
+                } else {
+                    absolute_or_current_color(value)?
+                };
+            }
+            "border-color" => {
+                style.border_color = if let Some(source) = default_from {
+                    source.border_color
+                } else {
+                    absolute_or_current_color(value)?
+                };
+            }
+            "border-style" => {
+                style.solid_border =
+                    default_from.map_or(value == "solid", |source| source.solid_border);
+            }
+            "overflow" => {
+                style.clip_children =
+                    default_from.map_or(value == "hidden", |source| source.clip_children);
+            }
+            "font-family" => {
+                style.text.font = if let Some(source) = default_from {
+                    source.text.font
+                } else {
+                    PinnedFont::for_family(value)?
+                };
+            }
+            "font-size" => {
+                style.text.font_px = if let Some(source) = default_from {
+                    source.text.font_px
+                } else {
+                    font_size_px(value)?
+                        .ok_or_else(|| format!("invalid expanded font-size: {value}"))?
+                };
+            }
+            "line-height" => {
+                style.text.line_px = if let Some(source) = default_from {
+                    source.text.line_px
+                } else {
+                    line_height_px(value)?
+                };
+            }
+            "direction" => {
+                style.text.direction = if let Some(source) = default_from {
+                    source.text.direction
+                } else {
+                    value.parse()?
+                };
+            }
+            "white-space" => {} // The supported value and every default compute to normal.
             _ => {
-                let length = edge_length(property, value)?
-                    .ok_or_else(|| format!("invalid expanded edge length: {property}: {value}"))?;
-                match property {
-                    "margin-top" => style.margin.top = length,
-                    "margin-right" => style.margin.right = length,
-                    "margin-bottom" => style.margin.bottom = length,
-                    "margin-left" => style.margin.left = length,
-                    "padding-top" => style.padding.top = length,
-                    "padding-right" => style.padding.right = length,
-                    "padding-bottom" => style.padding.bottom = length,
-                    "padding-left" => style.padding.left = length,
-                    "border-top-width" => style.border.top = length,
-                    "border-right-width" => style.border.right = length,
-                    "border-bottom-width" => style.border.bottom = length,
-                    "border-left-width" => style.border.left = length,
-                    _ => return Err(format!("unrecognized expanded property: {property}")),
-                }
+                apply_edge(&mut style, property, value, default_from)?;
             }
         }
     }
@@ -765,18 +1106,62 @@ fn computed_style(
     Ok(style)
 }
 
+fn absolute_or_current_color(value: &str) -> Result<ColorValue, String> {
+    color_value(value)?.ok_or_else(|| format!("invalid expanded color: {value}"))
+}
+
+fn apply_edge(
+    style: &mut Style,
+    property: &str,
+    value: &str,
+    source: Option<&Style>,
+) -> Result<(), String> {
+    let (edges, inherited, side) = if let Some(side) = property.strip_prefix("margin-") {
+        (&mut style.margin, source.map(|s| s.margin), side)
+    } else if let Some(side) = property.strip_prefix("padding-") {
+        (&mut style.padding, source.map(|s| s.padding), side)
+    } else if let Some(side) = property
+        .strip_prefix("border-")
+        .and_then(|rest| rest.strip_suffix("-width"))
+    {
+        (&mut style.border, source.map(|s| s.border), side)
+    } else {
+        return Err(format!("unrecognized expanded edge property: {property}"));
+    };
+    let (slot, previous) = match side {
+        "top" => (&mut edges.top, inherited.map(|e| e.top)),
+        "right" => (&mut edges.right, inherited.map(|e| e.right)),
+        "bottom" => (&mut edges.bottom, inherited.map(|e| e.bottom)),
+        "left" => (&mut edges.left, inherited.map(|e| e.left)),
+        _ => return Err(format!("unrecognized expanded edge side: {side}")),
+    };
+    *slot = if let Some(length) = previous {
+        length
+    } else {
+        edge_length(property, value)?
+            .ok_or_else(|| format!("invalid expanded edge length: {property}: {value}"))?
+    };
+    Ok(())
+}
+
+struct LayoutResources<'a> {
+    winners: &'a [Winners<'a>],
+    images: &'a PngResources,
+    inline_budget: Option<inline::InlineBudget>,
+}
+
 fn layout_node(
     doc: &Document,
     node: usize,
     origin: (i64, i64),
     available_width: i64,
-    context: (Rect, Option<Color>),
-    winners: &[Winners<'_>],
+    context: (Rect, &Style),
+    resources: &mut LayoutResources<'_>,
     boxes: &mut Vec<LayoutBox>,
 ) -> Result<i64, String> {
     let (x, y) = origin;
-    let (clip, foreground) = context;
-    let name = match &doc.nodes[node].kind {
+    let (clip, parent) = context;
+    let (name, attributes) = match &doc.nodes[node].kind {
         NodeKind::Text(text) => {
             if text.chars().any(|c| !c.is_ascii_whitespace()) {
                 return Err("unsupported visible text: shaping and inline layout are outside the bootstrap renderer".to_owned());
@@ -785,44 +1170,81 @@ fn layout_node(
         }
         NodeKind::Doctype(_) => return Ok(0),
         NodeKind::Document => return Err("nested document nodes cannot be rendered".to_owned()),
-        NodeKind::Element { name, .. } => name,
+        NodeKind::Element { name, attributes } => (name, attributes),
     };
-    let style = computed_style(doc, node, foreground, &winners[node])?;
-    if style.hidden {
+    let style = computed_style(doc, node, parent, &resources.winners[node])?;
+    if style.display == Display::None {
         return Ok(0);
     }
     if matches!(
         name.as_str(),
-        "img" | "svg" | "canvas" | "video" | "audio" | "iframe" | "input" | "object" | "embed"
+        "svg" | "canvas" | "video" | "audio" | "iframe" | "input" | "object" | "embed"
     ) {
         return Err(format!(
             "visible replaced element <{name}> is outside the bootstrap renderer"
         ));
     }
-    if !style.explicit_block
-        && !matches!(
-            name.as_str(),
-            "html"
-                | "body"
-                | "div"
-                | "section"
-                | "article"
-                | "main"
-                | "header"
-                | "footer"
-                | "nav"
-                | "aside"
-        )
-    {
+    let mut image = None;
+    let mut image_size = None;
+    if name == "img" {
+        if attributes.contains_key("srcset") || attributes.contains_key("sizes") {
+            return Err("responsive image sources are outside the fixture renderer".to_owned());
+        }
+        let label = attributes
+            .get("src")
+            .ok_or("replaced element <img> requires a PNG resource label")?;
+        let source = resources.images.get(label).ok_or_else(|| {
+            format!("replaced element <img> requires a declared PNG resource: {label:?}")
+        })?;
+        if style.display != Display::Block
+            && let Some(parent_node) = doc.nodes[node].parent
+        {
+            for &sibling in &doc.nodes[parent_node].children {
+                if sibling == node {
+                    continue;
+                }
+                let visible = match &doc.nodes[sibling].kind {
+                    NodeKind::Doctype(_) => false,
+                    NodeKind::Text(text) => !text.chars().all(|ch| ch.is_ascii_whitespace()),
+                    NodeKind::Element { .. } => {
+                        computed_style(doc, sibling, parent, &resources.winners[sibling])?.display
+                            != Display::None
+                    }
+                    NodeKind::Document => true,
+                };
+                if visible {
+                    return Err(
+                        "an inline fixture image must be the only visible content in its parent"
+                            .to_owned(),
+                    );
+                }
+            }
+        }
+        if !doc.nodes[node].children.is_empty() {
+            return Err("a fixture image cannot have children".to_owned());
+        }
+        let (width, height) = source.size();
+        let (width, height) = (i64::from(width), i64::from(height));
+        image_size = Some(match (style.width, style.height) {
+            (None, None) => (width, height),
+            (Some(w), None) => (w, (w * height + width / 2) / width),
+            (None, Some(h)) => ((h * width + height / 2) / height, h),
+            (Some(w), Some(h)) => (w, h),
+        });
+        image = Some(label.clone());
+    } else if style.display != Display::Block {
         return Err(format!(
             "<{name}> requires explicit display:block in the bootstrap fixture grammar"
         ));
     }
     let horizontal_edges =
         style.padding.left + style.padding.right + style.border.left + style.border.right;
-    let content_width = style.width.unwrap_or(
-        (available_width - style.margin.left - style.margin.right - horizontal_edges).max(0),
-    );
+    let content_width = image_size
+        .map(|(width, _)| width)
+        .or(style.width)
+        .unwrap_or_else(|| {
+            (available_width - style.margin.left - style.margin.right - horizontal_edges).max(0)
+        });
     let border_x = x + style.margin.left;
     let border_y = y + style.margin.top;
     let content_x = border_x + style.border.left + style.padding.left;
@@ -845,6 +1267,8 @@ fn layout_node(
         },
         clip,
         style: style.clone(),
+        image,
+        inline: None,
     });
     // Fixed-height overflow clips are known before child layout. Auto-height boxes
     // contain their normal-flow children vertically, so no extra vertical clip is needed.
@@ -862,19 +1286,49 @@ fn layout_node(
     } else {
         clip
     };
-    let mut cursor = content_y;
-    for child in &doc.nodes[node].children {
-        cursor += layout_node(
-            doc,
-            *child,
-            (content_x, cursor),
+    let children = &doc.nodes[node].children;
+    let mut inline = None;
+    if let Some(budget) = &mut resources.inline_budget
+        && children.iter().any(|&child| {
+            matches!(&doc.nodes[child].kind, NodeKind::Text(text) if !text.chars().all(|ch| ch.is_ascii_whitespace()))
+        })
+    {
+        if children.iter().any(|&child| !matches!(doc.nodes[child].kind, NodeKind::Text(_))) {
+            return Err("mixed text and element children are outside the pinned inline fixture grammar".to_owned());
+        }
+        let text: String = children.iter().filter_map(|&child| match &doc.nodes[child].kind {
+            NodeKind::Text(text) => Some(text.as_str()),
+            _ => None,
+        }).collect();
+        inline = Some(inline::layout(
+            &text,
+            style.text,
+            text_language(doc, node),
+            (content_x, content_y),
             content_width,
-            (child_clip, style.foreground),
-            winners,
-            boxes,
-        )?;
+            budget,
+        )?);
     }
-    let content_height = style.height.unwrap_or((cursor - content_y).max(0));
+    let mut cursor = content_y;
+    if let Some(layout) = &inline {
+        cursor += layout.content_height;
+    } else {
+        for child in children {
+            cursor += layout_node(
+                doc,
+                *child,
+                (content_x, cursor),
+                content_width,
+                (child_clip, &style),
+                resources,
+                boxes,
+            )?;
+        }
+    }
+    let content_height = image_size
+        .map(|(_, height)| height)
+        .or(style.height)
+        .unwrap_or_else(|| (cursor - content_y).max(0));
     let border_height = content_height
         + style.padding.top
         + style.padding.bottom
@@ -882,23 +1336,64 @@ fn layout_node(
         + style.border.bottom;
     boxes[box_index].border_box.height = border_height;
     boxes[box_index].content_box.height = content_height;
-    if style.clip_children {
-        let final_clip = clip.intersect(Rect {
+    let final_clip = if style.clip_children {
+        let padding_clip = clip.intersect(Rect {
             x: border_x + style.border.left,
             y: border_y + style.border.top,
             width: content_width + style.padding.left + style.padding.right,
             height: content_height + style.padding.top + style.padding.bottom,
         });
         for child in &mut boxes[box_index + 1..] {
-            child.clip = child.clip.intersect(final_clip);
+            child.clip = child.clip.intersect(padding_clip);
+            if let Some((_, inline_clip)) = &mut child.inline {
+                *inline_clip = inline_clip.intersect(padding_clip);
+            }
         }
-    }
+        padding_clip
+    } else {
+        clip
+    };
+    boxes[box_index].inline = inline.map(|layout| (layout, final_clip));
     Ok(style.margin.top + border_height + style.margin.bottom)
 }
 
-struct Fill {
+fn text_language(doc: &Document, node: usize) -> Option<&str> {
+    std::iter::successors(Some(node), |node| doc.nodes[*node].parent)
+        .find_map(|node| match &doc.nodes[node].kind {
+            NodeKind::Element { attributes, .. } => attributes.get("lang").map(String::as_str),
+            _ => None,
+        })
+        .filter(|language| !language.is_empty())
+}
+
+fn image_attribute_size(
+    attributes: &BTreeMap<String, String>,
+    axis: &str,
+) -> Result<Option<i64>, String> {
+    attributes
+        .get(axis)
+        .map(|value| {
+            value
+                .trim_ascii()
+                .parse::<i64>()
+                .ok()
+                .filter(|value| (0..=MAX_LENGTH).contains(value))
+                .ok_or_else(|| {
+                    format!("fixture image {axis} requires an integer in 0..={MAX_LENGTH}")
+                })
+        })
+        .transpose()
+}
+
+enum Paint<'a> {
+    Solid(Color),
+    Image(&'a PngImage, Rect),
+    Glyph(Color, &'a inline::PositionedGlyph),
+}
+
+struct Fill<'a> {
     bounds: Rect,
-    color: Color,
+    paint: Paint<'a>,
 }
 
 fn canvas_background(doc: &Document, boxes: &[LayoutBox]) -> Option<(usize, Color)> {
@@ -908,7 +1403,7 @@ fn canvas_background(doc: &Document, boxes: &[LayoutBox]) -> Option<(usize, Colo
     let body_parent = if let Some(&html) = html {
         // A display:none document element does not generate a canvas background.
         let root = boxes.iter().find(|item| item.node == html)?;
-        if let Some(color) = root.style.background {
+        if let Some(color) = root.style.background_color() {
             return Some((html, color));
         }
         html
@@ -920,13 +1415,19 @@ fn canvas_background(doc: &Document, boxes: &[LayoutBox]) -> Option<(usize, Colo
         |&&node| matches!(&doc.nodes[node].kind, NodeKind::Element { name, .. } if name == "body"),
     )?;
     let body = boxes.iter().find(|item| item.node == body)?;
-    Some((body.node, body.style.background?))
+    Some((body.node, body.style.background_color()?))
 }
 
-fn paint_fills(doc: &Document, boxes: &[LayoutBox], viewport: Rect) -> Result<Vec<Fill>, String> {
+fn paint_fills<'a>(
+    doc: &Document,
+    boxes: &[LayoutBox],
+    viewport: Rect,
+    images: &'a PngResources,
+    glyphs: &'a BTreeMap<usize, Vec<inline::PositionedGlyph>>,
+) -> Result<Vec<Fill<'a>>, String> {
     let mut pixels = 0;
     let mut fills = Vec::new();
-    let mut add = |rect: Rect, clip: Rect, color| -> Result<(), String> {
+    let mut add = |rect: Rect, clip: Rect, paint| -> Result<(), String> {
         let bounds = rect.intersect(clip);
         if bounds.width > 0 && bounds.height > 0 {
             pixels += bounds.width as usize * bounds.height as usize;
@@ -935,24 +1436,24 @@ fn paint_fills(doc: &Document, boxes: &[LayoutBox], viewport: Rect) -> Result<Ve
                     "paint exceeds {MAX_PAINT_PIXELS} clipped pixel writes"
                 ));
             }
-            fills.push(Fill { bounds, color });
+            fills.push(Fill { bounds, paint });
         }
         Ok(())
     };
     let canvas = canvas_background(doc, boxes);
     if let Some((_, color)) = canvas {
-        add(viewport, viewport, color)?;
+        add(viewport, viewport, Paint::Solid(color))?;
     }
     for item in boxes {
         let r = item.border_box;
         let border = item.style.border;
         if canvas.is_none_or(|(source, _)| source != item.node)
-            && let Some(background) = item.style.background
+            && let Some(background) = item.style.background_color()
         {
-            add(r, item.clip, background)?;
+            add(r, item.clip, Paint::Solid(background))?;
         }
         if item.style.solid_border
-            && let Some(border_color) = item.style.border_color
+            && let Some(border_color) = item.style.border_color()
         {
             // Top and bottom bands include corners; side bands only cover the
             // intervening height, so the corners are painted exactly once.
@@ -984,26 +1485,89 @@ fn paint_fills(doc: &Document, boxes: &[LayoutBox], viewport: Rect) -> Result<Ve
                 },
             ];
             for edge in edges {
-                add(edge, item.clip, border_color)?;
+                add(edge, item.clip, Paint::Solid(border_color))?;
+            }
+        }
+        if let Some(label) = &item.image {
+            let image = images
+                .get(label)
+                .ok_or("layout image resource disappeared")?;
+            add(
+                item.content_box,
+                item.clip,
+                Paint::Image(image, item.content_box),
+            )?;
+        }
+        if let Some(colors) = item.style.foreground
+            && let Some(glyphs) = glyphs.get(&item.node)
+        {
+            for glyph in glyphs {
+                add(glyph.bounds, item.clip, Paint::Glyph(colors, glyph))?;
             }
         }
     }
     Ok(fills)
 }
 
-fn paint(pixels: &mut [u8], width: u32, fills: &[Fill]) {
+fn paint(pixels: &mut [u8], width: u32, fills: &[Fill<'_>]) {
     let stride = width as usize * 3;
-    for &Fill { bounds, color } in fills {
+    for &Fill { bounds, ref paint } in fills {
         let start = bounds.y as usize * stride + bounds.x as usize * 3;
         let row_bytes = bounds.width as usize * 3;
-        let first_row = start..start + row_bytes;
-        pixels[first_row.clone()]
-            .as_chunks_mut::<3>()
-            .0
-            .fill([color.0, color.1, color.2]);
-        for row in 1..bounds.height as usize {
-            pixels.copy_within(first_row.clone(), start + row * stride);
+        match *paint {
+            Paint::Solid(color) => {
+                let first_row = start..start + row_bytes;
+                pixels[first_row.clone()]
+                    .as_chunks_mut::<3>()
+                    .0
+                    .fill([color.0, color.1, color.2]);
+                for row in 1..bounds.height as usize {
+                    pixels.copy_within(first_row.clone(), start + row * stride);
+                }
+            }
+            Paint::Image(image, destination) => {
+                let (width, height) = image.size();
+                for row in 0..bounds.height {
+                    let y =
+                        (bounds.y + row - destination.y) * i64::from(height) / destination.height;
+                    let offset = start + row as usize * stride;
+                    let row = pixels[offset..offset + row_bytes].as_chunks_mut::<3>().0;
+                    for (column, pixel) in row.iter_mut().enumerate() {
+                        let x = (bounds.x + column as i64 - destination.x) * i64::from(width)
+                            / destination.width;
+                        let [red, green, blue, alpha] = image.rgba(x as u32, y as u32);
+                        blend(pixel, [red, green, blue], alpha);
+                    }
+                }
+            }
+            Paint::Glyph(color, glyph) => {
+                let source_stride = glyph.bounds.width as usize;
+                let first = (bounds.y - glyph.bounds.y) as usize * source_stride
+                    + (bounds.x - glyph.bounds.x) as usize;
+                for row in 0..bounds.height as usize {
+                    let offset = start + row * stride;
+                    let source = first + row * source_stride;
+                    let coverage = &glyph.coverage[source..source + bounds.width as usize];
+                    for (pixel, &alpha) in pixels[offset..offset + row_bytes]
+                        .as_chunks_mut::<3>()
+                        .0
+                        .iter_mut()
+                        .zip(coverage)
+                    {
+                        blend(pixel, [color.0, color.1, color.2], alpha);
+                    }
+                }
+            }
         }
+    }
+}
+
+fn blend(destination: &mut [u8; 3], color: [u8; 3], opacity: u8) {
+    let alpha = u16::from(opacity);
+    for (background, foreground) in destination.iter_mut().zip(color) {
+        *background =
+            ((u16::from(foreground) * alpha + u16::from(*background) * (255 - alpha) + 127) / 255)
+                as u8;
     }
 }
 
@@ -1014,14 +1578,31 @@ fn rect_json(rect: Rect) -> String {
     )
 }
 
-fn layout_json(width: u32, height: u32, boxes: &[LayoutBox]) -> String {
+fn layout_json(width: u32, height: u32, boxes: &[LayoutBox], m1_profile: bool) -> String {
     let entries: Vec<_> = boxes.iter().map(|item| {
-        let background = item.style.background.map(|color| json_string(&color.hex())).unwrap_or_else(|| "null".to_owned());
+        let background = item.style.background_color().map(|color| json_string(&color.hex())).unwrap_or_else(|| "null".to_owned());
         format!("{{\"node\":{},\"tag\":{},\"border_box\":{},\"content_box\":{},\"clip\":{},\"background\":{}}}",
             item.node, json_string(&item.tag), rect_json(item.border_box), rect_json(item.content_box), rect_json(item.clip), background)
     }).collect();
+    let text = if m1_profile {
+        let lines = boxes
+            .iter()
+            .filter_map(|item| {
+                item.inline.as_ref().map(|(inline, _)| {
+                    format!(
+                        "{{\"node\":{},\"inline\":{}}}",
+                        item.node,
+                        inline.canonical_json()
+                    )
+                })
+            })
+            .collect::<Vec<_>>();
+        format!(",\"text\":[{}]", lines.join(","))
+    } else {
+        String::new()
+    };
     format!(
-        "{{\"viewport\":{{\"width\":{width},\"height\":{height}}},\"boxes\":[{}]}}\n",
+        "{{\"viewport\":{{\"width\":{width},\"height\":{height}}},\"boxes\":[{}]{text}}}\n",
         entries.join(",")
     )
 }
@@ -1033,6 +1614,179 @@ mod tests {
 
     fn output(html: &str, width: u32, height: u32) -> RenderOutput {
         render(&parse(html).unwrap(), width, height).unwrap()
+    }
+
+    fn properties_for<'a>(json: &'a str, id: &str) -> &'a str {
+        let prefix = format!("\"id\":\"{id}\",\"properties\":{{");
+        json.split_once(&prefix)
+            .unwrap()
+            .1
+            .split_once('}')
+            .unwrap()
+            .0
+    }
+
+    #[test]
+    fn computes_frozen_selector_and_recovery_properties_without_layout() {
+        let doc = parse(include_str!("../fixtures/m1/full/selectors-v2.html")).unwrap();
+        let output = inspect_styles(&doc, "").unwrap();
+        for (id, property) in [
+            ("a", "\"background-color\":\"#ff0000\""),
+            ("b", "\"background-color\":\"#ff0000\""),
+            ("c", "\"background-color\":\"#00ff00\""),
+            ("s", "\"color\":\"#0000ff\""),
+            ("p", "\"color\":\"#008000\""),
+        ] {
+            assert!(properties_for(&output, id).contains(property));
+        }
+
+        let doc = parse(include_str!("../fixtures/m1/full/css-recovery.html")).unwrap();
+        let output = inspect_styles(&doc, "").unwrap();
+        let props = properties_for(&output, "box");
+        assert!(props.contains("\"width_px\":10,\"height_px\":12"));
+        assert!(props.contains("\"color\":\"#000000\",\"background-color\":\"#ff0000\""));
+        assert!(!output.contains("unknown-prop"));
+    }
+
+    #[test]
+    fn computes_user_and_author_cascade_levels_and_inline_specificity() {
+        let doc = parse(include_str!("../fixtures/m1/full/cascade-origins.html")).unwrap();
+        let user_css = "#target{color:#008000!important}";
+        let output = inspect_styles(&doc, user_css).unwrap();
+        assert!(
+            properties_for(&output, "target")
+                .starts_with("\"color\":\"#008000\",\"background-color\":\"#00ff00\"")
+        );
+        let output = inspect_styles(&doc, "#target{color:#008000}").unwrap();
+        assert!(properties_for(&output, "target").starts_with("\"color\":\"#ff0000\""));
+
+        let doc = parse(
+            "<style>div{width:10px;color:red!important}</style>\
+             <div id=target style='height:7px;color:blue!important'></div>",
+        )
+        .unwrap();
+        let output = inspect_styles(
+            &doc,
+            "#target { width:4px;height:2px; color:orange!important; }\
+             #target { color:green!important }",
+        )
+        .unwrap();
+        let props = properties_for(&output, "target");
+        assert!(props.contains("\"width_px\":10,\"height_px\":7"));
+        assert!(props.starts_with("\"color\":\"#008000\""));
+        let output = inspect_styles(&doc, "").unwrap();
+        assert!(properties_for(&output, "target").starts_with("\"color\":\"#0000ff\""));
+    }
+
+    #[test]
+    fn inherits_computed_values_and_applies_initial_and_unset_defaults() {
+        let doc = parse(
+            "<body id=body style='color:red;background:currentcolor;width:9px;height:11px;\
+                 margin:initial;padding:3px 2px;border:4px solid currentcolor;overflow:hidden'>\
+             <div id=inherited style='color:blue;background:inherit;width:inherit;min-width:nope;\
+                 padding:inherit;border:inherit;overflow:inherit'></div>\
+             <div id=defaults style='color:unset;width:unset;background:unset;border:unset;\
+                 padding:initial;display:initial'></div>\
+             <div hidden id=overridden></div>\
+             </body>",
+        )
+        .unwrap();
+        let output = inspect_styles(&doc, "#overridden{display:block}").unwrap();
+        let parent = properties_for(&output, "body");
+        assert!(parent.contains("\"margin_px\":[0, 0, 0, 0]"));
+        let inherited = properties_for(&output, "inherited");
+        assert!(inherited.starts_with(
+            "\"color\":\"#0000ff\",\"background-color\":\"#0000ff\",\"width_px\":9,\"height_px\":null"
+        ));
+        assert!(inherited.contains(
+            "\"overflow\":\"hidden\",\"border-color\":\"#0000ff\",\"border-style\":\"solid\""
+        ));
+        assert!(inherited.contains("\"padding_px\":[3, 2, 3, 2],\"border_width_px\":[4, 4, 4, 4]"));
+        let defaults = properties_for(&output, "defaults");
+        assert!(defaults.starts_with("\"color\":\"#ff0000\",\"background-color\":\"transparent\",\"width_px\":null,\"height_px\":null,\"display\":\"inline\""));
+        assert!(defaults.contains("\"border-style\":\"none\""));
+        assert!(defaults.contains("\"padding_px\":[0, 0, 0, 0],\"border_width_px\":[0, 0, 0, 0]"));
+        let overridden = properties_for(&output, "overridden");
+        assert!(overridden.contains("\"display\":\"block\""));
+
+        let out = render(
+            &parse(
+                "<div style='color:red;width:1px'><div style='color:initial;width:inherit;\
+             height:1px;background:currentcolor'></div></div>",
+            )
+            .unwrap(),
+            2,
+            2,
+        )
+        .unwrap();
+        assert_eq!(pixel(&out, 2, 2, 0, 0), [0, 0, 0]);
+        assert_eq!(pixel(&out, 2, 2, 1, 0), [255, 255, 255]);
+    }
+
+    #[test]
+    fn checks_user_sheet_syntax_and_the_aggregate_css_budget() {
+        let doc = parse("<div style='width:1px'></div>").unwrap();
+        let inline_bytes = "width:1px".len();
+        let css = format!("/*{}*/", "a".repeat(MAX_CSS_BYTES - inline_bytes - 4));
+        assert!(inspect_styles(&doc, &css).is_ok());
+        assert!(
+            inspect_styles(&doc, &(css + " "))
+                .unwrap_err()
+                .contains("256 KiB")
+        );
+        assert!(
+            inspect_styles(&doc, "@import 'local.css';")
+                .unwrap_err()
+                .contains("at-rule")
+        );
+        assert!(
+            inspect_styles(&doc, "div{color:revert}")
+                .unwrap_err()
+                .contains("revert")
+        );
+    }
+
+    #[test]
+    fn computes_bounded_inherited_typography_and_html_direction() {
+        let doc = parse(
+            "<div dir=rtl style='font-family:\"Noto Sans Arabic\";font-size:24px;line-height:28px'>\
+             <p id=inherit style='font-size:unset; white-space:normal'></p>\
+             <p id=reset dir=rtl style='font-family:initial;font-size:initial;line-height:normal;direction:ltr'></p>\
+             </div>",
+        )
+        .unwrap();
+        let output = inspect_styles(&doc, "").unwrap();
+        let inherited = properties_for(&output, "inherit");
+        assert!(inherited.contains(
+            "\"font-family\":\"Noto Sans Arabic\",\"font_size_px\":24,\"line_height_px\":28,\"direction\":\"rtl\",\"white-space\":\"normal\""
+        ));
+        let reset = properties_for(&output, "reset");
+        assert!(reset.contains(
+            "\"font-family\":\"Noto Sans\",\"font_size_px\":16,\"line_height_px\":null,\"direction\":\"ltr\""
+        ));
+        let doc =
+            parse("<div style='font-family:Noto Sans Devanagari;font-size:256px' id=max></div>")
+                .unwrap();
+        let output = inspect_styles(&doc, "").unwrap();
+        assert!(
+            properties_for(&output, "max")
+                .contains("\"font-family\":\"Noto Sans Devanagari\",\"font_size_px\":256")
+        );
+        for (css, diagnostic) in [
+            ("font-family:Arial", "unsupported pinned font family"),
+            ("font-family:'Noto Sans',serif", "one pinned Noto family"),
+            ("font-size:257px", "in 1..=256 CSS pixels"),
+            ("font-size:150%", "integer px"),
+            ("line-height:1.2", "integer CSS pixels or normal"),
+            ("white-space:pre", "unsupported bootstrap value"),
+            ("white-space:preserve nowrap", "unsupported bootstrap value"),
+        ] {
+            let doc = parse(&format!("<div style=\"{css}\"></div>")).unwrap();
+            assert!(
+                inspect_styles(&doc, "").unwrap_err().contains(diagnostic),
+                "{css}"
+            );
+        }
     }
 
     fn pixel(output: &RenderOutput, width: u32, height: u32, x: usize, y: usize) -> &[u8] {
@@ -1347,6 +2101,33 @@ mod tests {
                 .unwrap()
                 .contains("replaced element")
         );
+    }
+
+    #[test]
+    fn declared_png_scales_clips_and_composites_straight_alpha() {
+        let mut encoded = Vec::new();
+        {
+            let mut encoder = png::Encoder::new(&mut encoded, 1, 1);
+            encoder.set_color(png::ColorType::Rgba);
+            let mut output = encoder.write_header().unwrap();
+            output.write_image_data(&[255, 0, 0, 128]).unwrap();
+            output.finish().unwrap();
+        }
+        let mut resources = PngResources::default();
+        resources.insert("red.png", &encoded).unwrap();
+        let input = "<div style='width:2px;height:1px;overflow:hidden;background:blue'><div hidden></div><img src='red.png' width='3'><span style='display:none'></span></div>";
+        let out = render_with_resources(&parse(input).unwrap(), 4, 3, &resources).unwrap();
+        assert_eq!(pixel(&out, 4, 3, 0, 0), [128, 0, 127]);
+        assert_eq!(pixel(&out, 4, 3, 1, 0), [128, 0, 127]);
+        assert_eq!(pixel(&out, 4, 3, 2, 0), [255, 255, 255]);
+        assert_eq!(pixel(&out, 4, 3, 0, 1), [255, 255, 255]);
+        assert!(
+            out.layout_json
+                .contains("\"content_box\":{\"x\":0,\"y\":0,\"width\":3,\"height\":3}")
+        );
+        let input = "<div><img src='red.png' width='3' style='width:auto'></div>";
+        let auto = render_with_resources(&parse(input).unwrap(), 4, 3, &resources).unwrap();
+        assert_eq!(pixel(&auto, 4, 3, 1, 0), [255, 255, 255]);
     }
 
     #[test]

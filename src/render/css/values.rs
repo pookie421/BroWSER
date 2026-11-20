@@ -3,6 +3,7 @@
 use super::colors::{color_value, unsupported_color};
 use super::{Token, number_end, tokens};
 use crate::render::{Declaration, MAX_DECLARATIONS, MAX_LENGTH, MEDIUM_BORDER_WIDTH};
+use crate::text::{MAX_FONT_SCALE, PinnedFont};
 
 pub(in crate::render) fn parse_declarations(
     text: &str,
@@ -79,12 +80,13 @@ pub(in crate::render) fn parse_declarations(
 }
 
 fn expand_declaration(name: &str, values: &[&str]) -> Result<Vec<(String, String)>, String> {
-    if matches!(
-        values,
-        ["initial" | "inherit" | "unset" | "revert" | "revert-layer"]
-    ) || values
-        .iter()
-        .any(|part| part.starts_with("var(") || part.contains('\\'))
+    if let [value @ ("initial" | "inherit" | "unset")] = values {
+        return expand_defaulting(name, value);
+    }
+    if matches!(values, ["revert" | "revert-layer"])
+        || values
+            .iter()
+            .any(|part| part.starts_with("var(") || part.contains('\\'))
     {
         return Err(format!(
             "unsupported bootstrap value for {name}: {}",
@@ -100,6 +102,22 @@ fn expand_declaration(name: &str, values: &[&str]) -> Result<Vec<(String, String
     }
     if name == "border" {
         return expand_border(values);
+    }
+    if name == "font-family" {
+        let family = match values {
+            [value] if value.starts_with(['\'', '"']) => &value[1..value.len() - 1],
+            _ if values.iter().all(|value| {
+                value
+                    .bytes()
+                    .all(|byte| byte.is_ascii_alphanumeric() || matches!(byte, b'-' | b'_'))
+            }) =>
+            {
+                &values.join(" ")
+            }
+            _ => return Err("font-family requires exactly one pinned Noto family".to_owned()),
+        };
+        let font = PinnedFont::for_family(family)?;
+        return Ok(vec![(name.to_owned(), font.family().to_owned())]);
     }
     if ["border-color", "border-style", "overflow"].contains(&name) && values.len() > 1 {
         let (limit, valid): (usize, fn(&str) -> bool) = match name {
@@ -119,6 +137,12 @@ fn expand_declaration(name: &str, values: &[&str]) -> Result<Vec<(String, String
     }
     let [value] = values else {
         if name == "display" && multi_keyword_display(values) {
+            return Err(format!(
+                "unsupported bootstrap value for {name}: {}",
+                values.join(" ")
+            ));
+        }
+        if name == "white-space" && values.iter().all(|value| white_space_component(value)) {
             return Err(format!(
                 "unsupported bootstrap value for {name}: {}",
                 values.join(" ")
@@ -198,6 +222,19 @@ fn expand_declaration(name: &str, values: &[&str]) -> Result<Vec<(String, String
                 return unsupported();
             }
         }
+        "direction" if matches!(*value, "ltr" | "rtl") => emit(name, value),
+        "white-space" if *value == "normal" => emit(name, value),
+        "white-space" if white_space_component(value) => return unsupported(),
+        "font-size" => {
+            if font_size_px(value)?.is_some() {
+                emit(name, value);
+            }
+        }
+        "line-height" => {
+            if *value == "normal" || line_height_px(value)?.is_some() {
+                emit(name, value);
+            }
+        }
         "width" | "height" => match *value {
             "auto" => emit(name, value),
             "min-content" | "max-content" | "fit-content" | "stretch" => return unsupported(),
@@ -231,6 +268,65 @@ fn expand_declaration(name: &str, values: &[&str]) -> Result<Vec<(String, String
     Ok(out)
 }
 
+fn expand_defaulting(name: &str, value: &str) -> Result<Vec<(String, String)>, String> {
+    let properties: &[&str] = match name {
+        "background" => &["background-color"],
+        "margin" => &["margin-top", "margin-right", "margin-bottom", "margin-left"],
+        "padding" => &[
+            "padding-top",
+            "padding-right",
+            "padding-bottom",
+            "padding-left",
+        ],
+        "border-width" => &[
+            "border-top-width",
+            "border-right-width",
+            "border-bottom-width",
+            "border-left-width",
+        ],
+        "border" => &[
+            "border-top-width",
+            "border-right-width",
+            "border-bottom-width",
+            "border-left-width",
+            "border-style",
+            "border-color",
+        ],
+        "background-color"
+        | "border-color"
+        | "color"
+        | "display"
+        | "overflow"
+        | "width"
+        | "height"
+        | "border-style"
+        | "font-family"
+        | "font-size"
+        | "line-height"
+        | "white-space"
+        | "direction"
+        | "margin-top"
+        | "margin-right"
+        | "margin-bottom"
+        | "margin-left"
+        | "padding-top"
+        | "padding-right"
+        | "padding-bottom"
+        | "padding-left"
+        | "border-top-width"
+        | "border-right-width"
+        | "border-bottom-width"
+        | "border-left-width" => {
+            return Ok(vec![(name.to_owned(), value.to_owned())]);
+        }
+        _ => return Err(format!("unsupported bootstrap value for {name}: {value}")),
+    };
+    Ok(properties
+        .iter()
+        .map(|property| ((*property).to_owned(), value.to_owned()))
+        .collect())
+}
+
 fn known_property(name: &str) -> bool {
     matches!(
         name,
@@ -248,6 +344,11 @@ fn known_property(name: &str) -> bool {
             | "box-sizing"
             | "width"
             | "height"
+            | "font-family"
+            | "font-size"
+            | "line-height"
+            | "white-space"
+            | "direction"
             | "margin"
             | "padding"
             | "border-width"
@@ -368,15 +469,10 @@ fn unsupported_property(name: &str) -> bool {
             | "padding-block-start"
             | "padding-block-end"
             | "writing-mode"
-            | "direction"
             | "unicode-bidi"
-            | "white-space"
             | "text-align"
             | "vertical-align"
-            | "line-height"
             | "font"
-            | "font-size"
-            | "font-family"
             | "font-style"
             | "font-weight"
             | "font-stretch"
@@ -489,6 +585,24 @@ fn multi_keyword_display(values: &[&str]) -> bool {
         && outside_count <= 1
         && flow_count <= 1
         && values.len() == outside_count + flow_count + 1
+}
+
+fn white_space_component(value: &str) -> bool {
+    matches!(
+        value,
+        "normal"
+            | "pre"
+            | "nowrap"
+            | "pre-wrap"
+            | "pre-line"
+            | "break-spaces"
+            | "collapse"
+            | "preserve"
+            | "preserve-breaks"
+            | "preserve-spaces"
+            | "wrap"
+            | "discard"
+    )
 }
 
 fn image_property(name: &str) -> bool {
@@ -727,6 +841,42 @@ fn unit(suffix: &str) -> bool {
             | "cqmin"
             | "cqmax"
     )
+}
+
+pub(in crate::render) fn font_size_px(value: &str) -> Result<Option<u32>, String> {
+    if matches!(
+        value,
+        "xx-small"
+            | "x-small"
+            | "small"
+            | "medium"
+            | "large"
+            | "x-large"
+            | "xx-large"
+            | "xxx-large"
+            | "smaller"
+            | "larger"
+            | "math"
+    ) {
+        return Err(format!("font-size requires integer CSS pixels: {value}"));
+    }
+    let Some(size) = parse_length(value, false)? else {
+        return Ok(None);
+    };
+    let max = MAX_FONT_SCALE / 64;
+    if !(1..=i64::from(max)).contains(&size) {
+        return Err(format!("font-size must be in 1..={max} CSS pixels"));
+    }
+    Ok(Some(size as u32))
+}
+
+pub(in crate::render) fn line_height_px(value: &str) -> Result<Option<u32>, String> {
+    if number_end(value) == Some(value.len()) && value.parse::<f64>().is_ok_and(|n| n > 0.0) {
+        return Err(format!(
+            "line-height requires integer CSS pixels or normal: {value}"
+        ));
+    }
+    Ok(parse_length(value, false)?.map(|height| height as u32))
 }
 
 pub(in crate::render) fn parse_length(value: &str, negative: bool) -> Result<Option<i64>, String> {

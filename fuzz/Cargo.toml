@@ -1,0 +1,36 @@
+[package]
+name = "browser-engine-fuzz"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+browser-engine = { path = ".." }
+libfuzzer-sys = "=0.4.13"
+
+[workspace]
+members = ["."]
+resolver = "3"
+
+[profile.release]
+overflow-checks = true
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[[bin]]
+name = "html_parse"
+path = "fuzz_targets/html_parse.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "render_fixture"
+path = "fuzz_targets/render_fixture.rs"
+test = false
+doc = false
+bench = false

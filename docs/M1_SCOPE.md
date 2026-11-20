@@ -30,10 +30,10 @@ must not produce success-shaped output or be silently omitted by the bootstrap.
 
 ## Bootstrap contract
 
-The first runner operates only on controlled fixtures in
+The default runner uses the bootstrap profile on fixtures in
 `fixtures/m1/bootstrap`. B001 draws one red rectangle; B002 verifies nested content,
 padding, border and margin coordinates; B003 verifies a concrete cascade result.
-B004 requires explicit rejection of visible text before text rendering exists.
+B004 checks the bootstrap profile's explicit rejection of visible text.
 B005 requires rejection of an external stylesheet request without fetching it.
 Both require exit 1 with the fixture's exact diagnostic, no output files, and
 successful rendering of a paired control that removes the unsupported feature.
@@ -41,9 +41,8 @@ successful rendering of a paired control that removes the unsupported feature.
 The manifest represents pixels as `[x, y, red, green, blue]`, zero-based from the
 viewport's top-left corner. Rectangles use `[x, y, width, height]` in integer CSS
 pixels. All bootstrap fixtures explicitly set the body's margin to zero. Their
-PPM image format is a development output; PNG resource support remains a separate
-full-M1 requirement. A renderer that paints empty rectangles while omitting text
-does not pass a text case.
+PPM image format is the development output. The full cohort checks PNG input
+decoding independently and requires text cases to produce visible glyphs.
 
 `execution: "not_run"` in the frozen contract is not a current-results database.
 Each actual runner invocation writes a separate evidence report with the commit,
@@ -57,6 +56,37 @@ Both modes use the same input, token and tree limits as strict parsing.
 They accept the subset of head metadata and ordinary block and phrasing elements
 documented by the parser. Other tree-construction modes produce a diagnostic.
 [Tree-construction implementation](../src/html/tree.rs)
+
+## Current engine profiles
+
+- `inspect --parse-mode document` and `inspect --fragment-context div` expose the
+  bounded document and fragment modes. The library provides document-owned handles
+  and validates ownership, cycles and depth before append, move or removal.
+  Detaching a subtree preserves its handles and hides it from inspection and
+  rendering. Detached nodes still count against the arena budget. Replacing text
+  or attributes reclaims the bytes of the previous strings.
+- `style --user-css CSS` lists computed values in tree order. The user sheet is
+  optional. Author rules beat normal user declarations, and important user rules
+  beat important author declarations. Supported properties resolve initial and
+  inherited values, including `initial`, `inherit`, and `unset`.
+- `shape --script Latn|Arab|Deva --direction ltr|rtl --language TAG --scale 1024`
+  reads UTF-8 fixture text and reports glyph IDs, UTF-8 clusters and signed
+  positions from the pinned font.
+- `render --profile m1` uses document parsing and formats standalone block text in
+  a single supported script and direction. It collapses ASCII whitespace, wraps
+  using shaped advances, records line and glyph geometry, and paints grayscale
+  coverage into the clipped RGB surface. It collapses adjoining vertical margins
+  for in-flow blocks, including empty boxes and eligible parent-child edges.
+  Borders, padding, and overflow formatting contexts separate those edges.
+  Mixed inline elements, mixed-direction runs, and non-pinned fonts remain
+  outside the supported slice. [CSS collapsing margins](https://www.w3.org/TR/CSS22/box.html#collapsing-margins)
+- `render --resource NAME=PATH` maps an explicit label to a PNG within the fixture
+  root. The image renderer supports static 8-bit RGB and RGBA with untagged
+  or sRGB color. It composites alpha onto the existing surface, uses intrinsic
+  dimensions by default, and resizes and clips the image to the fixture box.
+  Standalone inline images and explicit block images are supported. The
+  `decode-png` command verifies container and compressed-data checksums and
+  reports decoded dimensions.
 
 ## Resource contract
 
@@ -73,12 +103,11 @@ documented by the parser. Other tree-construction modes produce a diagnostic.
 | Fixture wall time | 5 seconds | Runner terminates the child and records timeout, never pass |
 
 R001–R004 define exact below/at/above values and reproducible generator recipes.
-These are implementation obligations, not claims that every bound is already
-enforced. RSS and wall-clock enforcement belong to the isolated runner; input,
-node, depth, decoded-size and viewport bounds belong at engine entry/allocation
-boundaries. The bootstrap reports its implemented checks separately. Its lack of
-network calls does not constitute an OS sandbox or authorization to open arbitrary
-untrusted local documents.
+Input, node, depth, decoded-size and viewport bounds belong at engine allocation
+boundaries. The full-M1 replay imposes the five-second timeout and samples
+per-child RSS, with a kernel peak check when it reaps each invocation. Dedicated
+worker isolation remains required for acceptance and the developer tool remains
+limited to controlled input. [Fixture and worker evidence](VALIDATION.md#evidence-identity)
 
 The input limit counts the original bytes, including a leading UTF-8 signature.
 The parser strips one leading signature, preserves U+FEFF elsewhere, and
@@ -92,7 +121,11 @@ The separate sibling-selector check retains the 5,120,000 element–compound
 limit for `+` and `~`. Rules with no usable declarations incur no match work.
 Cascade processing has a separate 5,120,000 matched-declaration limit.
 Paint preflights up to 33,554,432 clipped pixel writes across canvas,
-backgrounds and borders before allocating one RGB PPM buffer.
+backgrounds, borders, images and glyphs before allocating one RGB PPM buffer.
+The fixture resource map retains up to 64 PNGs and 32 MiB of normalized image
+data. The decoder checks `width × height × 4` against the per-resource limit
+before frame allocation. Inline layout bounds per-document text bytes, shaped
+glyph count, repeated shaping work and retained glyph coverage.
 
 Embedded stylesheets are parsed independently in document order. The bootstrap
 uses a screen context with bare `all`, `screen`, `print` and `speech` media
@@ -127,8 +160,24 @@ and full glyph IDs, offsets and advances. At 16px font size, scale 1024 represen
 64 positioning units per CSS pixel. These are reference-shaper outputs, not BroWSER
 test results. Changes to a font, shaping configuration or oracle require a reviewed
 contract revision. Screenshot references for text still need independent raster
-review when font painting is integrated; engine-generated images cannot approve
-their own correctness.
+review. The renderer records screenshots and exact glyph geometry so the
+reviewer can compare them with independent images and pin the accepted evidence.
+
+### Runtime dependencies
+
+Cargo pins HarfRust 0.13.3 (MIT) for OpenType shaping, Skrifa 0.46.2
+(MIT or Apache-2.0) for face metrics and outlines, ab_glyph_rasterizer 0.1.10
+(Apache-2.0) for grayscale coverage, and png 0.18.1 (MIT or Apache-2.0)
+for bounded image decoding. First-party engine code uses their Rust interfaces.
+The renderer loads embedded fixture fonts and never resolves system fonts.
+Cargo checksums and the complete transitive versions are recorded in the lockfile.
+[HarfRust](https://github.com/harfbuzz/harfrust/releases/tag/0.13.3) · [Skrifa](https://docs.rs/crate/skrifa/0.46.2) · [ab_glyph_rasterizer](https://docs.rs/crate/ab_glyph_rasterizer/0.1.10) · [image-rs PNG](https://github.com/image-rs/image-png) · [Cargo.lock](../Cargo.lock)
+
+The text and rendering maintainers own dependency updates. Preserve upstream
+notices, review lockfile and license changes, and repeat the independent glyph,
+pixel and malformed-input checks before accepting a revision. Fixture decoding
+runs inside the development process. Codec isolation and broader decode fuzzing
+remain release gates.
 
 ## Upstream identities and change control
 

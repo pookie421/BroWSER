@@ -200,7 +200,7 @@
       "title": "Implement the HTML tokenizer cohort",
       "milestone": "M1",
       "priority": "P0",
-      "status": "in_progress",
+      "status": "complete",
       "depends_on": [
         "B011"
       ],
@@ -212,7 +212,8 @@
       "evidence": [
         "evidence/M1/capability-matrix.md",
         "evidence/M1/BOOTSTRAP.md",
-        "docs/CODE_AUDIT.md"
+        "src/html.rs",
+        "fuzz/fuzz_targets/html_parse.rs"
       ]
     },
     {
@@ -220,7 +221,7 @@
       "title": "Implement DOM ownership and HTML tree construction",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "complete",
       "depends_on": [
         "B012"
       ],
@@ -229,14 +230,17 @@
         "Pass document and fragment tree fixtures including malformed nesting and node/attribute handling.",
         "Test identity, ownership, mutation invariants, deep inputs and deterministic teardown."
       ],
-      "evidence": []
+      "evidence": [
+        "evidence/M1/capability-matrix.md",
+        "tests/dom.rs"
+      ]
     },
     {
       "id": "B014",
       "title": "Implement CSS syntax, selectors and cascade",
       "milestone": "M1",
       "priority": "P0",
-      "status": "in_progress",
+      "status": "complete",
       "depends_on": [
         "B011"
       ],
@@ -248,7 +252,8 @@
       "evidence": [
         "evidence/M1/capability-matrix.md",
         "evidence/M1/BOOTSTRAP.md",
-        "docs/CODE_AUDIT.md"
+        "docs/M1_SCOPE.md",
+        "src/render.rs"
       ]
     },
     {
@@ -256,7 +261,7 @@
       "title": "Integrate deterministic international text metrics",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "complete",
       "depends_on": [
         "B011"
       ],
@@ -265,14 +270,18 @@
         "Shape Latin, Arabic and Devanagari fixtures using licensed pinned fonts and explicit Unicode data.",
         "Pass direction, cluster, wrapping and malformed-font limits; document native ownership and dependency updates."
       ],
-      "evidence": []
+      "evidence": [
+        "docs/M1_SCOPE.md",
+        "evidence/M1/capability-matrix.md",
+        "tests/text.rs"
+      ]
     },
     {
       "id": "B016",
       "title": "Implement block and inline formatting",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "complete",
       "depends_on": [
         "B013",
         "B014",
@@ -283,14 +292,19 @@
         "Pass frozen geometry tests for sizing, margins, padding, borders, whitespace and line wrapping.",
         "Cover nested/empty/oversized documents and deterministic bounded failure without hidden truncation."
       ],
-      "evidence": []
+      "evidence": [
+        "docs/M1_SCOPE.md",
+        "evidence/M1/capability-matrix.md",
+        "src/render/margins.rs",
+        "tests/m1_render.rs"
+      ]
     },
     {
       "id": "B017",
       "title": "Implement display lists, PNG resources and CPU paint",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "B016"
       ],
@@ -299,7 +313,12 @@
         "Generate stable display lists and pixels for clipping, text, backgrounds, borders, colors and controlled PNG fixtures.",
         "Validate image decoded-size limits; fail resource manifest escapes and unsupported fixture requirements explicitly."
       ],
-      "evidence": []
+      "evidence": [
+        "docs/M1_SCOPE.md",
+        "evidence/M1/capability-matrix.md",
+        "src/png_image.rs",
+        "tests/m1_render.rs"
+      ]
     },
     {
       "id": "B018",

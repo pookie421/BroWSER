@@ -1,24 +1,31 @@
-use browser_engine::{html, render};
+use browser_engine::{html, png_image, render, text};
 use std::collections::BTreeMap;
 use std::fs::{self, File, OpenOptions};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
-const MAX_INPUT: u64 = 1_048_576;
-const USAGE: &str = "BroWSER offline fixture renderer\n\
-Usage:\n\
-  browser-engine inspect --fixture PATH --output DOM.json [--fixture-root DIR]\n\
-      [--parse-mode document | --fragment-context div]\n\
-  browser-engine render --fixture PATH --output IMAGE.ppm [--layout LAYOUT.json]\n\
-      [--width 640] [--height 480] [--fixture-root DIR]\n\n\
-The fixture root defaults to fixtures/m1. Input must resolve inside it.\n\
-Inspect defaults to strict parsing. The document and div-fragment modes support\n\
-bounded HTML tree construction for controlled fixtures.\n\
-Outputs must not exist. Parent directories must exist.\n\
-This unsandboxed developer tool accepts controlled synthetic fixtures only.\n\
-Full HTML/CSS recovery, visible text, image resources and network browsing are\n\
-outside the bootstrap renderer. See docs/M1_SCOPE.md for scope and M1 gates.";
+const MAX_INPUT: u64 = html::MAX_INPUT_BYTES as u64;
+const USAGE: &str = "BroWSER offline fixture renderer
+Usage:
+  browser-engine inspect --fixture PATH --output DOM.json [--fixture-root DIR]
+      [--parse-mode document | --fragment-context div]
+  browser-engine style --fixture PATH --output STYLE.json [--fixture-root DIR]
+      [--user-css CSS]
+  browser-engine shape --fixture PATH --output GLYPHS.json [--fixture-root DIR]
+      --script Latn|Arab|Deva --direction ltr|rtl --language TAG [--scale 1024]
+  browser-engine decode-png --fixture PATH --output PNG.json [--fixture-root DIR]
+  browser-engine render --fixture PATH --output IMAGE.ppm [--layout LAYOUT.json]
+      [--width 640] [--height 480] [--fixture-root DIR] [--resource NAME=PATH]...
+      [--profile bootstrap|m1]
+
+The fixture root defaults to fixtures/m1. Input must resolve inside it.
+Inspect defaults to strict parsing. The document and div-fragment modes support
+bounded HTML tree construction for controlled fixtures.
+
+Outputs must not exist. Parent directories must exist.
+This unsandboxed developer tool accepts controlled synthetic fixtures only.
+See docs/M1_SCOPE.md for the supported fixture grammar and remaining gates.";
 
 fn main() -> ExitCode {
     match run() {
@@ -50,29 +57,40 @@ fn run() -> Result<(), String> {
         return Ok(());
     }
     let command = args[0].as_str();
-    if !matches!(command, "inspect" | "render") {
+    if !matches!(
+        command,
+        "inspect" | "style" | "shape" | "decode-png" | "render"
+    ) {
         return Err(format!("unknown command {command:?}; use --help"));
     }
     let mut flags = BTreeMap::new();
+    let mut resource_specs = Vec::new();
     for pair in args[1..].chunks(2) {
         if pair.len() != 2 || !pair[0].starts_with("--") {
             return Err("each option requires a value; use --help".into());
         }
-        let allowed = match command {
-            "inspect" => matches!(
-                pair[0].as_str(),
-                "--fixture" | "--output" | "--fixture-root" | "--parse-mode" | "--fragment-context"
-            ),
-            _ => matches!(
-                pair[0].as_str(),
-                "--fixture" | "--output" | "--fixture-root" | "--layout" | "--width" | "--height"
-            ),
-        };
-        if !allowed {
-            return Err(format!("unsupported option {:?} for {command}", pair[0]));
+        let name = pair[0].as_str();
+        if command == "render" && name == "--resource" {
+            resource_specs.push(
+                pair[1]
+                    .split_once('=')
+                    .ok_or("--resource requires NAME=PATH")?,
+            );
+            continue;
         }
-        if flags.insert(pair[0].as_str(), pair[1].as_str()).is_some() {
-            return Err(format!("duplicate option {:?}", pair[0]));
+        let allowed = matches!(name, "--fixture" | "--output" | "--fixture-root")
+            || match command {
+                "inspect" => matches!(name, "--parse-mode" | "--fragment-context"),
+                "style" => name == "--user-css",
+                "shape" => matches!(name, "--script" | "--direction" | "--language" | "--scale"),
+                "render" => matches!(name, "--layout" | "--width" | "--height" | "--profile"),
+                _ => false,
+            };
+        if !allowed {
+            return Err(format!("unsupported option {name:?} for {command}"));
+        }
+        if flags.insert(name, pair[1].as_str()).is_some() {
+            return Err(format!("duplicate option {name:?}"));
         }
     }
     let input = flags.get("--fixture").ok_or("--fixture is required")?;
@@ -85,71 +103,133 @@ fn run() -> Result<(), String> {
     )
     .canonicalize()
     .map_err(|e| format!("cannot resolve fixture root: {e}"))?;
-    let input_path = Path::new(input)
+    let limit = if command == "decode-png" {
+        png_image::MAX_ENCODED_BYTES as u64
+    } else {
+        MAX_INPUT
+    };
+    let (input_path, bytes) = read_fixture(input, &fixture_root, limit)?;
+    if command == "decode-png" {
+        let (width, height) = png_image::PngImage::decode(&bytes)?.size();
+        let json = format!("{{\"width\":{width},\"height\":{height}}}\n");
+        return write_outputs(
+            &input_path,
+            vec![(PathBuf::from(output), json.into_bytes())],
+        );
+    }
+    let input_text = std::str::from_utf8(&bytes).map_err(|_| "fixture must be valid UTF-8")?;
+    let json = match command {
+        "inspect" => {
+            let document = match (flags.get("--parse-mode"), flags.get("--fragment-context")) {
+                (None, None) => html::parse(input_text)?,
+                (Some(_), Some(_)) => {
+                    return Err("choose one of --parse-mode and --fragment-context".into());
+                }
+                (Some(&"document"), None) => html::parse_document(input_text)?,
+                (Some(_), None) => return Err("--parse-mode must be document".into()),
+                (None, Some(context)) => html::parse_fragment(input_text, context)?,
+            };
+            let json = (document.canonical_json() + "\n").into_bytes();
+            write_outputs(&input_path, vec![(PathBuf::from(output), json)])?;
+            println!(
+                "{{\"command\":\"inspect\",\"nodes\":{}}}",
+                document.nodes().len()
+            );
+            return Ok(());
+        }
+        "style" => {
+            let document = html::parse_document(input_text)?;
+            render::inspect_styles(&document, flags.get("--user-css").copied().unwrap_or(""))?
+        }
+        "shape" => {
+            let font =
+                text::PinnedFont::for_script(flags.get("--script").ok_or("--script is required")?)?;
+            let direction = flags
+                .get("--direction")
+                .ok_or("--direction is required")?
+                .parse()?;
+            let language = flags.get("--language").ok_or("--language is required")?;
+            let scale = flags
+                .get("--scale")
+                .unwrap_or(&"1024")
+                .parse::<u32>()
+                .map_err(|_| "--scale must be a positive integer")?;
+            font.shape(input_text, direction, language, scale)?
+                .canonical_json()
+        }
+        "render" => {
+            let pinned_text = match flags.get("--profile") {
+                None | Some(&"bootstrap") => false,
+                Some(&"m1") => true,
+                Some(_) => return Err("--profile must be bootstrap or m1".to_owned()),
+            };
+            let document = if pinned_text {
+                html::parse_document(input_text)?
+            } else {
+                html::parse(input_text)?
+            };
+            let dimension = |name, fallback| -> Result<u32, String> {
+                flags
+                    .get(name)
+                    .copied()
+                    .unwrap_or(fallback)
+                    .parse::<u32>()
+                    .ok()
+                    .filter(|value| (1..=2048).contains(value))
+                    .ok_or_else(|| format!("{name} must be an integer in 1..=2048"))
+            };
+            let width = dimension("--width", "640")?;
+            let height = dimension("--height", "480")?;
+            let mut resources = png_image::PngResources::default();
+            for (name, path) in resource_specs {
+                let (_, encoded) =
+                    read_fixture(path, &fixture_root, png_image::MAX_ENCODED_BYTES as u64)?;
+                resources.insert(name, &encoded)?;
+            }
+            let rendered = if pinned_text {
+                render::render_m1(&document, width, height, &resources)?
+            } else {
+                render::render_with_resources(&document, width, height, &resources)?
+            };
+            let image_bytes = rendered.ppm.len();
+            let mut outputs = vec![(PathBuf::from(output), rendered.ppm)];
+            if let Some(layout) = flags.get("--layout") {
+                outputs.push((
+                    PathBuf::from(layout),
+                    (rendered.layout_json + "\n").into_bytes(),
+                ));
+            }
+            write_outputs(&input_path, outputs)?;
+            println!(
+                "{{\"command\":\"render\",\"nodes\":{},\"width\":{width},\"height\":{height},\"image_bytes\":{image_bytes}}}",
+                document.nodes().len()
+            );
+            return Ok(());
+        }
+        _ => unreachable!("validated command"),
+    };
+    write_outputs(
+        &input_path,
+        vec![(PathBuf::from(output), (json + "\n").into_bytes())],
+    )
+}
+
+fn read_fixture(path: &str, fixture_root: &Path, limit: u64) -> Result<(PathBuf, Vec<u8>), String> {
+    let input_path = Path::new(path)
         .canonicalize()
         .map_err(|e| format!("cannot resolve fixture: {e}"))?;
-    if !input_path.starts_with(&fixture_root) || !input_path.is_file() {
+    if !input_path.starts_with(fixture_root) || !input_path.is_file() {
         return Err("fixture must be a regular file inside --fixture-root".into());
     }
     let file = File::open(&input_path).map_err(|e| format!("cannot open fixture: {e}"))?;
     let mut bytes = Vec::new();
-    file.take(MAX_INPUT + 1)
+    file.take(limit + 1)
         .read_to_end(&mut bytes)
         .map_err(|e| format!("cannot read fixture: {e}"))?;
-    if bytes.len() as u64 > MAX_INPUT {
-        return Err(format!("fixture exceeds the {MAX_INPUT}-byte input limit"));
+    if bytes.len() as u64 > limit {
+        return Err(format!("fixture exceeds the {limit}-byte input limit"));
     }
-    let input_text = std::str::from_utf8(&bytes).map_err(|_| "fixture must be valid UTF-8")?;
-    let document = match (flags.get("--parse-mode"), flags.get("--fragment-context")) {
-        (None, None) => html::parse(input_text)?,
-        (Some(_), Some(_)) => {
-            return Err("choose one of --parse-mode and --fragment-context".into());
-        }
-        (Some(&"document"), None) => html::parse_document(input_text)?,
-        (Some(_), None) => return Err("--parse-mode must be document".into()),
-        (None, Some(context)) => html::parse_fragment(input_text, context)?,
-    };
-    if command == "inspect" {
-        write_outputs(
-            &input_path,
-            vec![(
-                PathBuf::from(output),
-                (document.canonical_json() + "\n").into_bytes(),
-            )],
-        )?;
-        println!(
-            "{{\"command\":\"inspect\",\"nodes\":{}}}",
-            document.nodes.len()
-        );
-    } else {
-        let dimension = |name, fallback| -> Result<u32, String> {
-            let value = flags.get(name).copied().unwrap_or(fallback);
-            let parsed = value
-                .parse::<u32>()
-                .map_err(|_| format!("{name} must be an integer in 1..=2048"))?;
-            if !(1..=2048).contains(&parsed) {
-                return Err(format!("{name} must be an integer in 1..=2048"));
-            }
-            Ok(parsed)
-        };
-        let width = dimension("--width", "640")?;
-        let height = dimension("--height", "480")?;
-        let rendered = render::render(&document, width, height)?;
-        let image_bytes = rendered.ppm.len();
-        let mut outputs = vec![(PathBuf::from(output), rendered.ppm)];
-        if let Some(layout) = flags.get("--layout") {
-            outputs.push((
-                PathBuf::from(layout),
-                (rendered.layout_json + "\n").into_bytes(),
-            ));
-        }
-        write_outputs(&input_path, outputs)?;
-        println!(
-            "{{\"command\":\"render\",\"nodes\":{},\"width\":{width},\"height\":{height},\"image_bytes\":{image_bytes}}}",
-            document.nodes.len()
-        );
-    }
-    Ok(())
+    Ok((input_path, bytes))
 }
 
 /// Stage output bytes next to their destination, then publish without overwriting.
