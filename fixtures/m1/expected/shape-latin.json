@@ -1,0 +1,62 @@
+{
+  "reference_tool": "HarfBuzz hb-shape 14.3.1",
+  "text": "office",
+  "direction": "ltr",
+  "script": "Latn",
+  "language": "en",
+  "font_scale": 1024,
+  "variation": {
+    "wdth": 100,
+    "wght": 400
+  },
+  "cluster_units": "UTF-8 byte offsets",
+  "command_argv": [
+    "hb-shape",
+    "--output-format=json",
+    "--no-glyph-names",
+    "--font-funcs=ot",
+    "--shapers=ot",
+    "--font-size=1024",
+    "--variations=wdth=100,wght=400",
+    "--utf8-clusters",
+    "--direction=ltr",
+    "--script=Latn",
+    "--language=en",
+    "fixtures/m1/assets/fonts/notosans/NotoSans[wdth,wght].ttf",
+    "office"
+  ],
+  "glyphs": [
+    {
+      "g": 82,
+      "cl": 0,
+      "dx": 0,
+      "dy": 0,
+      "ax": 620,
+      "ay": 0
+    },
+    {
+      "g": 1656,
+      "cl": 1,
+      "dx": 0,
+      "dy": 0,
+      "ax": 969,
+      "ay": 0
+    },
+    {
+      "g": 70,
+      "cl": 4,
+      "dx": 0,
+      "dy": 0,
+      "ax": 492,
+      "ay": 0
+    },
+    {
+      "g": 72,
+      "cl": 5,
+      "dx": 0,
+      "dy": 0,
+      "ax": 578,
+      "ay": 0
+    }
+  ]
+}

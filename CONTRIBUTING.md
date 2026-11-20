@@ -1,8 +1,9 @@
 # Contributing
 
-BroWSER is currently a planning repository. Start with [README.md](README.md) and
-[the backlog](docs/BACKLOG.md). Small complete changes with reproducible evidence are
-the unit of contribution. No engine build or browser download exists yet.
+BroWSER is implementing M1's offline renderer. Start with [README.md](README.md),
+[the frozen M1 scope](docs/M1_SCOPE.md) and [the backlog](docs/BACKLOG.md). Small
+complete changes with reproducible evidence are the unit of contribution. The
+bootstrap is a developer tool; no general-purpose browser release exists yet.
 
 ## Working process
 
@@ -26,12 +27,14 @@ Use Python 3.11 or later:
 ```sh
 python3 tools/check_plan.py
 python3 -m unittest discover -s tests -v
+make engine-check
 ```
 
 Changes to `planning/roadmap.json` must preserve acyclic dependencies and honest
 completion evidence. Complete and in-progress entries cannot depend on unfinished
-entries. M0 evidence concerns the planning package only. New engine build commands
-must be documented and exercised when the first executable slice is contributed.
+entries. M0 evidence concerns the planning package only. Engine changes also need
+Rust tests/Clippy and the relevant frozen fixture assertions. Use the bootstrap
+denominator honestly; unimplemented full-M1 cases remain not run.
 
 ## Review and evidence
 

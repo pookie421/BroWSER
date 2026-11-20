@@ -1,0 +1,25 @@
+{
+  "generator": "BroWSER hand-authored 2x2 RGBA pixel matrix, standard-library zlib PNG writer",
+  "license": "MIT",
+  "width": 2,
+  "height": 2,
+  "rgba_row_major": [
+    255,
+    0,
+    0,
+    255,
+    0,
+    255,
+    0,
+    255,
+    0,
+    0,
+    255,
+    255,
+    0,
+    0,
+    0,
+    0
+  ],
+  "sha256": "306322f4c76b0c2e2aff78a0f127575ed2b4830fe04abe76ad63a28147b9862d"
+}

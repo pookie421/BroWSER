@@ -1,6 +1,6 @@
 # Validation and evidence policy
 
-Status on 16 November 2026: no engine implementation or engine benchmark results exist in this repository. Repository checks verify the planning package. They do not establish rendering correctness, standards conformance, performance, or security.
+Status updated 20 November 2026: the M1 bootstrap has local parser, renderer, CLI and fixture checks. Their scope and actual outcomes are recorded in [bootstrap evidence](../evidence/M1/BOOTSTRAP.md). No engine benchmark or WPT result is claimed. Repository integrity checks still verify the planning package separately from engine behavior and security.
 
 ## Evidence identity
 

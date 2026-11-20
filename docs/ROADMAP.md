@@ -1,6 +1,6 @@
 # Delivery roadmap
 
-Planning baseline: 16 November 2026. This roadmap is a proposal for a new engine. The repository contains planning documents and repository validation, not a working browser. No engine milestone is complete, no compatibility score has been measured, and no date below is a release commitment.
+Planning baseline: 16 November 2026; implementation update: 20 November 2026. M0 is complete and M1 has a working controlled-fixture rendering bootstrap. No engine milestone is complete, no browser compatibility score has been measured, and no date below is a release commitment. See the [current capability matrix](../evidence/M1/capability-matrix.md) for implemented behavior.
 
 ## Product strategy
 

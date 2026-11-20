@@ -68,6 +68,17 @@ class PlanContractTests(unittest.TestCase):
         self.write_plan()
         self.assertEqual([], check_plan.validate_repository(self.root))
 
+    def test_development_status_accepts_started_milestone(self):
+        self.plan["status"] = "development"
+        self.plan["milestones"][1]["status"] = "in_progress"
+        self.assertEqual([], self.errors())
+
+    def test_generated_artifacts_are_not_documentation_link_targets(self):
+        artifact = self.root / "artifacts"
+        artifact.mkdir()
+        (artifact / "compiler-manual.md").write_text("[external build source](missing.md)")
+        self.assertEqual([], check_plan.check_links(self.root))
+
     def test_unknown_and_missing_keys_are_rejected(self):
         self.plan["milestones"][0]["claim"] = "shipped"
         del self.plan["tasks"][0]["owner_role"]

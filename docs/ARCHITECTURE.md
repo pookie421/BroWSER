@@ -1,8 +1,10 @@
 # BroWSER architecture
 
 Status: proposed implementation architecture. Reviewed against primary references on
-2026-11-16. This repository contains the development plan and its validation tools;
-none of the engine components described here is implemented yet.
+2026-11-16. Updated 2026-11-20: the repository also contains a limited M1 bootstrap
+with strict fixture parsing, DOM inspection, CSS block layout and CPU PPM painting.
+The [capability matrix](../evidence/M1/capability-matrix.md) identifies actual support;
+the broader architecture below remains a target rather than an implementation claim.
 
 ## Objective and system boundary
 
@@ -230,5 +232,5 @@ Do not create empty engine crates or API methods to imply progress. Add a
 component when its first coherent behavior, tests, failure handling, and build
 instructions are delivered together. Proposed directory boundaries may become
 libraries during implementation, but this document is not a requirement to create
-unused directories. BroWSER's current runnable code validates the plan itself;
-it is not an engine benchmark or a standards-conformance result.
+unused directories. BroWSER's runnable bootstrap is a bounded offline development
+slice; its fixture results are not an engine benchmark or a standards-conformance score.

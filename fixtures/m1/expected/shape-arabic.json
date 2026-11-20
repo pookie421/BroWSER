@@ -1,0 +1,62 @@
+{
+  "reference_tool": "HarfBuzz hb-shape 14.3.1",
+  "text": "سلام",
+  "direction": "rtl",
+  "script": "Arab",
+  "language": "ar",
+  "font_scale": 1024,
+  "variation": {
+    "wdth": 100,
+    "wght": 400
+  },
+  "cluster_units": "UTF-8 byte offsets",
+  "command_argv": [
+    "hb-shape",
+    "--output-format=json",
+    "--no-glyph-names",
+    "--font-funcs=ot",
+    "--shapers=ot",
+    "--font-size=1024",
+    "--variations=wdth=100,wght=400",
+    "--utf8-clusters",
+    "--direction=rtl",
+    "--script=Arab",
+    "--language=ar",
+    "fixtures/m1/assets/fonts/notosansarabic/NotoSansArabic[wdth,wght].ttf",
+    "سلام"
+  ],
+  "glyphs": [
+    {
+      "g": 74,
+      "cl": 6,
+      "dx": 0,
+      "dy": 0,
+      "ax": 496,
+      "ay": 0
+    },
+    {
+      "g": 11,
+      "cl": 4,
+      "dx": 0,
+      "dy": 0,
+      "ax": 388,
+      "ay": 0
+    },
+    {
+      "g": 71,
+      "cl": 2,
+      "dx": 0,
+      "dy": 0,
+      "ax": 225,
+      "ay": 0
+    },
+    {
+      "g": 37,
+      "cl": 0,
+      "dx": 0,
+      "dy": 0,
+      "ax": 803,
+      "ay": 0
+    }
+  ]
+}

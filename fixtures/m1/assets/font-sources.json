@@ -1,0 +1,50 @@
+[
+  {
+    "path": "fixtures/m1/assets/fonts/notosans/NotoSans[wdth,wght].ttf",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+    "bytes": 2049096,
+    "license": "OFL-1.1"
+  },
+  {
+    "path": "fixtures/m1/assets/fonts/notosans/OFL.txt",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosans/OFL.txt",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+    "bytes": 4396,
+    "license": "OFL-1.1"
+  },
+  {
+    "path": "fixtures/m1/assets/fonts/notosansarabic/NotoSansArabic[wdth,wght].ttf",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansarabic/NotoSansArabic%5Bwdth%2Cwght%5D.ttf",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+    "bytes": 844676,
+    "license": "OFL-1.1"
+  },
+  {
+    "path": "fixtures/m1/assets/fonts/notosansarabic/OFL.txt",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansarabic/OFL.txt",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+    "bytes": 4382,
+    "license": "OFL-1.1"
+  },
+  {
+    "path": "fixtures/m1/assets/fonts/notosansdevanagari/NotoSansDevanagari[wdth,wght].ttf",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansdevanagari/NotoSansDevanagari%5Bwdth%2Cwght%5D.ttf",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "14ec4af41f27482216d1c2229f417ff9b1425e1babb014e57d1d40d03229853e",
+    "bytes": 641944,
+    "license": "OFL-1.1"
+  },
+  {
+    "path": "fixtures/m1/assets/fonts/notosansdevanagari/OFL.txt",
+    "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansdevanagari/OFL.txt",
+    "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+    "sha256": "a216f6f8d85c7228093e0ee5e258d9d377e6671f68acb4db1930b29583d0f331",
+    "bytes": 4386,
+    "license": "OFL-1.1"
+  }
+]

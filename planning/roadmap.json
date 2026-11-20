@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "project": "BroWSER",
-  "status": "planning",
+  "status": "development",
   "milestones": [
     {
       "id": "M0",
@@ -33,7 +33,7 @@
     {
       "id": "M1",
       "title": "Deterministic offline renderer",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "M0"
       ],
@@ -49,7 +49,11 @@
         "Seven consecutive days of parser and layout fuzzing have no unresolved reproducible crash; size and time limits pass.",
         "Network and script execution remain disabled."
       ],
-      "evidence": []
+      "evidence": [
+        "docs/M1_SCOPE.md",
+        "evidence/M1/capability-matrix.md",
+        "evidence/M1/BOOTSTRAP.md"
+      ]
     },
     {
       "id": "M2",
@@ -157,7 +161,7 @@
       "title": "Freeze the M1 capability and fixture contract",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "complete",
       "depends_on": [
         "B001"
       ],
@@ -166,14 +170,18 @@
         "List exact HTML/CSS/text/paint features, spec sections, upstream revisions and expected outcomes.",
         "Include malformed and boundary cases, input/memory/time limits, pinned fonts and image assets with licenses."
       ],
-      "evidence": []
+      "evidence": [
+        "docs/M1_SCOPE.md",
+        "planning/m1-cohort.json",
+        "fixtures/m1/assets/font-sources.json"
+      ]
     },
     {
       "id": "B011",
       "title": "Bootstrap reproducible Rust builds and a real executable slice",
       "milestone": "M1",
       "priority": "P0",
-      "status": "planned",
+      "status": "in_progress",
       "depends_on": [
         "B010"
       ],
@@ -182,7 +190,10 @@
         "Pin the toolchain and dependency locks; build from clean Linux workers and a macOS developer host.",
         "CLI reads a constrained input and writes a validated document artifact through real parsing code; no empty subsystem crates."
       ],
-      "evidence": []
+      "evidence": [
+        "evidence/M1/BOOTSTRAP.md",
+        "evidence/M1/2026-11-20-macos/bootstrap-report.json"
+      ]
     },
     {
       "id": "B012",

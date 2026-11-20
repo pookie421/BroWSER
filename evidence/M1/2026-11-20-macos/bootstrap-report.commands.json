@@ -1,0 +1,5774 @@
+{
+  "temporary_output_paths_normalized": true,
+  "commands": [
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "inspect",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/dom.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"inspect\",\"nodes\":9}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/0.ppm",
+        "--layout",
+        "<run-directory>/0.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/1.ppm",
+        "--layout",
+        "<run-directory>/1.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/2.ppm",
+        "--layout",
+        "<run-directory>/2.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/3.ppm",
+        "--layout",
+        "<run-directory>/3.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/4.ppm",
+        "--layout",
+        "<run-directory>/4.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/5.ppm",
+        "--layout",
+        "<run-directory>/5.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/6.ppm",
+        "--layout",
+        "<run-directory>/6.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/7.ppm",
+        "--layout",
+        "<run-directory>/7.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/8.ppm",
+        "--layout",
+        "<run-directory>/8.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/9.ppm",
+        "--layout",
+        "<run-directory>/9.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/10.ppm",
+        "--layout",
+        "<run-directory>/10.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/11.ppm",
+        "--layout",
+        "<run-directory>/11.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/12.ppm",
+        "--layout",
+        "<run-directory>/12.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/13.ppm",
+        "--layout",
+        "<run-directory>/13.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/14.ppm",
+        "--layout",
+        "<run-directory>/14.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/15.ppm",
+        "--layout",
+        "<run-directory>/15.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/16.ppm",
+        "--layout",
+        "<run-directory>/16.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/17.ppm",
+        "--layout",
+        "<run-directory>/17.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/18.ppm",
+        "--layout",
+        "<run-directory>/18.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/19.ppm",
+        "--layout",
+        "<run-directory>/19.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/20.ppm",
+        "--layout",
+        "<run-directory>/20.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/21.ppm",
+        "--layout",
+        "<run-directory>/21.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/22.ppm",
+        "--layout",
+        "<run-directory>/22.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/23.ppm",
+        "--layout",
+        "<run-directory>/23.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/24.ppm",
+        "--layout",
+        "<run-directory>/24.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/25.ppm",
+        "--layout",
+        "<run-directory>/25.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/26.ppm",
+        "--layout",
+        "<run-directory>/26.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/27.ppm",
+        "--layout",
+        "<run-directory>/27.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/28.ppm",
+        "--layout",
+        "<run-directory>/28.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/29.ppm",
+        "--layout",
+        "<run-directory>/29.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/30.ppm",
+        "--layout",
+        "<run-directory>/30.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/31.ppm",
+        "--layout",
+        "<run-directory>/31.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/32.ppm",
+        "--layout",
+        "<run-directory>/32.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/33.ppm",
+        "--layout",
+        "<run-directory>/33.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/34.ppm",
+        "--layout",
+        "<run-directory>/34.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/35.ppm",
+        "--layout",
+        "<run-directory>/35.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/36.ppm",
+        "--layout",
+        "<run-directory>/36.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/37.ppm",
+        "--layout",
+        "<run-directory>/37.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/38.ppm",
+        "--layout",
+        "<run-directory>/38.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/39.ppm",
+        "--layout",
+        "<run-directory>/39.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/40.ppm",
+        "--layout",
+        "<run-directory>/40.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/41.ppm",
+        "--layout",
+        "<run-directory>/41.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/42.ppm",
+        "--layout",
+        "<run-directory>/42.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/43.ppm",
+        "--layout",
+        "<run-directory>/43.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/44.ppm",
+        "--layout",
+        "<run-directory>/44.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/45.ppm",
+        "--layout",
+        "<run-directory>/45.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/46.ppm",
+        "--layout",
+        "<run-directory>/46.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/47.ppm",
+        "--layout",
+        "<run-directory>/47.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/48.ppm",
+        "--layout",
+        "<run-directory>/48.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/49.ppm",
+        "--layout",
+        "<run-directory>/49.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/50.ppm",
+        "--layout",
+        "<run-directory>/50.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/51.ppm",
+        "--layout",
+        "<run-directory>/51.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/52.ppm",
+        "--layout",
+        "<run-directory>/52.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/53.ppm",
+        "--layout",
+        "<run-directory>/53.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/54.ppm",
+        "--layout",
+        "<run-directory>/54.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/55.ppm",
+        "--layout",
+        "<run-directory>/55.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/56.ppm",
+        "--layout",
+        "<run-directory>/56.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/57.ppm",
+        "--layout",
+        "<run-directory>/57.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/58.ppm",
+        "--layout",
+        "<run-directory>/58.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/59.ppm",
+        "--layout",
+        "<run-directory>/59.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/60.ppm",
+        "--layout",
+        "<run-directory>/60.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/61.ppm",
+        "--layout",
+        "<run-directory>/61.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/62.ppm",
+        "--layout",
+        "<run-directory>/62.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/63.ppm",
+        "--layout",
+        "<run-directory>/63.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/64.ppm",
+        "--layout",
+        "<run-directory>/64.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/65.ppm",
+        "--layout",
+        "<run-directory>/65.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/66.ppm",
+        "--layout",
+        "<run-directory>/66.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/67.ppm",
+        "--layout",
+        "<run-directory>/67.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/68.ppm",
+        "--layout",
+        "<run-directory>/68.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/69.ppm",
+        "--layout",
+        "<run-directory>/69.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/70.ppm",
+        "--layout",
+        "<run-directory>/70.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/71.ppm",
+        "--layout",
+        "<run-directory>/71.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/72.ppm",
+        "--layout",
+        "<run-directory>/72.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/73.ppm",
+        "--layout",
+        "<run-directory>/73.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/74.ppm",
+        "--layout",
+        "<run-directory>/74.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/75.ppm",
+        "--layout",
+        "<run-directory>/75.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/76.ppm",
+        "--layout",
+        "<run-directory>/76.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/77.ppm",
+        "--layout",
+        "<run-directory>/77.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/78.ppm",
+        "--layout",
+        "<run-directory>/78.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/79.ppm",
+        "--layout",
+        "<run-directory>/79.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/80.ppm",
+        "--layout",
+        "<run-directory>/80.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/81.ppm",
+        "--layout",
+        "<run-directory>/81.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/82.ppm",
+        "--layout",
+        "<run-directory>/82.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/83.ppm",
+        "--layout",
+        "<run-directory>/83.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/84.ppm",
+        "--layout",
+        "<run-directory>/84.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/85.ppm",
+        "--layout",
+        "<run-directory>/85.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/86.ppm",
+        "--layout",
+        "<run-directory>/86.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/87.ppm",
+        "--layout",
+        "<run-directory>/87.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/88.ppm",
+        "--layout",
+        "<run-directory>/88.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/89.ppm",
+        "--layout",
+        "<run-directory>/89.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/90.ppm",
+        "--layout",
+        "<run-directory>/90.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/91.ppm",
+        "--layout",
+        "<run-directory>/91.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/92.ppm",
+        "--layout",
+        "<run-directory>/92.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/93.ppm",
+        "--layout",
+        "<run-directory>/93.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/94.ppm",
+        "--layout",
+        "<run-directory>/94.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/95.ppm",
+        "--layout",
+        "<run-directory>/95.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/96.ppm",
+        "--layout",
+        "<run-directory>/96.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/97.ppm",
+        "--layout",
+        "<run-directory>/97.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/98.ppm",
+        "--layout",
+        "<run-directory>/98.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/root-box.html",
+        "--output",
+        "<run-directory>/99.ppm",
+        "--layout",
+        "<run-directory>/99.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "inspect",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/dom.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"inspect\",\"nodes\":10}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/0.ppm",
+        "--layout",
+        "<run-directory>/0.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/1.ppm",
+        "--layout",
+        "<run-directory>/1.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/2.ppm",
+        "--layout",
+        "<run-directory>/2.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/3.ppm",
+        "--layout",
+        "<run-directory>/3.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/4.ppm",
+        "--layout",
+        "<run-directory>/4.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/5.ppm",
+        "--layout",
+        "<run-directory>/5.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/6.ppm",
+        "--layout",
+        "<run-directory>/6.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/7.ppm",
+        "--layout",
+        "<run-directory>/7.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/8.ppm",
+        "--layout",
+        "<run-directory>/8.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/9.ppm",
+        "--layout",
+        "<run-directory>/9.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/10.ppm",
+        "--layout",
+        "<run-directory>/10.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/11.ppm",
+        "--layout",
+        "<run-directory>/11.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/12.ppm",
+        "--layout",
+        "<run-directory>/12.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/13.ppm",
+        "--layout",
+        "<run-directory>/13.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/14.ppm",
+        "--layout",
+        "<run-directory>/14.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/15.ppm",
+        "--layout",
+        "<run-directory>/15.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/16.ppm",
+        "--layout",
+        "<run-directory>/16.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/17.ppm",
+        "--layout",
+        "<run-directory>/17.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/18.ppm",
+        "--layout",
+        "<run-directory>/18.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/19.ppm",
+        "--layout",
+        "<run-directory>/19.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/20.ppm",
+        "--layout",
+        "<run-directory>/20.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/21.ppm",
+        "--layout",
+        "<run-directory>/21.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/22.ppm",
+        "--layout",
+        "<run-directory>/22.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/23.ppm",
+        "--layout",
+        "<run-directory>/23.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/24.ppm",
+        "--layout",
+        "<run-directory>/24.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/25.ppm",
+        "--layout",
+        "<run-directory>/25.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/26.ppm",
+        "--layout",
+        "<run-directory>/26.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/27.ppm",
+        "--layout",
+        "<run-directory>/27.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/28.ppm",
+        "--layout",
+        "<run-directory>/28.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/29.ppm",
+        "--layout",
+        "<run-directory>/29.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/30.ppm",
+        "--layout",
+        "<run-directory>/30.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/31.ppm",
+        "--layout",
+        "<run-directory>/31.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/32.ppm",
+        "--layout",
+        "<run-directory>/32.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/33.ppm",
+        "--layout",
+        "<run-directory>/33.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/34.ppm",
+        "--layout",
+        "<run-directory>/34.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/35.ppm",
+        "--layout",
+        "<run-directory>/35.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/36.ppm",
+        "--layout",
+        "<run-directory>/36.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/37.ppm",
+        "--layout",
+        "<run-directory>/37.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/38.ppm",
+        "--layout",
+        "<run-directory>/38.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/39.ppm",
+        "--layout",
+        "<run-directory>/39.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/40.ppm",
+        "--layout",
+        "<run-directory>/40.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/41.ppm",
+        "--layout",
+        "<run-directory>/41.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/42.ppm",
+        "--layout",
+        "<run-directory>/42.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/43.ppm",
+        "--layout",
+        "<run-directory>/43.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/44.ppm",
+        "--layout",
+        "<run-directory>/44.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/45.ppm",
+        "--layout",
+        "<run-directory>/45.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/46.ppm",
+        "--layout",
+        "<run-directory>/46.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/47.ppm",
+        "--layout",
+        "<run-directory>/47.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/48.ppm",
+        "--layout",
+        "<run-directory>/48.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/49.ppm",
+        "--layout",
+        "<run-directory>/49.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/50.ppm",
+        "--layout",
+        "<run-directory>/50.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/51.ppm",
+        "--layout",
+        "<run-directory>/51.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/52.ppm",
+        "--layout",
+        "<run-directory>/52.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/53.ppm",
+        "--layout",
+        "<run-directory>/53.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/54.ppm",
+        "--layout",
+        "<run-directory>/54.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/55.ppm",
+        "--layout",
+        "<run-directory>/55.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/56.ppm",
+        "--layout",
+        "<run-directory>/56.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/57.ppm",
+        "--layout",
+        "<run-directory>/57.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/58.ppm",
+        "--layout",
+        "<run-directory>/58.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/59.ppm",
+        "--layout",
+        "<run-directory>/59.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/60.ppm",
+        "--layout",
+        "<run-directory>/60.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/61.ppm",
+        "--layout",
+        "<run-directory>/61.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/62.ppm",
+        "--layout",
+        "<run-directory>/62.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/63.ppm",
+        "--layout",
+        "<run-directory>/63.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/64.ppm",
+        "--layout",
+        "<run-directory>/64.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/65.ppm",
+        "--layout",
+        "<run-directory>/65.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/66.ppm",
+        "--layout",
+        "<run-directory>/66.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/67.ppm",
+        "--layout",
+        "<run-directory>/67.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/68.ppm",
+        "--layout",
+        "<run-directory>/68.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/69.ppm",
+        "--layout",
+        "<run-directory>/69.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/70.ppm",
+        "--layout",
+        "<run-directory>/70.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/71.ppm",
+        "--layout",
+        "<run-directory>/71.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/72.ppm",
+        "--layout",
+        "<run-directory>/72.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/73.ppm",
+        "--layout",
+        "<run-directory>/73.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/74.ppm",
+        "--layout",
+        "<run-directory>/74.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/75.ppm",
+        "--layout",
+        "<run-directory>/75.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/76.ppm",
+        "--layout",
+        "<run-directory>/76.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/77.ppm",
+        "--layout",
+        "<run-directory>/77.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/78.ppm",
+        "--layout",
+        "<run-directory>/78.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/79.ppm",
+        "--layout",
+        "<run-directory>/79.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/80.ppm",
+        "--layout",
+        "<run-directory>/80.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/81.ppm",
+        "--layout",
+        "<run-directory>/81.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/82.ppm",
+        "--layout",
+        "<run-directory>/82.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/83.ppm",
+        "--layout",
+        "<run-directory>/83.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/84.ppm",
+        "--layout",
+        "<run-directory>/84.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/85.ppm",
+        "--layout",
+        "<run-directory>/85.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/86.ppm",
+        "--layout",
+        "<run-directory>/86.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/87.ppm",
+        "--layout",
+        "<run-directory>/87.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/88.ppm",
+        "--layout",
+        "<run-directory>/88.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/89.ppm",
+        "--layout",
+        "<run-directory>/89.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/90.ppm",
+        "--layout",
+        "<run-directory>/90.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/91.ppm",
+        "--layout",
+        "<run-directory>/91.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/92.ppm",
+        "--layout",
+        "<run-directory>/92.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/93.ppm",
+        "--layout",
+        "<run-directory>/93.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/94.ppm",
+        "--layout",
+        "<run-directory>/94.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/95.ppm",
+        "--layout",
+        "<run-directory>/95.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/96.ppm",
+        "--layout",
+        "<run-directory>/96.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/97.ppm",
+        "--layout",
+        "<run-directory>/97.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/98.ppm",
+        "--layout",
+        "<run-directory>/98.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/nested-boxes.html",
+        "--output",
+        "<run-directory>/99.ppm",
+        "--layout",
+        "<run-directory>/99.json",
+        "--width",
+        "64",
+        "--height",
+        "48"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":10,\"width\":64,\"height\":48,\"image_bytes\":9229}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "inspect",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/dom.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"inspect\",\"nodes\":9}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/0.ppm",
+        "--layout",
+        "<run-directory>/0.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/1.ppm",
+        "--layout",
+        "<run-directory>/1.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/2.ppm",
+        "--layout",
+        "<run-directory>/2.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/3.ppm",
+        "--layout",
+        "<run-directory>/3.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/4.ppm",
+        "--layout",
+        "<run-directory>/4.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/5.ppm",
+        "--layout",
+        "<run-directory>/5.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/6.ppm",
+        "--layout",
+        "<run-directory>/6.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/7.ppm",
+        "--layout",
+        "<run-directory>/7.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/8.ppm",
+        "--layout",
+        "<run-directory>/8.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/9.ppm",
+        "--layout",
+        "<run-directory>/9.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/10.ppm",
+        "--layout",
+        "<run-directory>/10.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/11.ppm",
+        "--layout",
+        "<run-directory>/11.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/12.ppm",
+        "--layout",
+        "<run-directory>/12.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/13.ppm",
+        "--layout",
+        "<run-directory>/13.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/14.ppm",
+        "--layout",
+        "<run-directory>/14.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/15.ppm",
+        "--layout",
+        "<run-directory>/15.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/16.ppm",
+        "--layout",
+        "<run-directory>/16.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/17.ppm",
+        "--layout",
+        "<run-directory>/17.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/18.ppm",
+        "--layout",
+        "<run-directory>/18.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/19.ppm",
+        "--layout",
+        "<run-directory>/19.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/20.ppm",
+        "--layout",
+        "<run-directory>/20.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/21.ppm",
+        "--layout",
+        "<run-directory>/21.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/22.ppm",
+        "--layout",
+        "<run-directory>/22.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/23.ppm",
+        "--layout",
+        "<run-directory>/23.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/24.ppm",
+        "--layout",
+        "<run-directory>/24.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/25.ppm",
+        "--layout",
+        "<run-directory>/25.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/26.ppm",
+        "--layout",
+        "<run-directory>/26.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/27.ppm",
+        "--layout",
+        "<run-directory>/27.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/28.ppm",
+        "--layout",
+        "<run-directory>/28.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/29.ppm",
+        "--layout",
+        "<run-directory>/29.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/30.ppm",
+        "--layout",
+        "<run-directory>/30.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/31.ppm",
+        "--layout",
+        "<run-directory>/31.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/32.ppm",
+        "--layout",
+        "<run-directory>/32.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/33.ppm",
+        "--layout",
+        "<run-directory>/33.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/34.ppm",
+        "--layout",
+        "<run-directory>/34.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/35.ppm",
+        "--layout",
+        "<run-directory>/35.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/36.ppm",
+        "--layout",
+        "<run-directory>/36.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/37.ppm",
+        "--layout",
+        "<run-directory>/37.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/38.ppm",
+        "--layout",
+        "<run-directory>/38.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/39.ppm",
+        "--layout",
+        "<run-directory>/39.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/40.ppm",
+        "--layout",
+        "<run-directory>/40.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/41.ppm",
+        "--layout",
+        "<run-directory>/41.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/42.ppm",
+        "--layout",
+        "<run-directory>/42.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/43.ppm",
+        "--layout",
+        "<run-directory>/43.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/44.ppm",
+        "--layout",
+        "<run-directory>/44.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/45.ppm",
+        "--layout",
+        "<run-directory>/45.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/46.ppm",
+        "--layout",
+        "<run-directory>/46.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/47.ppm",
+        "--layout",
+        "<run-directory>/47.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/48.ppm",
+        "--layout",
+        "<run-directory>/48.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/49.ppm",
+        "--layout",
+        "<run-directory>/49.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/50.ppm",
+        "--layout",
+        "<run-directory>/50.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/51.ppm",
+        "--layout",
+        "<run-directory>/51.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/52.ppm",
+        "--layout",
+        "<run-directory>/52.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/53.ppm",
+        "--layout",
+        "<run-directory>/53.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/54.ppm",
+        "--layout",
+        "<run-directory>/54.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/55.ppm",
+        "--layout",
+        "<run-directory>/55.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/56.ppm",
+        "--layout",
+        "<run-directory>/56.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/57.ppm",
+        "--layout",
+        "<run-directory>/57.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/58.ppm",
+        "--layout",
+        "<run-directory>/58.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/59.ppm",
+        "--layout",
+        "<run-directory>/59.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/60.ppm",
+        "--layout",
+        "<run-directory>/60.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/61.ppm",
+        "--layout",
+        "<run-directory>/61.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/62.ppm",
+        "--layout",
+        "<run-directory>/62.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/63.ppm",
+        "--layout",
+        "<run-directory>/63.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/64.ppm",
+        "--layout",
+        "<run-directory>/64.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/65.ppm",
+        "--layout",
+        "<run-directory>/65.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/66.ppm",
+        "--layout",
+        "<run-directory>/66.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/67.ppm",
+        "--layout",
+        "<run-directory>/67.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/68.ppm",
+        "--layout",
+        "<run-directory>/68.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/69.ppm",
+        "--layout",
+        "<run-directory>/69.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/70.ppm",
+        "--layout",
+        "<run-directory>/70.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/71.ppm",
+        "--layout",
+        "<run-directory>/71.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/72.ppm",
+        "--layout",
+        "<run-directory>/72.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/73.ppm",
+        "--layout",
+        "<run-directory>/73.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/74.ppm",
+        "--layout",
+        "<run-directory>/74.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/75.ppm",
+        "--layout",
+        "<run-directory>/75.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/76.ppm",
+        "--layout",
+        "<run-directory>/76.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/77.ppm",
+        "--layout",
+        "<run-directory>/77.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/78.ppm",
+        "--layout",
+        "<run-directory>/78.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/79.ppm",
+        "--layout",
+        "<run-directory>/79.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/80.ppm",
+        "--layout",
+        "<run-directory>/80.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/81.ppm",
+        "--layout",
+        "<run-directory>/81.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/82.ppm",
+        "--layout",
+        "<run-directory>/82.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/83.ppm",
+        "--layout",
+        "<run-directory>/83.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/84.ppm",
+        "--layout",
+        "<run-directory>/84.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/85.ppm",
+        "--layout",
+        "<run-directory>/85.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/86.ppm",
+        "--layout",
+        "<run-directory>/86.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/87.ppm",
+        "--layout",
+        "<run-directory>/87.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/88.ppm",
+        "--layout",
+        "<run-directory>/88.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/89.ppm",
+        "--layout",
+        "<run-directory>/89.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/90.ppm",
+        "--layout",
+        "<run-directory>/90.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/91.ppm",
+        "--layout",
+        "<run-directory>/91.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/92.ppm",
+        "--layout",
+        "<run-directory>/92.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/93.ppm",
+        "--layout",
+        "<run-directory>/93.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/94.ppm",
+        "--layout",
+        "<run-directory>/94.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/95.ppm",
+        "--layout",
+        "<run-directory>/95.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/96.ppm",
+        "--layout",
+        "<run-directory>/96.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/97.ppm",
+        "--layout",
+        "<run-directory>/97.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/98.ppm",
+        "--layout",
+        "<run-directory>/98.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/cascade.html",
+        "--output",
+        "<run-directory>/99.ppm",
+        "--layout",
+        "<run-directory>/99.json",
+        "--width",
+        "32",
+        "--height",
+        "24"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"command\":\"render\",\"nodes\":9,\"width\":32,\"height\":24,\"image_bytes\":2317}\n",
+      "stderr": ""
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/visible-text.html",
+        "--output",
+        "<run-directory>/reject.ppm",
+        "--layout",
+        "<run-directory>/reject.json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "browser-engine: unsupported visible text: shaping and inline layout are outside the bootstrap renderer\n"
+    },
+    {
+      "arguments": [
+        "./target/debug/browser-engine",
+        "render",
+        "--fixture",
+        "fixtures/m1/bootstrap/external-resource.html",
+        "--output",
+        "<run-directory>/reject.ppm",
+        "--layout",
+        "<run-directory>/reject.json"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "browser-engine: unsupported external stylesheet: bootstrap styles must be embedded\n"
+    }
+  ]
+}

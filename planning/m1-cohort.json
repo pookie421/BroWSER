@@ -1,0 +1,1142 @@
+{
+  "schema_version": 1,
+  "id": "M1-v1",
+  "frozen_on": "2026-11-16",
+  "scope_status": "frozen_contract_not_implementation_evidence",
+  "limits": {
+    "input_bytes": 1048576,
+    "nodes": 10000,
+    "depth": 128,
+    "viewport_max": 2048,
+    "stylesheet_bytes": 262144,
+    "decoded_resource_bytes": 16777216,
+    "resident_memory_bytes": 536870912,
+    "wall_time_seconds": 5
+  },
+  "limits_enforcement": "Engine checks input/tree/viewport/decoded bounds; isolated runner must enforce RSS and wall time before a complete M1 gate can pass. Bootstrap support is reported separately.",
+  "upstream": [
+    {
+      "name": "WHATWG HTML",
+      "revision": "61a2f78025e7ac78849c172d276f132d9f2fe8a3",
+      "url": "https://github.com/whatwg/html/commit/61a2f78025e7ac78849c172d276f132d9f2fe8a3"
+    },
+    {
+      "name": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "url": "https://github.com/web-platform-tests/wpt/commit/8746bafe086e036b5e5be028ac200e4a595ef3d0"
+    },
+    {
+      "name": "Google Fonts",
+      "revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+      "url": "https://github.com/google/fonts/commit/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "name": "Unicode data baseline",
+      "revision": "17.0.0",
+      "url": "https://www.unicode.org/Public/17.0.0/ucd/"
+    },
+    {
+      "name": "Reference text shaper",
+      "revision": "HarfBuzz 14.3.1",
+      "url": "https://github.com/harfbuzz/harfbuzz/releases/tag/14.3.1"
+    }
+  ],
+  "assets": [
+    {
+      "path": "fixtures/m1/assets/README.md",
+      "bytes": 780,
+      "sha256": "ba270fc3165e2ea93f4824a099aed1b34ed0dc4e0d3de3af71970df9fe4f89a0",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/assets/checker.png",
+      "bytes": 76,
+      "sha256": "306322f4c76b0c2e2aff78a0f127575ed2b4830fe04abe76ad63a28147b9862d",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/assets/font-sources.json",
+      "bytes": 2512,
+      "sha256": "6923c26002b4a7abf815c9b30ec64fb2fc2b19c22112cc9d278803316daf367d",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosans/NotoSans[wdth,wght].ttf",
+      "bytes": 2049096,
+      "sha256": "bfb7bb691513f12e734dc346c03a03f784912432d7e3fa8e56efcf906fe86b3d",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosans/NotoSans%5Bwdth%2Cwght%5D.ttf",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosans/OFL.txt",
+      "bytes": 4396,
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosans/OFL.txt",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosansarabic/NotoSansArabic[wdth,wght].ttf",
+      "bytes": 844676,
+      "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansarabic/NotoSansArabic%5Bwdth%2Cwght%5D.ttf",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosansarabic/OFL.txt",
+      "bytes": 4382,
+      "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansarabic/OFL.txt",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosansdevanagari/NotoSansDevanagari[wdth,wght].ttf",
+      "bytes": 641944,
+      "sha256": "14ec4af41f27482216d1c2229f417ff9b1425e1babb014e57d1d40d03229853e",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansdevanagari/NotoSansDevanagari%5Bwdth%2Cwght%5D.ttf",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/fonts/notosansdevanagari/OFL.txt",
+      "bytes": 4386,
+      "sha256": "a216f6f8d85c7228093e0ee5e258d9d377e6671f68acb4db1930b29583d0f331",
+      "license": "OFL-1.1",
+      "source_url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansdevanagari/OFL.txt",
+      "source_revision": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe"
+    },
+    {
+      "path": "fixtures/m1/assets/png-source.json",
+      "bytes": 378,
+      "sha256": "65a275377bfa0bf3ad40ecaec0e1979502f62af29d8b93c53ea011d0bed98adb",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/assets/truncated.png",
+      "bytes": 30,
+      "sha256": "de9bdefca7b21e5662c338d4d2212df80ee897125ff29280af67eff3d59997ab",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/cascade.html",
+      "bytes": 350,
+      "sha256": "c19ff6d4f8a383cecab1f88984c4391fee5253db7daeca322d0878c779c38871",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/external-resource.html",
+      "bytes": 131,
+      "sha256": "8b096ccf00c072962486ca1fbfedbff701a3a91e2b03f975946b4859e7c2defd",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/nested-boxes.html",
+      "bytes": 316,
+      "sha256": "055c9de38623a02b1b2957fa177b85b5960438ac6a5f97f51e8491a784819636",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/root-box.html",
+      "bytes": 173,
+      "sha256": "824804bdae25606b49b7b6566fcf11eb3c9a27b670242d234b897ca3f653e290",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/bootstrap/visible-text.html",
+      "bytes": 156,
+      "sha256": "9cd9444ab4133215317a283b8def30e6ca3bf55d6ad678bfe4a93059cbbda32e",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/expected/shape-arabic.json",
+      "bytes": 1065,
+      "sha256": "3123768b09096b211724b6fd058ffc12a5b32f2e411b0cc57a77e7282dcb217b",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/expected/shape-devanagari.json",
+      "bytes": 1198,
+      "sha256": "31151f854acdada89f31201666f59a35c87b4474d0f235c464a07c18de12b575",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/expected/shape-latin.json",
+      "bytes": 1051,
+      "sha256": "245ec886c96a409e3c42174614a55a4ccb6b9e3aa206cdbac4af663db558b9d7",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/arabic.html",
+      "bytes": 184,
+      "sha256": "163c26ffc38202427607fdc3d9187b1f97706c52062d1590ff06a64fb2f0ba2b",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/attributes.html",
+      "bytes": 58,
+      "sha256": "c758aba60a3154fc3b9f02ec8941c2c98d067b6f849659de409b04bf24dbc994",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/cascade-origins.html",
+      "bytes": 236,
+      "sha256": "09db721f4246fa26949b46c6cf2872171a6a8351da2635551e1b7362065e1df7",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/character-references.html",
+      "bytes": 58,
+      "sha256": "47da7fcf641b6b53fa3c4325dc78d383eca4d9a79a3af416b5bef1f80156ec61",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/clip.html",
+      "bytes": 239,
+      "sha256": "d5b94029b59b7d82ed8e7fa226f102bacd0b83fe9878b01ce3ec034506e1b6c2",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/css-recovery.html",
+      "bytes": 207,
+      "sha256": "5fdbfa1de0e6365b98363db476f6fbd1cd426ebdf8c283e196f1be508f927544",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/devanagari.html",
+      "bytes": 188,
+      "sha256": "5bf88d6a549f4bfc11306423d756dbf142348344d2e2c974d856a2de6a7244f6",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/document.html",
+      "bytes": 103,
+      "sha256": "02db805d32244030aa63c2dd3f1815fcf70b4150d21684ff552baebf6a3156be",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/fragment.html",
+      "bytes": 38,
+      "sha256": "e6688fa546f38957b0148ff29636e91abc952dedbafd40ba25ec722e6a70e16e",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/inline-wrap.html",
+      "bytes": 225,
+      "sha256": "1bd9eabe279dc6a4da6f2f852cfc429a2ebb3e93df90317b9f841ce84a46ff67",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/malformed-nesting.html",
+      "bytes": 27,
+      "sha256": "a3d7a00c5e6a6c1cc894876f6355ab4952a16d04ca7ae2afa02ba82a54b6a4d1",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/negative-margin.html",
+      "bytes": 227,
+      "sha256": "ae69a1ca964f35a43e90852737b7f99c3c5596031730e408266c210d4c69576c",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/png.html",
+      "bytes": 179,
+      "sha256": "edb23eeabf21eb4360f6f8e60039f0ab03c29947d2668bd04fc456ab86009981",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/rawtext.html",
+      "bytes": 77,
+      "sha256": "3a787e14d720763847c9885068c2d7f663239d00ccf58b85739cf70726e1afde",
+      "license": "MIT"
+    },
+    {
+      "path": "fixtures/m1/full/selectors.html",
+      "bytes": 352,
+      "sha256": "6eb45eb6104c13f1db4cbee3f575127a368c68ae1b7a0e67271843c15d18fa7c",
+      "license": "MIT"
+    }
+  ],
+  "cases": [
+    {
+      "id": "M1-B001",
+      "stage": "bootstrap",
+      "kind": "render",
+      "input": "fixtures/m1/bootstrap/root-box.html",
+      "expected": {
+        "boxes": {
+          "box": {
+            "content": [
+              0,
+              0,
+              32,
+              16
+            ]
+          }
+        },
+        "pixels": [
+          [
+            0,
+            0,
+            255,
+            0,
+            0
+          ],
+          [
+            31,
+            15,
+            255,
+            0,
+            0
+          ],
+          [
+            32,
+            15,
+            255,
+            255,
+            255
+          ],
+          [
+            63,
+            47,
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/box.html#box-dimensions"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 64,
+        "height": 48
+      }
+    },
+    {
+      "id": "M1-B002",
+      "stage": "bootstrap",
+      "kind": "render",
+      "input": "fixtures/m1/bootstrap/nested-boxes.html",
+      "expected": {
+        "boxes": {
+          "outer": {
+            "border": [
+              3,
+              3,
+              42,
+              32
+            ],
+            "content": [
+              9,
+              9,
+              30,
+              20
+            ]
+          },
+          "inner": {
+            "content": [
+              9,
+              9,
+              8,
+              6
+            ]
+          }
+        },
+        "pixels": [
+          [
+            3,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            5,
+            5,
+            0,
+            255,
+            0
+          ],
+          [
+            9,
+            9,
+            0,
+            0,
+            255
+          ],
+          [
+            17,
+            9,
+            0,
+            255,
+            0
+          ],
+          [
+            45,
+            3,
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/box.html#box-dimensions"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 64,
+        "height": 48
+      }
+    },
+    {
+      "id": "M1-B003",
+      "stage": "bootstrap",
+      "kind": "render",
+      "input": "fixtures/m1/bootstrap/cascade.html",
+      "expected": {
+        "boxes": {
+          "winner": {
+            "content": [
+              0,
+              0,
+              10,
+              10
+            ]
+          }
+        },
+        "pixels": [
+          [
+            0,
+            0,
+            255,
+            255,
+            0
+          ],
+          [
+            9,
+            9,
+            255,
+            255,
+            0
+          ],
+          [
+            10,
+            0,
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "spec": [
+        "https://www.w3.org/TR/2022/CR-css-cascade-5-20220113/#cascade-sort"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 32,
+        "height": 24
+      }
+    },
+    {
+      "id": "M1-B004",
+      "stage": "bootstrap",
+      "kind": "reject",
+      "input": "fixtures/m1/bootstrap/visible-text.html",
+      "expected": {
+        "exit": "nonzero",
+        "diagnostic_contains": "unsupported",
+        "reason": "Bootstrap cannot paint visible text and must fail rather than omit it."
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#inline-formatting"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-B005",
+      "stage": "bootstrap",
+      "kind": "reject",
+      "input": "fixtures/m1/bootstrap/external-resource.html",
+      "expected": {
+        "exit": "nonzero",
+        "reason": "External stylesheets are outside the controlled bootstrap grammar; no network access occurs."
+      },
+      "spec": [
+        "docs/SECURITY_MODEL.md"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-H001",
+      "stage": "full_m1",
+      "kind": "inspect",
+      "input": "fixtures/m1/full/document.html",
+      "expected": {
+        "doctype": "html",
+        "document_element": "html",
+        "head_children": [
+          "title"
+        ],
+        "title": "Fixture",
+        "body_children": [
+          "p"
+        ],
+        "elements": {
+          "greeting": {
+            "tag": "p",
+            "text_content": "Hello"
+          }
+        }
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#tree-construction"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-H002",
+      "stage": "full_m1",
+      "kind": "inspect_fragment",
+      "input": "fixtures/m1/full/fragment.html",
+      "expected": {
+        "fragment_children": [
+          "p",
+          "div"
+        ],
+        "text_content": "A & B",
+        "last_child_attributes": {
+          "data-x": "1"
+        }
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#html-fragment-parsing-algorithm"
+      ],
+      "execution": "not_run",
+      "context_element": "div"
+    },
+    {
+      "id": "M1-H003",
+      "stage": "full_m1",
+      "kind": "inspect",
+      "input": "fixtures/m1/full/malformed-nesting.html",
+      "expected": {
+        "body_children": [
+          "p",
+          "p"
+        ],
+        "paragraph_texts": [
+          "one",
+          "two"
+        ],
+        "fatal_error": false
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#parsing-main-inbody"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-H004",
+      "stage": "full_m1",
+      "kind": "inspect",
+      "input": "fixtures/m1/full/character-references.html",
+      "expected": {
+        "paragraph_texts": [
+          "&<>\"'AA"
+        ]
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#tokenizing-character-references"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-H005",
+      "stage": "full_m1",
+      "kind": "inspect",
+      "input": "fixtures/m1/full/attributes.html",
+      "expected": {
+        "body_children": [
+          "div"
+        ],
+        "first_child_attributes": {
+          "id": "first",
+          "data-x": "1"
+        },
+        "duplicate_attribute_resolution": "first-wins"
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#attribute-name-state"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-H006",
+      "stage": "full_m1",
+      "kind": "inspect",
+      "input": "fixtures/m1/full/rawtext.html",
+      "expected": {
+        "style_text": "div::before { content: \"<b>&amp;\"; }",
+        "style_element_children": 0,
+        "body_children": [
+          "div"
+        ]
+      },
+      "spec": [
+        "https://html.spec.whatwg.org/multipage/parsing.html#rawtext-state"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-C001",
+      "stage": "full_m1",
+      "kind": "style",
+      "input": "fixtures/m1/full/selectors.html",
+      "expected": {
+        "elements": {
+          "a": {
+            "background-color": "#ff0000"
+          },
+          "b": {
+            "background-color": "#00ff00"
+          },
+          "s": {
+            "color": "#0000ff"
+          },
+          "p": {
+            "color": "#008000"
+          }
+        }
+      },
+      "spec": [
+        "https://www.w3.org/TR/2018/REC-selectors-3-20181106/#combinators",
+        "https://www.w3.org/TR/2018/REC-selectors-3-20181106/#specificity"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-C002",
+      "stage": "full_m1",
+      "kind": "style",
+      "input": "fixtures/m1/full/cascade-origins.html",
+      "expected": {
+        "elements": {
+          "target": {
+            "color": "#008000",
+            "background-color": "#00ff00"
+          }
+        }
+      },
+      "spec": [
+        "https://www.w3.org/TR/2022/CR-css-cascade-5-20220113/#cascading-origins",
+        "https://www.w3.org/TR/2022/CR-css-cascade-5-20220113/#importance"
+      ],
+      "execution": "not_run",
+      "user_stylesheet": "#target { color:#008000 !important }"
+    },
+    {
+      "id": "M1-C003",
+      "stage": "full_m1",
+      "kind": "style",
+      "input": "fixtures/m1/full/css-recovery.html",
+      "expected": {
+        "elements": {
+          "box": {
+            "width_px": 10,
+            "height_px": 12,
+            "background-color": "#ff0000",
+            "color": "#000000"
+          }
+        },
+        "unknown_property_applied": false
+      },
+      "spec": [
+        "https://www.w3.org/TR/2021/CRD-css-syntax-3-20211224/#declaration-rule-list",
+        "https://www.w3.org/TR/2022/CR-css-cascade-5-20220113/#defaulting"
+      ],
+      "execution": "not_run"
+    },
+    {
+      "id": "M1-L001",
+      "stage": "full_m1",
+      "kind": "layout",
+      "input": "fixtures/m1/full/inline-wrap.html",
+      "expected": {
+        "collapsed_text": "one two three",
+        "line_texts": [
+          "one two",
+          "three"
+        ],
+        "line_height_px": 20,
+        "content_height_px": 40,
+        "space_behavior": "intervening ASCII whitespace collapses to one separator"
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#inline-formatting",
+        "https://www.w3.org/TR/css-text-3/#white-space-processing"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 128,
+        "height": 64
+      },
+      "font_family": "Noto Sans",
+      "font_weight": 400,
+      "font_width": 100
+    },
+    {
+      "id": "M1-L002",
+      "stage": "full_m1",
+      "kind": "layout",
+      "input": "fixtures/m1/full/negative-margin.html",
+      "expected": {
+        "boxes": {
+          "a": {
+            "content": [
+              0,
+              0,
+              20,
+              10
+            ]
+          },
+          "b": {
+            "content": [
+              0,
+              6,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/box.html#margin-properties"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 64,
+        "height": 48
+      }
+    },
+    {
+      "id": "M1-T001",
+      "stage": "full_m1",
+      "kind": "shape",
+      "input": null,
+      "expected": {
+        "glyph_reference": "fixtures/m1/expected/shape-latin.json",
+        "comparison": "exact glyph IDs, UTF-8 clusters, advances and offsets at scale 1024"
+      },
+      "spec": [
+        "https://harfbuzz.github.io/shaping-concepts.html"
+      ],
+      "execution": "not_run",
+      "text": "office",
+      "direction": "ltr",
+      "script": "Latn",
+      "language": "en"
+    },
+    {
+      "id": "M1-T002",
+      "stage": "full_m1",
+      "kind": "shape",
+      "input": null,
+      "expected": {
+        "glyph_reference": "fixtures/m1/expected/shape-arabic.json",
+        "comparison": "exact glyph IDs, UTF-8 clusters, advances and offsets at scale 1024"
+      },
+      "spec": [
+        "https://harfbuzz.github.io/shaping-concepts.html"
+      ],
+      "execution": "not_run",
+      "text": "سلام",
+      "direction": "rtl",
+      "script": "Arab",
+      "language": "ar"
+    },
+    {
+      "id": "M1-T003",
+      "stage": "full_m1",
+      "kind": "shape",
+      "input": null,
+      "expected": {
+        "glyph_reference": "fixtures/m1/expected/shape-devanagari.json",
+        "comparison": "exact glyph IDs, UTF-8 clusters, advances and offsets at scale 1024"
+      },
+      "spec": [
+        "https://harfbuzz.github.io/shaping-concepts.html"
+      ],
+      "execution": "not_run",
+      "text": "नमस्ते",
+      "direction": "ltr",
+      "script": "Deva",
+      "language": "hi"
+    },
+    {
+      "id": "M1-T004",
+      "stage": "full_m1",
+      "kind": "render",
+      "input": "fixtures/m1/full/arabic.html",
+      "expected": {
+        "direction": "rtl",
+        "shaped_text": "سلام",
+        "glyph_reference": "fixtures/m1/expected/shape-arabic.json",
+        "missing_glyphs": 0,
+        "reference_requirement": "Exact independently reviewed glyph geometry at font-size 16px; screenshot must use pinned font only."
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#direction"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 128,
+        "height": 64
+      }
+    },
+    {
+      "id": "M1-T005",
+      "stage": "full_m1",
+      "kind": "render",
+      "input": "fixtures/m1/full/devanagari.html",
+      "expected": {
+        "direction": "ltr",
+        "shaped_text": "नमस्ते",
+        "glyph_reference": "fixtures/m1/expected/shape-devanagari.json",
+        "missing_glyphs": 0,
+        "reference_requirement": "Exact independently reviewed glyph geometry at font-size 16px; screenshot must use pinned font only."
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/visuren.html#inline-formatting"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 128,
+        "height": 64
+      }
+    },
+    {
+      "id": "M1-P001",
+      "stage": "full_m1",
+      "kind": "render",
+      "input": "fixtures/m1/full/clip.html",
+      "expected": {
+        "pixels": [
+          [
+            0,
+            0,
+            255,
+            0,
+            0
+          ],
+          [
+            7,
+            7,
+            255,
+            0,
+            0
+          ],
+          [
+            8,
+            7,
+            255,
+            255,
+            255
+          ],
+          [
+            7,
+            8,
+            255,
+            255,
+            255
+          ],
+          [
+            9,
+            9,
+            255,
+            255,
+            255
+          ]
+        ]
+      },
+      "spec": [
+        "https://www.w3.org/TR/2011/REC-CSS2-20110607/visufx.html#overflow-clipping"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "id": "M1-P002",
+      "stage": "full_m1",
+      "kind": "render",
+      "input": "fixtures/m1/full/png.html",
+      "expected": {
+        "pixels": [
+          [
+            0,
+            0,
+            255,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            255,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            255
+          ],
+          [
+            1,
+            1,
+            255,
+            255,
+            255
+          ]
+        ],
+        "decoded_width": 2,
+        "decoded_height": 2
+      },
+      "spec": [
+        "https://www.w3.org/TR/png-3/"
+      ],
+      "execution": "not_run",
+      "viewport": {
+        "width": 8,
+        "height": 8
+      },
+      "resources": {
+        "checker.png": "fixtures/m1/assets/checker.png"
+      }
+    },
+    {
+      "id": "M1-P003",
+      "stage": "full_m1",
+      "kind": "decode_reject",
+      "input": null,
+      "expected": {
+        "exit": "nonzero",
+        "reason": "truncated IHDR is not a valid PNG"
+      },
+      "spec": [
+        "https://www.w3.org/TR/png-3/"
+      ],
+      "execution": "not_run",
+      "resource": "fixtures/m1/assets/truncated.png"
+    },
+    {
+      "id": "M1-R001",
+      "stage": "full_m1",
+      "kind": "generated_boundary",
+      "input": null,
+      "expected": {
+        "at_or_below": "accept within all other declared limits",
+        "above": "nonzero bounded resource-limit diagnostic",
+        "no_hidden_truncation": true
+      },
+      "spec": [
+        "docs/M1_SCOPE.md#resource-contract"
+      ],
+      "execution": "not_run",
+      "limit": "input_bytes",
+      "values": [
+        1048575,
+        1048576,
+        1048577
+      ],
+      "generator": {
+        "prefix": "<!doctype html><html><head></head><body></body></html>",
+        "padding": "ASCII space",
+        "measure": "UTF-8 bytes"
+      }
+    },
+    {
+      "id": "M1-R002",
+      "stage": "full_m1",
+      "kind": "generated_boundary",
+      "input": null,
+      "expected": {
+        "at_or_below": "accept within all other declared limits",
+        "above": "nonzero bounded resource-limit diagnostic",
+        "no_hidden_truncation": true
+      },
+      "spec": [
+        "docs/M1_SCOPE.md#resource-contract"
+      ],
+      "execution": "not_run",
+      "limit": "nodes",
+      "values": [
+        9999,
+        10000,
+        10001
+      ],
+      "generator": {
+        "base": "<!doctype html><html><head></head><body></body></html>",
+        "repeat": "<div></div>",
+        "measure": "document, doctype, element and text nodes, including generated html/head/body; exact requested total determined by fixture generator"
+      }
+    },
+    {
+      "id": "M1-R003",
+      "stage": "full_m1",
+      "kind": "generated_boundary",
+      "input": null,
+      "expected": {
+        "at_or_below": "accept within all other declared limits",
+        "above": "nonzero bounded resource-limit diagnostic",
+        "no_hidden_truncation": true
+      },
+      "spec": [
+        "docs/M1_SCOPE.md#resource-contract"
+      ],
+      "execution": "not_run",
+      "limit": "depth",
+      "values": [
+        127,
+        128,
+        129
+      ],
+      "generator": {
+        "open": "<div>",
+        "close": "</div>",
+        "measure": "number of elements from html through the current node inclusive; exclude document node"
+      }
+    },
+    {
+      "id": "M1-R004",
+      "stage": "full_m1",
+      "kind": "generated_boundary",
+      "input": null,
+      "expected": {
+        "at_or_below": "accept within all other declared limits",
+        "above": "nonzero bounded resource-limit diagnostic",
+        "no_hidden_truncation": true
+      },
+      "spec": [
+        "docs/M1_SCOPE.md#resource-contract"
+      ],
+      "execution": "not_run",
+      "limit": "viewport_max",
+      "values": [
+        2047,
+        2048,
+        2049
+      ],
+      "generator": {
+        "input": "fixtures/m1/bootstrap/root-box.html",
+        "height": 1,
+        "measure": "width CSS pixels"
+      }
+    }
+  ],
+  "upstream_selection": [
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "html/syntax/parsing/ambiguous-ampersand.html",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/html/syntax/parsing/ambiguous-ampersand.html",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "html/syntax/parsing/named-character-references.html",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/html/syntax/parsing/named-character-references.html",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "html/syntax/parsing/named-character-references-data.js",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/html/syntax/parsing/named-character-references-data.js",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/css-cascade/important-vs-inline-001.html",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/css-cascade/important-vs-inline-001.html",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/css-cascade/inline-style-background.html",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/css-cascade/inline-style-background.html",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/selectors/child-selector-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/selectors/child-selector-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/selectors/class-selector-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/selectors/class-selector-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/selectors/descendent-selector-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/selectors/descendent-selector-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/selectors/id-selector-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/selectors/id-selector-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/box-display/anonymous-inline-whitespace-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/box-display/anonymous-inline-whitespace-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    },
+    {
+      "suite": "WPT",
+      "revision": "8746bafe086e036b5e5be028ac200e4a595ef3d0",
+      "path": "css/CSS2/box-display/display-none-001.xht",
+      "url": "https://github.com/web-platform-tests/wpt/blob/8746bafe086e036b5e5be028ac200e4a595ef3d0/css/CSS2/box-display/display-none-001.xht",
+      "mode": "reference_only_not_executed",
+      "purpose": "Named immutable upstream semantic cross-check; testharness or XHTML harness dependencies are not claimed implemented."
+    }
+  ],
+  "evidence_rules": {
+    "result_storage": "Per-run separate evidence file; static contract execution fields remain not_run until actual runner evidence is linked.",
+    "bootstrap_denominator": "Only stage=bootstrap cases are the initial slice; never report as full M1 or WPT pass rate.",
+    "m1_completion": "Every selected full_m1 case, broader declared feature contracts and release gates in docs/ROADMAP.md must pass, including 100 repetitions, second equivalent worker, and seven-day fuzz campaign.",
+    "full_fixture_expectations": "Expected DOM/style/geometry and glyph references are test oracles. Renderer screenshot references for text need independent review when raster/font integration is implemented; no generated engine output can approve itself."
+  }
+}

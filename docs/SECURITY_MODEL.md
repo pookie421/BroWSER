@@ -1,8 +1,9 @@
 # BroWSER security model
 
-Status: design and release policy, 2026-11-16. The engine, isolation mechanisms,
-and security tests described here are planned. No browsing safety or security
-certification is claimed by this planning repository.
+Status: design and release policy, 2026-11-16; implementation note 2026-11-20.
+A controlled offline renderer bootstrap exists. Isolation mechanisms and browser
+security tests described here remain planned. No browsing safety or security
+certification is claimed by the development bootstrap.
 
 ## Assets and adversaries
 

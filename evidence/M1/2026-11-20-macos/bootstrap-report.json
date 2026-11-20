@@ -1,0 +1,112 @@
+{
+  "cohort": "M1-v1",
+  "cohort_sha256": "bfd5baf5bc4d451da74887b58e0f6c639496ab48210153ad24ef48d1cca9e02c",
+  "binary_sha256": "6e2ef71fc873a8add318a2836d7d1a0beab9bd0bf1b7ab567fa02ed6fad4d017",
+  "source_sha256": {
+    "src/html.rs": "ef2d4683ef607c29e91bad2c8eb538b457a6544d8a5adc72eab3339edef46c87",
+    "src/lib.rs": "e2f496331055b455300926079341bde1143c6606015cac2b2b5a0957dedbb563",
+    "src/main.rs": "a9f55a838b16968b0259c89cede0b034eeb88318d822076c85d38090f81eb1d1",
+    "src/render.rs": "f5a81d99cd5272d2d7c18569cbeff56b9322c68c96b323a64c783e739da78254",
+    "Cargo.toml": "1f0e22bdf900148e5b012e336d3d7b74dd75da346f65cd8318d258d3f919bcc0",
+    "Cargo.lock": "d4e8b920c2215148d38209cc7079780164e2fcb6ecb9162175602cdfafc033e0",
+    "rust-toolchain.toml": "6b1cf8341d9a08d76c6deb1e9df90a0b208d0ef0d00ee05e0173e9cd4f0f425d"
+  },
+  "source": {
+    "commit": "691b82554a68f74441f22b65c5ab74ba005b3bf0",
+    "worktree_dirty": true
+  },
+  "runner_sha256": "aa5442e1f145e3d5f0fb3c780af0743138cabe54e08493488c3c6441470ef748",
+  "case_input_sha256": {
+    "M1-B001": "824804bdae25606b49b7b6566fcf11eb3c9a27b670242d234b897ca3f653e290",
+    "M1-B002": "055c9de38623a02b1b2957fa177b85b5960438ac6a5f97f51e8491a784819636",
+    "M1-B003": "c19ff6d4f8a383cecab1f88984c4391fee5253db7daeca322d0878c779c38871",
+    "M1-B004": "9cd9444ab4133215317a283b8def30e6ca3bf55d6ad678bfe4a93059cbbda32e",
+    "M1-B005": "8b096ccf00c072962486ca1fbfedbff701a3a91e2b03f975946b4859e7c2defd",
+    "M1-H001": "02db805d32244030aa63c2dd3f1815fcf70b4150d21684ff552baebf6a3156be",
+    "M1-H002": "e6688fa546f38957b0148ff29636e91abc952dedbafd40ba25ec722e6a70e16e",
+    "M1-H003": "a3d7a00c5e6a6c1cc894876f6355ab4952a16d04ca7ae2afa02ba82a54b6a4d1",
+    "M1-H004": "47da7fcf641b6b53fa3c4325dc78d383eca4d9a79a3af416b5bef1f80156ec61",
+    "M1-H005": "c758aba60a3154fc3b9f02ec8941c2c98d067b6f849659de409b04bf24dbc994",
+    "M1-H006": "3a787e14d720763847c9885068c2d7f663239d00ccf58b85739cf70726e1afde",
+    "M1-C001": "6eb45eb6104c13f1db4cbee3f575127a368c68ae1b7a0e67271843c15d18fa7c",
+    "M1-C002": "09db721f4246fa26949b46c6cf2872171a6a8351da2635551e1b7362065e1df7",
+    "M1-C003": "5fdbfa1de0e6365b98363db476f6fbd1cd426ebdf8c283e196f1be508f927544",
+    "M1-L001": "1bd9eabe279dc6a4da6f2f852cfc429a2ebb3e93df90317b9f841ce84a46ff67",
+    "M1-L002": "ae69a1ca964f35a43e90852737b7f99c3c5596031730e408266c210d4c69576c",
+    "M1-T004": "163c26ffc38202427607fdc3d9187b1f97706c52062d1590ff06a64fb2f0ba2b",
+    "M1-T005": "5bf88d6a549f4bfc11306423d756dbf142348344d2e2c974d856a2de6a7244f6",
+    "M1-P001": "d5b94029b59b7d82ed8e7fa226f102bacd0b83fe9878b01ce3ec034506e1b6c2",
+    "M1-P002": "edb23eeabf21eb4360f6f8e60039f0ab03c29947d2668bd04fc456ab86009981"
+  },
+  "compiler": "rustc 1.100.0 (0ef1bc386 2026-11-09)\nbinary: rustc\ncommit-hash: 0ef1bc386059596dada8fb65b50425aab2ea637a\ncommit-date: 2026-11-09\nhost: aarch64-apple-darwin\nrelease: 1.100.0\nLLVM version: 23.1.5",
+  "invocation": [
+    "/opt/homebrew/opt/python@3.15/bin/python3.15",
+    "tools/run_m1_bootstrap.py",
+    "--repeat",
+    "100"
+  ],
+  "started_at_utc": "2026-11-20T09:51:25.814595+00:00",
+  "finished_at_utc": "2026-11-20T09:51:29.888176+00:00",
+  "command_log": {
+    "file": "bootstrap-report.commands.json",
+    "sha256": "ae7dd4b7e7f768d755741ffffdfb872113a8ba53f9e2e28d457105b438208189"
+  },
+  "platform": {
+    "os": "Darwin",
+    "release": "27.3.0",
+    "architecture": "arm64",
+    "python": "3.15.2",
+    "cpu_count": 8,
+    "locale": [
+      "C",
+      "UTF-8"
+    ]
+  },
+  "summary": {
+    "bootstrap_selected": 5,
+    "bootstrap_passed": 5,
+    "full_m1_not_run": 23,
+    "wpt_executed": 0,
+    "repetitions_per_render": 100
+  },
+  "limits": {
+    "wall_time_seconds_per_invocation": 5,
+    "rss_containment_enforced": false
+  },
+  "cases": [
+    {
+      "id": "M1-B001",
+      "outcome": "pass",
+      "executions": 100,
+      "image_sha256": "da76f0ab195e1b786bdd84cb943add39fb7ef72b31aab38772981cae1a5e500a",
+      "layout_sha256": "2f2c3716d198960569bc53e4655ed7d869a3ffc9bb5ee2367641e1a326553877"
+    },
+    {
+      "id": "M1-B002",
+      "outcome": "pass",
+      "executions": 100,
+      "image_sha256": "19d536ea67a226d35b457986f45663b03dce643d05bc8acfcf9f028bd848cd90",
+      "layout_sha256": "e0275a256e3dca57d2cdc6a3802d0843a6709888d43df32e297c84a0f7019bb0"
+    },
+    {
+      "id": "M1-B003",
+      "outcome": "pass",
+      "executions": 100,
+      "image_sha256": "cc663dba311f6acda5187b863ea9c2efe20ea57e0b9488116455da097233ad2d",
+      "layout_sha256": "9ec288cfcd93bb43a137620a70f4952878c7c257e560cf45343d3c81af0210af"
+    },
+    {
+      "id": "M1-B004",
+      "outcome": "pass",
+      "executions": 1,
+      "diagnostic": "browser-engine: unsupported visible text: shaping and inline layout are outside the bootstrap renderer"
+    },
+    {
+      "id": "M1-B005",
+      "outcome": "pass",
+      "executions": 1,
+      "diagnostic": "browser-engine: unsupported external stylesheet: bootstrap styles must be embedded"
+    }
+  ],
+  "boundary": "Bootstrap fixtures only. Not full M1 completion, WPT conformance, sandbox evidence or sustained fuzzing."
+}

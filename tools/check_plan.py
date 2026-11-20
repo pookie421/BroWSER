@@ -20,7 +20,7 @@ COMMON_KEYS = {"id", "title", "status", "depends_on", "owner_role", "acceptance"
 MILESTONE_KEYS = COMMON_KEYS | {"deliverables"}
 TASK_KEYS = COMMON_KEYS | {"milestone", "priority"}
 STATUSES = {"planned", "in_progress", "complete"}
-IGNORED_DIRECTORIES = {".git", ".venv", "venv", "node_modules", "target", "dist", "build", "__pycache__"}
+IGNORED_DIRECTORIES = {".git", ".venv", "venv", "node_modules", "target", "dist", "build", "artifacts", "__pycache__"}
 LINK = re.compile(r"!?\[[^\]\n]*\]\((<[^>\n]+>|[^\s)]+)(?:\s+[\"'][^\n]*?[\"'])?\)")
 REFERENCE = re.compile(r"^\s{0,3}\[[^\]]+\]:\s*(<[^>\n]+>|\S+)", re.MULTILINE)
 
@@ -157,8 +157,8 @@ def validate_plan(plan: object, root: Path) -> list[str]:
         errors.append("roadmap.schema_version: expected integer 1")
     if plan.get("project") != "BroWSER":
         errors.append("roadmap.project: expected BroWSER")
-    if plan.get("status") != "planning":
-        errors.append("roadmap.status: expected planning")
+    if plan.get("status") not in ("planning", "development"):
+        errors.append("roadmap.status: expected planning or development")
     milestones = validate_records(plan.get("milestones"), "milestones", root, errors)
     tasks = validate_records(plan.get("tasks"), "tasks", root, errors)
     check_dependencies(milestones, "milestones", errors)

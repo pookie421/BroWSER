@@ -3,6 +3,10 @@
 Date: 16 November 2026. Scope: M0 and B001 only. Project location:
 [pookie421/BroWSER](https://github.com/pookie421/BroWSER), public, default branch `main`.
 
+This is a historical record of M0's published planning baseline. Implementation
+has since started; see the [current M1 matrix](../evidence/M1/capability-matrix.md).
+The planned statuses and 28-test count below describe the linked baseline commit.
+
 **M0: complete. B001: complete.** Rechecked against the published baseline commit
 [`fe85687`](https://github.com/pookie421/BroWSER/commit/fe856876d7490f78083ecf01c1904b43a15e97a8).
 All ten M0 deliverables listed in the machine-readable plan exist in that commit.

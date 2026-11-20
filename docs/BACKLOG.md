@@ -1,6 +1,6 @@
 # Implementation backlog
 
-The canonical contracts and dependency graph are in [planning/roadmap.json](../planning/roadmap.json). Only B001 and M0 concern this planning package; every engine task is planned. P0 blocks correctness, security or its milestone; P1 expands required product coverage. Role names are staffing requirements.
+The canonical contracts and dependency graph are in [planning/roadmap.json](../planning/roadmap.json). M0 is complete; M1 is in progress with frozen B010 scope and a working bootstrap. Current task status and evidence live in the JSON plan and [capability matrix](../evidence/M1/capability-matrix.md). P0 blocks correctness, security or its milestone; P1 expands required product coverage. Role names are staffing requirements.
 
 Task dependencies are completion dependencies. B030 can run during M1 because VM feasibility must retire architectural risk early; it does not enable scripts before M2 security approval. Release operations can start after M2 while runtime work proceeds.
 

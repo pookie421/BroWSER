@@ -1,0 +1,70 @@
+{
+  "reference_tool": "HarfBuzz hb-shape 14.3.1",
+  "text": "नमस्ते",
+  "direction": "ltr",
+  "script": "Deva",
+  "language": "hi",
+  "font_scale": 1024,
+  "variation": {
+    "wdth": 100,
+    "wght": 400
+  },
+  "cluster_units": "UTF-8 byte offsets",
+  "command_argv": [
+    "hb-shape",
+    "--output-format=json",
+    "--no-glyph-names",
+    "--font-funcs=ot",
+    "--shapers=ot",
+    "--font-size=1024",
+    "--variations=wdth=100,wght=400",
+    "--utf8-clusters",
+    "--direction=ltr",
+    "--script=Deva",
+    "--language=hi",
+    "fixtures/m1/assets/fonts/notosansdevanagari/NotoSansDevanagari[wdth,wght].ttf",
+    "नमस्ते"
+  ],
+  "glyphs": [
+    {
+      "g": 75,
+      "cl": 0,
+      "dx": 0,
+      "dy": 0,
+      "ax": 568,
+      "ay": 0
+    },
+    {
+      "g": 80,
+      "cl": 3,
+      "dx": 0,
+      "dy": 0,
+      "ax": 612,
+      "ay": 0
+    },
+    {
+      "g": 256,
+      "cl": 6,
+      "dx": 0,
+      "dy": 0,
+      "ax": 398,
+      "ay": 0
+    },
+    {
+      "g": 71,
+      "cl": 12,
+      "dx": 0,
+      "dy": 0,
+      "ax": 584,
+      "ay": 0
+    },
+    {
+      "g": 40,
+      "cl": 12,
+      "dx": 0,
+      "dy": 0,
+      "ax": 0,
+      "ay": 0
+    }
+  ]
+}

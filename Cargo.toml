@@ -1,0 +1,23 @@
+[package]
+name = "browser-engine"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.100"
+license = "MIT"
+description = "BroWSER controlled-fixture offline renderer bootstrap"
+repository = "https://github.com/pookie421/BroWSER"
+publish = false
+
+[lib]
+name = "browser_engine"
+path = "src/lib.rs"
+
+[[bin]]
+name = "browser-engine"
+path = "src/main.rs"
+
+[profile.release]
+overflow-checks = true
+
+[lints.rust]
+unsafe_code = "forbid"

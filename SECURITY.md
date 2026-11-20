@@ -1,8 +1,9 @@
 # Security policy
 
-There are no supported browser releases. This repository contains planning documents
-and validation tools; arbitrary web browsing is not available. Future releases need
-the gates in [the security model](docs/SECURITY_MODEL.md) before support is declared.
+There are no supported browser releases. The M1 development bootstrap handles only
+controlled synthetic offline fixtures and is unsandboxed; arbitrary web browsing is
+not available. Future releases need the gates in
+[the security model](docs/SECURITY_MODEL.md) before support is declared.
 
 Report sensitive findings through
 [GitHub private vulnerability reporting](https://github.com/pookie421/BroWSER/security/advisories/new)
